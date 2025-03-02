@@ -10,14 +10,14 @@ using Unity.Properties;
 public partial class SplineHitAction : Action
 {
     [SerializeReference] public BlackboardVariable<SplineAnimate> Spline;
-    private bool isEffective;
+    //private bool isEffective;
     protected override Status OnStart()
     {
 
         // I don't know why I can't call play here, Restart seems to work
         // when call play, the second time even if I call Restart, it won't play
         Spline.Value.Restart(true);
-        isEffective = true;
+        //isEffective = true;
 
         return Status.Running;
     }

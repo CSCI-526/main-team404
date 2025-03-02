@@ -23,7 +23,7 @@ public partial class AirPatrolAction : Action
         rb = Self.Value.GetComponent<Rigidbody2D>();
         (direction, time, verticalSpeed) = FixedRegionController.Value.getRandomLocationInRegion(Self.Value.transform.position, PatrolTime, PatrolSpeed);
         timer = time;
-        Debug.Log(time);
+        //Debug.Log(time);
         return Status.Running;
     }
 

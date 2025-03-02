@@ -25,7 +25,7 @@ public class LancerWeaponController : EnemyHitBoxBase
     }
     public void OnDisable()
     {
-        Debug.Log(gameObject.name + "Disabled");
+        //Debug.Log(gameObject.name + "Disabled");
     }
 
 }

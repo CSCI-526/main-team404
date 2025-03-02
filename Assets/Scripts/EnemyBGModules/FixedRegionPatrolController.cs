@@ -82,7 +82,7 @@ public class FixedRegionPatrolController : MonoBehaviour
         Player player = isPlayerInRange();
         if (player == null)
         {
-            Debug.Log("Player not in range");
+            //Debug.Log("Player not in range");
             return (0, 0);
         }
 

@@ -32,7 +32,7 @@ public partial class DamageCheckAction : Action
             int damage = HitBoxController.Value.GetResult();
             if (damage > 0)
             {
-                //Debug.Log("Enemy is Hit");
+                //Debug.Log("Enemy is Hit" + ", Health left is: "+ Health.Value);
                 //Debug.Log(Time.time);
                 Health.Value -= damage;
                 timer = ITimeOnHit.Value;
