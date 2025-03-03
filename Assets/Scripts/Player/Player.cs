@@ -270,7 +270,8 @@ public class Player : MonoBehaviour
                 stateMachine.ChangeState(deflectRewardState);
                 break;
             case BattleInfo.Doge:
-                //Invinsible do nothing
+                //Does not change state, add Mana
+                ManaCtrl.AddMana(1);
                 break;
             case BattleInfo.Hit:
                 stateMachine.ChangeState(damagePenaltyState);

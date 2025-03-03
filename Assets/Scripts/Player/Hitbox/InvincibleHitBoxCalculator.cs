@@ -41,9 +41,9 @@ public class InvincibleHitBoxCalculator : MonoBehaviour
             {
                 player.trigger = collider.gameObject;
                 player.battleInfo = Player.BattleInfo.Doge;
-                break;
+                gameObject.SetActive(false);
+                return;
             }
-            break;
         }
     }
     private void OnEnable()
