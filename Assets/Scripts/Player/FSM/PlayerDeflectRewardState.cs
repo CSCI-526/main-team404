@@ -10,6 +10,7 @@ public class PlayerDeflectRewardState : PlayerState
     {
         base.Enter();
         player.DeflectCtrl.Bump();
+        player.Mana += 1;
     }
 
     public override void Exit()
