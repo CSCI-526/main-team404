@@ -9,8 +9,10 @@ public class LevelManager : MonoBehaviour
     public GameObject canvasPrefab;
     private Image fadePanel;
     private TextMeshProUGUI quoteText;
+    private CanvasGroup quoteCanvasGroup; 
     public float fadeDuration = 1.5f;
     public float displayTime = 3.0f;
+    public float textFadeDuration = 1.0f; 
 
     private string[] quotes = {
         "\"Only those who will risk going too far can possibly find out how far one can go.\" — T.S. Eliot",
@@ -57,6 +59,11 @@ public class LevelManager : MonoBehaviour
         {
             fadePanel = canvas.transform.Find("FadePanel")?.GetComponent<Image>();
             quoteText = canvas.transform.Find("QuoteText")?.GetComponent<TextMeshProUGUI>();
+            quoteCanvasGroup = quoteText.GetComponent<CanvasGroup>(); 
+            if (quoteCanvasGroup == null)
+            {
+                quoteCanvasGroup = quoteText.gameObject.AddComponent<CanvasGroup>();
+            }
         }
     }
 
@@ -64,13 +71,19 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            StartCoroutine(TransitionToNextLevel());
+            StartTransitionToNextLevel();
         }
+    }
+
+    // Public function for changing to the next level
+    public void StartTransitionToNextLevel()
+    {
+        StartCoroutine(TransitionToNextLevel());
     }
 
     IEnumerator TransitionToNextLevel()
     {
-        if (fadePanel == null || quoteText == null)
+        if (fadePanel == null || quoteText == null || quoteCanvasGroup == null)
         {
             FindUIElements();
         }
@@ -84,17 +97,17 @@ public class LevelManager : MonoBehaviour
 
         if (isFirstScene)
         {
-            quoteText.text = quotes[0]; 
+            quoteText.text = quotes[0];
             isFirstScene = false;
         }
         else
         {
-            quoteText.text = quotes[Random.Range(1, quotes.Length)]; 
+            quoteText.text = quotes[Random.Range(1, quotes.Length)];
         }
 
         yield return new WaitForSeconds(displayTime);
 
-        quoteText.gameObject.SetActive(false);
+        yield return StartCoroutine(FadeOutText()); 
         yield return new WaitForSeconds(1.0f);
 
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
@@ -107,6 +120,18 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Last scene reached. No further transitions.");
         }
+    }
+
+    IEnumerator FadeOutText()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < textFadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            quoteCanvasGroup.alpha = Mathf.Lerp(1, 0, elapsedTime / textFadeDuration);
+            yield return null;
+        }
+        quoteText.gameObject.SetActive(false);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

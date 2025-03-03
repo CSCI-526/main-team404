@@ -569,6 +569,7 @@ MonoBehaviour:
   canvasPrefab: {fileID: 1331002768}
   fadeDuration: 1.5
   displayTime: 3
+  textFadeDuration: 1
 --- !u!4 &884113402
 Transform:
   m_ObjectHideFlags: 0
