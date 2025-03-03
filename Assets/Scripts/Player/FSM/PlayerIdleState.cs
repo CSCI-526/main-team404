@@ -12,6 +12,7 @@ public class PlayerIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.GroundMoveCtrl.Freeze();
     }
 
     public override void Exit()
@@ -41,7 +42,7 @@ public class PlayerIdleState : PlayerState
             return true;
         }
         // idle => Jump
-        if (input.Jump || input.isJumpBuffered)
+        if ((input.Jump || input.isJumpBuffered) && player.jumpable)
         {
             stateMachine.ChangeState(player.jumpState);
             return true;

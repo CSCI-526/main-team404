@@ -17,12 +17,7 @@ public class WeaponController
     }
     public void Attack(AttackInfo ai)
     {
-        if(player.currentWeaponAmmo > 0)
-        {
-            player.currentWeapon.attack(ai);
-            player.currentWeaponAmmo--;
-        }
-        //TODO: cost mana to attack when there is no ammo
+        player.currentWeapon.attack(ai);
     }
     public void Skill(AttackInfo ai)
     {
@@ -40,51 +35,21 @@ public class WeaponController
         player.weapon1 = temp;
         player.currentWeapon.ActivateWeapon();
     }
-    public void switchWP2()
-    {
-        if (player.weapon2 == null)
-        {
-            return;
-        }
-        PlayerWeapon temp = player.currentWeapon;
-        player.currentWeapon.DeactivateWeapon();
-        player.currentWeapon = player.weapon2;
-        player.weapon2 = temp;
-        player.currentWeapon.ActivateWeapon();
-    }
 
-    public void SetCurrentWP(EnemyHitBoxBase grab)
+    public void SetCurrentWP(int id)
     {
         // if player does not have weapon
         if (player.currentWeapon == null)
         {
-            player.currentWeapon = player.weaponDictionary.SearchWeapon(grab.getID());
-            player.currentWeaponAmmo = grab.getAmmo();
-            player.currentWeapon.ActivateWeapon();
-            return;
-        }
-        // if player current weapon is the same as grabbed weapon, reload
-        if (player.currentWeapon.WeaponID == grab.getID())
-        {
-            player.currentWeaponAmmo = grab.getAmmo();
+            player.currentWeapon = player.weaponDictionary.SearchWeapon(id);
             player.currentWeapon.ActivateWeapon();
             return;
         }
         // if player current weapon is not the same as grabbed weapon
-        // if there is at least 1 weapon slot
-        // optionA: put grabbed weapon in first empty weapon slot
-        // optionB: put grabbed weapon in current weapon and swich current weapon to first emply weapon slot
-        // if there is not weapon slot
-        // optionA,B continue: pop memu to let player choose which weapon to abandon
+        // put grabbed weapon in current weapon and swich current weapon to first emply weapon slot
+        // if there is no weapon slot
+        // pub grabbed weapon in bag
         // TODO: implement
     }
-
-    //public void UpdateCurrentWPAmmo()
-    //{
-    //    if(player.currentWeaponAmmo == 0)
-    //    {
-    //        player.currentWeapon.DeactivateWeapon();
-    //    }
-    //}
 
 }

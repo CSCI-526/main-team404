@@ -36,7 +36,7 @@ public class PlayerMoveState : PlayerState
             return true;
         }
         // move => jump
-        if (input.Jump || input.isJumpBuffered)
+        if ((input.Jump || input.isJumpBuffered) && player.jumpable)
         {
             stateMachine.ChangeState(player.jumpState);
             return true;
