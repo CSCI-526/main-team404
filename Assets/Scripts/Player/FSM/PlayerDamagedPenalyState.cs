@@ -9,7 +9,10 @@ public class PlayerDamagedPenalyState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.KnockBackCtrl.Prep();
+        //Lock stateMachine, release until timer is up (player will not be able to control)
+        player.stateMachine.stateLocked = true;
+
+        player.KnockBackCtrl.ApplyKnockback();
         // change player color
         player.Bleeding.color = Color.red;
     }
@@ -17,6 +20,8 @@ public class PlayerDamagedPenalyState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        // Freeze Player
+        player.GroundMoveCtrl.Freeze();
         player.battleInfo = Player.BattleInfo.Peace;
         // change player color
         player.Bleeding.color = Color.gray;
@@ -33,10 +38,11 @@ public class PlayerDamagedPenalyState : PlayerState
         {
             return true;
         }
-        player.KnockBackCtrl.ApplyKnockback();
 
+        // knockBack => idle
         if (player.KnockBackCtrl.timer.TimeUp())
         {
+            player.stateMachine.stateLocked = false;
             stateMachine.ChangeState(player.idleState);
             return true;
         }

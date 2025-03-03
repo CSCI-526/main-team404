@@ -12,12 +12,6 @@ public class KnockPlayerBackController
         timer = new Timer();
         player.TimerCountDownCtrl.register(timer);
     }
-    public void Prep()
-    {
-        direction = (player.transform.position - player.trigger.transform.position).normalized;
-        timer.Set(player.KnockBackDuration);
-        player.GoInvincible(player.KnockBackDuration);
-    }
     public void ApplyKnockback()
     {
         //TODO, parameterize attackForce and make different knockback given different attack force
@@ -29,6 +23,9 @@ public class KnockPlayerBackController
         //player.AirMoveCtrl.Freeze();
         //player.rb.AddForce(knockbackForce, ForceMode2D.Impulse);
 
-        player.rb.linearVelocity = new Vector2(direction.x * player.knockbackForceMultiplier, (direction.y+0.5f)*player.knockbackForceMultiplier);
+        direction = (player.transform.position - player.trigger.transform.position).normalized;
+        timer.Set(player.KnockBackDuration);
+        player.GoInvincible(player.KnockBackDuration);
+        player.rb.linearVelocity = new Vector2(direction.x * player.knockbackForceMultiplier, direction.y * player.knockbackForceMultiplier);
     }
 }

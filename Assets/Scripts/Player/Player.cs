@@ -63,16 +63,12 @@ public class Player : MonoBehaviour
     public GameObject deflectBox;
     public float deflectDuration;
     public Timer deflectTimer;
-    public float deflectHitboxOffsetX;
-    public float deflectHitboxOffsetY;
     public float deflectJumpSpeed;
 
     [Header("Grab")]
     public GameObject grabBox;
     public float grabDuration;
     public Timer grabTimer;
-    public float grabHitboxOffsetX;
-    public float grabHitboxOffsetY;
 
     [Header("BattleInfo")]
     public BattleInfo battleInfo;
@@ -92,9 +88,7 @@ public class Player : MonoBehaviour
     public GameObject HitBox;
 
     [Header("DamagedPenalty")]
-    public float knockbackThreshold;
     public float knockbackForceMultiplier;
-    public float controlLossDuration;
     public float KnockBackDuration;
     public Timer KnockBackTimer;
 

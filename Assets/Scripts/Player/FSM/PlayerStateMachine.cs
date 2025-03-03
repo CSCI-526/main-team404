@@ -30,10 +30,14 @@ public class PlayerStateMachine
 
     public void ChangeState(PlayerState _newState)
     {
-        previousState = currentState;
-        currentState.Exit();
-        currentState = _newState;
-        currentState.Enter();
+        if (!stateLocked)
+        {
+            previousState = currentState;
+            currentState.Exit();
+            currentState = _newState;
+            currentState.Enter();
+        }
+        // if there is a stateLock, abort current transition
     }
 
     public void ChangeToPreviousState()
