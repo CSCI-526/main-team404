@@ -33,6 +33,12 @@ public class PlayerInput : MonoBehaviour
     public bool isSkillBuffered { get; set; }
     public float skillBufferTimeWindow;
     WaitForSeconds skillBufferTime;
+
+    public bool SwtichWeapon => inputActions.GamePlay.SwitchWeapon.WasPressedThisFrame();
+    public bool isSwitchWeaponBuffered { get; set; }
+    public float switchWeaponBufferTimeWindow;
+    WaitForSeconds switchWeaponBufferTime;
+
     public Vector2 AxesInput => inputActions.GamePlay.Move.ReadValue<Vector2>();
     public float Xinput => AxesInput.x;
     public float Yinput => AxesInput.y;
@@ -97,10 +103,15 @@ public class PlayerInput : MonoBehaviour
         StopCoroutine(nameof(GrabBufferCoroutine));
         StartCoroutine(nameof(GrabBufferCoroutine));
     }
-    public void SkillGrabBufferTimer()
+    public void SetSkillGrabBufferTimer()
     {
         StopCoroutine(nameof(SkillBufferCoroutine));
         StartCoroutine(nameof(SkillBufferCoroutine));
+    }
+    public void SetSwitchWeaponBufferTimer()
+    {
+        StopCoroutine(nameof(SwitchWeaponBufferCoroutine));
+        StartCoroutine(nameof(SwitchWeaponBufferCoroutine));
     }
 
     public void SetUpBufferTimer()
@@ -150,6 +161,12 @@ public class PlayerInput : MonoBehaviour
         isSkillBuffered = true;
         yield return grabBufferTime;
         isSkillBuffered = false;
+    }
+    IEnumerator SwitchWeaponBufferCoroutine()
+    {
+        isSwitchWeaponBuffered = true;
+        yield return switchWeaponBufferTime;
+        isSwitchWeaponBuffered = false;
     }
 
     IEnumerator LoseControl(float duration)

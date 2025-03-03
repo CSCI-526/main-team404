@@ -33,7 +33,7 @@ public class DropDetection : MonoBehaviour
         foreach (var collider in detectedColliders)
         {
             
-            player.Mana += collider.gameObject.GetComponent<Drop>().GetEnergy();
+            player.ManaCtrl.AddMana(collider.gameObject.GetComponent<Drop>().GetEnergy());
             Destroy(collider.gameObject);
             break;
         }

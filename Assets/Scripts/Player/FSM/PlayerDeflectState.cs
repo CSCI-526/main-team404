@@ -19,6 +19,7 @@ public class PlayerDeflectState : PlayerState
     {
         base.Exit();
         player.DeflectCtrl.DefelectOver();
+        player.AirMoveCtrl.UnFreeze();
         //TODO; modify, there must be 1 frame of Fragile when deflect finished
     }
 

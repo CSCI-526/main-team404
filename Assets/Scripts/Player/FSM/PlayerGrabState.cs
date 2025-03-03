@@ -28,8 +28,6 @@ public class PlayerGrabState : PlayerState
             return true;
         }
 
-        player.AirMoveCtrl.Freeze();
-
         if (player.GrabCtrl.timer.TimeUp())
         {
             player.stateMachine.ChangeState(player.fallState);

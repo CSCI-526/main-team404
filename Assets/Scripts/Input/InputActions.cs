@@ -155,6 +155,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d46139d-0df0-42c2-9f13-949b8dd05ee0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""TestKey1"",
                     ""type"": ""Button"",
                     ""id"": ""f9a49b2a-894e-4d78-ac55-cd9d5f9abbd3"",
@@ -333,7 +342,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""99515c8a-974a-4318-806a-f506ec1ad058"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -351,6 +360,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Skill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a8b43fd-47eb-4d38-b64c-6b300d3feb20"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -366,6 +386,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_GamePlay_Roll = m_GamePlay.FindAction("Roll", throwIfNotFound: true);
         m_GamePlay_Grab = m_GamePlay.FindAction("Grab", throwIfNotFound: true);
         m_GamePlay_Skill = m_GamePlay.FindAction("Skill", throwIfNotFound: true);
+        m_GamePlay_SwitchWeapon = m_GamePlay.FindAction("SwitchWeapon", throwIfNotFound: true);
         m_GamePlay_TestKey1 = m_GamePlay.FindAction("TestKey1", throwIfNotFound: true);
     }
 
@@ -454,6 +475,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Roll;
     private readonly InputAction m_GamePlay_Grab;
     private readonly InputAction m_GamePlay_Skill;
+    private readonly InputAction m_GamePlay_SwitchWeapon;
     private readonly InputAction m_GamePlay_TestKey1;
     /// <summary>
     /// Provides access to input actions defined in input action map "GamePlay".
@@ -494,6 +516,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GamePlay/Skill".
         /// </summary>
         public InputAction @Skill => m_Wrapper.m_GamePlay_Skill;
+        /// <summary>
+        /// Provides access to the underlying input action "GamePlay/SwitchWeapon".
+        /// </summary>
+        public InputAction @SwitchWeapon => m_Wrapper.m_GamePlay_SwitchWeapon;
         /// <summary>
         /// Provides access to the underlying input action "GamePlay/TestKey1".
         /// </summary>
@@ -545,6 +571,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Skill.started += instance.OnSkill;
             @Skill.performed += instance.OnSkill;
             @Skill.canceled += instance.OnSkill;
+            @SwitchWeapon.started += instance.OnSwitchWeapon;
+            @SwitchWeapon.performed += instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
             @TestKey1.started += instance.OnTestKey1;
             @TestKey1.performed += instance.OnTestKey1;
             @TestKey1.canceled += instance.OnTestKey1;
@@ -580,6 +609,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Skill.started -= instance.OnSkill;
             @Skill.performed -= instance.OnSkill;
             @Skill.canceled -= instance.OnSkill;
+            @SwitchWeapon.started -= instance.OnSwitchWeapon;
+            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
             @TestKey1.started -= instance.OnTestKey1;
             @TestKey1.performed -= instance.OnTestKey1;
             @TestKey1.canceled -= instance.OnTestKey1;
@@ -672,6 +704,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSkill(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchWeapon(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "TestKey1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

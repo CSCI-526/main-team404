@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
     public PlayerWeapon weapon1;
     public PlayerWeapon currentWeapon;
     public WeaponsDiction weaponDictionary;
+    public int MaxMana = 3;
     public int Mana;
 
     [Header("Animation")]
@@ -122,6 +123,7 @@ public class Player : MonoBehaviour
     public KnockPlayerBackController KnockBackCtrl { get; private set; }
     public OnFlyableController OnFlyableCtrl { get; private set; }
     public WeaponController WeaponCtrl { get; private set; }
+    public ManaController ManaCtrl { get; private set; }
     #endregion
 
     #region States
@@ -161,6 +163,8 @@ public class Player : MonoBehaviour
         KnockBackCtrl = new KnockPlayerBackController(this);
         OnFlyableCtrl = new OnFlyableController(this);
         WeaponCtrl = new WeaponController(this);
+        ManaCtrl = new ManaController(this);
+
 
 
         stateMachine = new PlayerStateMachine(this);
@@ -199,7 +203,6 @@ public class Player : MonoBehaviour
         input.EnableGamePlayInputs();
         stateMachine.Initialize(fallState);
 
-        Mana = 0;
         //TODO: have some weaponCache
         WeaponCtrl.SetCurrentWP(0);
 

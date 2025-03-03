@@ -69,6 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwitchWeapon",
+                    "type": "Button",
+                    "id": "9d46139d-0df0-42c2-9f13-949b8dd05ee0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "TestKey1",
                     "type": "Button",
                     "id": "f9a49b2a-894e-4d78-ac55-cd9d5f9abbd3",
@@ -247,7 +256,7 @@
                 {
                     "name": "",
                     "id": "99515c8a-974a-4318-806a-f506ec1ad058",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -263,6 +272,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a8b43fd-47eb-4d38-b64c-6b300d3feb20",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

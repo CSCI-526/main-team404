@@ -19,5 +19,10 @@ public class AirMoveController
     public void Freeze()
     {
         player.rb.linearVelocity = new Vector2(0,0);
+        player.rb.gravityScale = 0;
+    }
+    public void UnFreeze()
+    {
+        player.rb.gravityScale = player.gravityScale;
     }
 }
