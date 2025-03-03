@@ -16,7 +16,9 @@ public partial class LookAtPlayerAction : Action
     {
         if (Player.Value == null)
         {
+            Debug.Log("Player is null WHEN TRYING TO LOOK");
             return Status.Success;
+           
         }
         if ((Self.Value.transform.position - Player.Value.transform.position).x > 0)
         {

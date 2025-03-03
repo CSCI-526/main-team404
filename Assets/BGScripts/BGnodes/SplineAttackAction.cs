@@ -89,7 +89,10 @@ public partial class SplineAttackAction : Action
                         break;
 
                     case 2:
-                        knockBackContrl.Value.KnockBack();
+                        if (knockBackContrl.Value != null)
+                        {
+                            knockBackContrl.Value.KnockBack();
+                        }
                         isAttackEffective = false;
                         if (attackMode == ATTACKMODE.MULTIPLE)
                         {

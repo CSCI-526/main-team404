@@ -40,7 +40,7 @@ MonoBehaviour:
           rid: 3251204283535983020
         m_EndedNodes:
           rid: 3251204283535983021
-        m_VersionTimestamp: 638765647520609840
+        m_VersionTimestamp: 638765649432504577
     - rid: 3251204283535983018
       type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:

@@ -22,7 +22,11 @@ public partial class DamageCheckAction : Action
 
     protected override Status OnStart()
     {
-        Health.Value = 100;
+        //Health.Value = 100;
+        if (Health.Value <= 0)
+        {
+            Health.Value = 100;
+        }
         timer = 0;
         Slider.Value.maxValue = Health.Value;
         return Status.Running;
