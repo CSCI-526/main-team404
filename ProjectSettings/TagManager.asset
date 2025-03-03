@@ -31,7 +31,7 @@ TagManager:
   - PlayerHitBox
   - EnemyHitBox
   - 
-  - 
+  - Camera
   - PlayerInteractBox
   - Drops
   - Interactable
