@@ -15,7 +15,7 @@ public class InteractManager : MonoBehaviour
     {
         
     }
-
+    //TODO: abandon ontriggerEnter2D, use manual collision detection instead
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))

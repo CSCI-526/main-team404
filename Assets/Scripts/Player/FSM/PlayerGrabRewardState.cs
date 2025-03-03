@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerGrabRewardState : PlayerState
@@ -9,7 +10,9 @@ public class PlayerGrabRewardState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.WeaponCtrl.SetCurrentWP(player.trigger.GetComponent<EnemyHitBoxBase>());
+        int eventId = player.trigger.GetComponent<GrabEvent>().GetEventID();
+        //Invoke event based on ID
+        //TODO: implement
     }
 
     public override void Exit()

@@ -5,13 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class LanceDrop : EnemyHitBoxBase
+public class EnergyDrop : MonoBehaviour,Drop
 {
     public Rigidbody2D rb;
     public SpriteRenderer circle;
-    public float frequency;
-    public int isActive; // isActive is equvilant to is Attacking
-    //TODO: Mechanism to prevent Dereferencing Null dfTransform pointer
 
     void Start()
     {
@@ -27,18 +24,10 @@ public class LanceDrop : EnemyHitBoxBase
 
     private void OnDestroy()
     {
+
     }
-
-
-    public override int getID () { return 0; }
-
-    public override void playerDestroy(int _param)
+    public int GetEnergy()
     {
-        base.playerDestroy(_param);
-        result = _param;
-    }
-    public override int getAmmo()
-    {
-        return 3;
+        return 1;
     }
 }

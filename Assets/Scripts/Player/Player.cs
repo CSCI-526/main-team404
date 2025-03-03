@@ -94,12 +94,9 @@ public class Player : MonoBehaviour
 
     [Header("Weapon")]
     public PlayerWeapon weapon1;
-    public int weapon1Ammo;
-    public PlayerWeapon weapon2;
-    public int weapon2Ammo;
     public PlayerWeapon currentWeapon;
-    public int currentWeaponAmmo;
     public WeaponsDiction weaponDictionary;
+    public int Mana;
 
     [Header("Animation")]
     [SerializeField] private string animState;
@@ -202,6 +199,9 @@ public class Player : MonoBehaviour
         input.EnableGamePlayInputs();
         stateMachine.Initialize(fallState);
 
+        Mana = 0;
+        //TODO: have some weaponCache
+        WeaponCtrl.SetCurrentWP(0);
 
 
     }
@@ -247,7 +247,8 @@ public class Player : MonoBehaviour
         GUIStyle bigFontStyle = new GUIStyle(GUI.skin.label);
         bigFontStyle.fontSize = 16;
         GUI.Label(new Rect(200, 100, 200, 200), "playerState: " + stateMachine.currentState.animBoolName, bigFontStyle);
-        GUI.Label(new Rect(200, 120, 200, 200), "CurrentWeapon Ammo " + currentWeaponAmmo, bigFontStyle);
+        GUI.Label(new Rect(200, 120, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
+        GUI.Label(new Rect(200, 140, 200, 200), "Mana: " + Mana, bigFontStyle);
     }
 
     private void OnDrawGizmos()

@@ -25,9 +25,4 @@ public class GrabController
         player.grabBox.SetActive(false);
     }
 
-    public void getGrabbingPosition(GameObject gameObj)
-    {
-        position = gameObj.transform.position;
-    }
-
 }

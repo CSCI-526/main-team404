@@ -75,9 +75,10 @@ public class Lance : PlayerWeapon
     {
         
         base.attack(ai);
-        if (!isDisappear)
+        if (!isDisappear && (player.Mana>0))
         {
             stateMachine.ChangeState(attackState,ai);
+            player.Mana--;
         }
     }
 
