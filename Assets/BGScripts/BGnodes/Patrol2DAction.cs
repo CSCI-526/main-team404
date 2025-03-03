@@ -50,7 +50,11 @@ public partial class Patrol2DAction : Action
         }
         else
         {
-            Flip();
+            if (UnityEngine.Random.value < 0.5)
+            {
+                Flip();
+            }
+            
             timer = MaxTimeFlip;
         }
         

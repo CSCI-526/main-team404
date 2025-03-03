@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -11,11 +12,18 @@ public class TrapAttack : MonoBehaviour
     public SplineAnimate goBackAni;
     public GameObject attackBoxToEnemy;
     public GameObject attackBoxToPlayer;
+    public float attackCoolDown;
     public float attackDuration;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private Vector2 centerOffset;
+    [SerializeField] private Vector2 detectionBoxSize;
+    [SerializeField] private bool showGizmo;
     private bool s1;
     private bool s2;
     private Color originalColor;
     private bool myLock;
+    private float coolDownTimer;
+   
     
 
     private bool isAttacking = false;
@@ -31,10 +39,21 @@ public class TrapAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        coolDownTimer -= Time.deltaTime;
+        Player player = isPlayerInRange();
+        if (player != null)
         {
-            StartAttack();
+            if (coolDownTimer < 0)
+            {
+                coolDownTimer = attackCoolDown;
+                StartAttack();
+            }
+            
         }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+            
+        //}
     }
 
     private void LateUpdate()
@@ -93,7 +112,7 @@ public class TrapAttack : MonoBehaviour
         myLock = true;
         Color originalColor = spriteRenderer.color;
         Color flashColor = Color.red;
-        float flashDuration = 0.3f; 
+        float flashDuration = 0.4f; 
         int numberOfFlashes = 5;
 
         for (int i = 0; i < numberOfFlashes; i++)
@@ -127,5 +146,34 @@ public class TrapAttack : MonoBehaviour
         }
 
         myLock = false;
+    }
+
+    public Player isPlayerInRange()
+    {
+        Vector2 detectBoxCenter = (Vector2)transform.position + centerOffset;
+        Vector2 detectBoxC1 = detectBoxCenter + detectionBoxSize / 2;
+        Vector2 detectBoxC2 = detectBoxCenter - detectionBoxSize / 2;
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(detectBoxC1, detectBoxC2, playerLayer);
+        foreach (var hit in colliders)
+        {
+            Player player = hit.GetComponent<Player>();
+            if (player != null)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (showGizmo)
+        {
+            Gizmos.color = Color.red;
+            Vector2 boxCenter = (Vector2)transform.position + centerOffset;
+            Gizmos.DrawWireCube(boxCenter, detectionBoxSize);
+            
+        }
+
     }
 }

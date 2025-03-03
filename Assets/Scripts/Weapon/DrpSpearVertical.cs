@@ -60,6 +60,7 @@ public class DrpSpearVertical : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             transform.parent = other.transform;
+            attackBox.SetActive(false);
             StartCoroutine(nameof(DisableAttacBoxCoroutine));
         }
     }
