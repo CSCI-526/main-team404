@@ -180,6 +180,121 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3225512665570647777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2613723668635849830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8098816163682026441}
+  - component: {fileID: 3730335485898216294}
+  - component: {fileID: 8034111516091373622}
+  - component: {fileID: 8021791688864578533}
+  m_Layer: 12
+  m_Name: DropDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8098816163682026441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613723668635849830}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3225512665570647777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &3730335485898216294
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613723668635849830}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0486042, y: -0.0486042}
+  m_Size: {x: 0.82402724, y: 1.2203385}
+  m_Direction: 0
+--- !u!50 &8034111516091373622
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613723668635849830}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!114 &8021791688864578533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613723668635849830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5923da6870a0294479c2e4ad5e6b36eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8034111516091373622}
+  triggerCollider: {fileID: 3730335485898216294}
+  contactLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &3763788250579995280
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,8 +690,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -852083793
-  m_SortingLayer: 2
+  m_SortingLayerID: -491072345
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 0.8482327, b: 0.103773475, a: 1}
@@ -953,6 +1068,7 @@ Transform:
   - {fileID: 7136984108579134553}
   - {fileID: 3938821325200025336}
   - {fileID: 8070490305301532518}
+  - {fileID: 8098816163682026441}
   - {fileID: 8322928243262861240}
   - {fileID: 2283033408763886428}
   - {fileID: 1656972153513040685}
@@ -1085,32 +1201,23 @@ MonoBehaviour:
   wallJumpFreeze: 0.2
   deflectBox: {fileID: 4595705052600271796}
   deflectDuration: 0.3
-  deflectHitboxOffsetX: 0
-  deflectHitboxOffsetY: 0
   deflectJumpSpeed: 80
   grabBox: {fileID: 6046421752998975312}
   grabDuration: 0.3
-  grabHitboxOffsetX: 0
-  grabHitboxOffsetY: 0
   battleInfo: 0
   trigger: {fileID: 0}
-  rollSpeed: 120
+  rollSpeed: 150
   rollCoolDown: 0.2
   rollDuration: 0.15
   rollInvincibleDuration: 0.2
   InvincibleBox: {fileID: 3763788250579995280}
   HitBox: {fileID: 4934100098350852}
-  knockbackThreshold: 2
   knockbackForceMultiplier: 30
-  controlLossDuration: 0.5
-  KnockBackDuration: 0.2
+  KnockBackDuration: 0.1
   weapon1: {fileID: 0}
-  weapon1Ammo: 0
-  weapon2: {fileID: 0}
-  weapon2Ammo: 0
   currentWeapon: {fileID: 0}
-  currentWeaponAmmo: 0
   weaponDictionary: {fileID: 0}
+  Mana: 0
   animState: 
 --- !u!1 &6365444264700113734
 GameObject:
@@ -1517,11 +1624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785642529971634628, guid: 29aa44ef5bbd1644d852c06272ec96f4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2785642529971634628, guid: 29aa44ef5bbd1644d852c06272ec96f4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2785642529971634628, guid: 29aa44ef5bbd1644d852c06272ec96f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1592,11 +1699,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3002809529043241554, guid: 5228a8d48f81f4e41b3dc755c6a29156, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3002809529043241554, guid: 5228a8d48f81f4e41b3dc755c6a29156, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3002809529043241554, guid: 5228a8d48f81f4e41b3dc755c6a29156, type: 3}
       propertyPath: m_LocalPosition.x
