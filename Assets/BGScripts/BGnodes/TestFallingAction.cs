@@ -39,11 +39,12 @@ public partial class TestFallingAction : Action
         }
         if (timer < 0)
         {
+            Debug.Log("Set Falling Value");
             IsFalling.Value = true;
             return Status.Success;
         }
 
-        return Status.Success;
+        return Status.Running;
     }
 
     protected override void OnEnd()
