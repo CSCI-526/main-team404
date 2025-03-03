@@ -34,7 +34,7 @@ public class KnockBackController : MonoBehaviour
         }
     }
 
-    public void KnockBack(float forceMagnitude = 100, bool _enableYDirection = false)
+    public void KnockBack(float forceMagnitude = 10, bool _enableYDirection = false)
     {
         
         isActive = true;
@@ -56,5 +56,6 @@ public class KnockBackController : MonoBehaviour
     {
         yield return new WaitForSeconds(effectiveTime);
         isActive = false;
+        rb.linearVelocityX = 0;
     }
 }

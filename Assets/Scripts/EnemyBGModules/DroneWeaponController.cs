@@ -26,6 +26,6 @@ public class DroneWeaponController : MonoBehaviour
     }
     public void Fire()
     {
-        Debug.Log("Fire");   // Fire the weapon
+        //Debug.Log("Fire");   // Fire the weapon
     }
 }
