@@ -43,7 +43,7 @@ public class PlayerDamagedPenalyState : PlayerState
         if (player.KnockBackCtrl.timer.TimeUp())
         {
             player.stateMachine.stateLocked = false;
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.fallState);
             return true;
         }
         return false;
