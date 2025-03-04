@@ -10,6 +10,7 @@ public class PlayerGrabRewardState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.battleInfo = Player.BattleInfo.Peace;
         int eventId = player.trigger.GetComponent<GrabEvent>().GetEventID();
         //Invoke event based on ID
         //TODO: implement
@@ -18,7 +19,6 @@ public class PlayerGrabRewardState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        player.battleInfo = Player.BattleInfo.Peace;
     }
 
     public override void LateUpdate()

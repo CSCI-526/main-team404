@@ -251,7 +251,8 @@ public class Player : MonoBehaviour
         bigFontStyle.fontSize = 16;
         GUI.Label(new Rect(200, 100, 200, 200), "playerState: " + stateMachine.currentState.animBoolName, bigFontStyle);
         GUI.Label(new Rect(200, 120, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
-        GUI.Label(new Rect(200, 140, 200, 200), "Mana: " + Mana, bigFontStyle);
+        GUI.Label(new Rect(200, 140, 200, 200), "BattleInfo: " + battleInfo, bigFontStyle);
+        GUI.Label(new Rect(200, 160, 200, 200), "Mana: " + Mana, bigFontStyle);
     }
 
     private void OnDrawGizmos()
@@ -270,8 +271,8 @@ public class Player : MonoBehaviour
                 stateMachine.ChangeState(deflectRewardState);
                 break;
             case BattleInfo.Doge:
-                //Does not change state, add Mana
                 ManaCtrl.AddMana(1);
+                battleInfo = BattleInfo.Peace;
                 break;
             case BattleInfo.Hit:
                 stateMachine.ChangeState(damagePenaltyState);

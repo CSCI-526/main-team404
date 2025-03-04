@@ -40,8 +40,8 @@ public class InvincibleHitBoxCalculator : MonoBehaviour
             if (collider.gameObject.CompareTag("EnemyAttackBox"))
             {
                 player.trigger = collider.gameObject;
-                player.battleInfo = Player.BattleInfo.Doge;
                 gameObject.SetActive(false);
+                player.battleInfo = Player.BattleInfo.Doge;
                 return;
             }
         }
