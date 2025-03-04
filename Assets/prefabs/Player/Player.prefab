@@ -150,8 +150,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -582.9814, y: 321.15808}
-  m_SizeDelta: {x: 406.0372, y: 55.6838}
+  m_AnchoredPosition: {x: -508.08676, y: 320.6416}
+  m_SizeDelta: {x: 555.8264, y: 56.7168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7309885385828952407
 CanvasRenderer:
@@ -2239,7 +2239,7 @@ MonoBehaviour:
   grabBox: {fileID: 6046421752998975312}
   grabDuration: 0.3
   rollSpeed: 150
-  rollCoolDown: 0.2
+  rollCoolDown: 0.5
   rollDuration: 0.15
   rollInvincibleDuration: 0.2
   knockbackForceMultiplier: 30
@@ -2251,7 +2251,7 @@ MonoBehaviour:
   weapon0: {fileID: 0}
   weapon1: {fileID: 0}
   weaponDictionary: {fileID: 0}
-  MaxMana: 3
+  MaxMana: 2
   Mana: 0
   MaxHealth: 100
   Health: 0
