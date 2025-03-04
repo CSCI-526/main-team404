@@ -98,8 +98,8 @@ public class Player : MonoBehaviour
     public GameObject HitBox;
 
     [Header("Weapon")]
+    public PlayerWeapon weapon0;
     public PlayerWeapon weapon1;
-    public PlayerWeapon currentWeapon;
     public WeaponsDiction weaponDictionary;
 
     [Header("Stats")]
@@ -217,7 +217,10 @@ public class Player : MonoBehaviour
         stateMachine.Initialize(fallState);
 
         //TODO: have some weaponCache
-        WeaponCtrl.SetCurrentWP(0);
+        WeaponCtrl.ActiveWP(0);
+        WeaponCtrl.EquipWP(0,0);
+        WeaponCtrl.ActiveWP(1);
+        WeaponCtrl.EquipWP(1, 1);
 
 
     }
@@ -238,7 +241,9 @@ public class Player : MonoBehaviour
 
         // stateMachine update second; aleast 0 frame on Playerstate.update() is called()
         stateMachine.currentState.Update();
-        //WeaponCtrl.UpdateCurrentWPAmmo();
+
+        //Check if swtich weapon is pressed
+        WeaponCtrl.checkSwtichPressed();
 
         //Debug
         rawSpeed = rb.linearVelocity;
@@ -267,8 +272,8 @@ public class Player : MonoBehaviour
         GUIStyle bigFontStyle = new GUIStyle(GUI.skin.label);
         bigFontStyle.fontSize = 16;
         GUI.Label(new Rect(200, 100, 200, 200), "playerState: " + stateMachine.currentState.animBoolName, bigFontStyle);
-        GUI.Label(new Rect(200, 120, 200, 200), "Mana: " + Mana, bigFontStyle);
-        GUI.Label(new Rect(200, 140, 200, 200), "Health: " + Health, bigFontStyle);
+        //GUI.Label(new Rect(200, 120, 200, 200), "Mana: " + Mana, bigFontStyle);
+        //GUI.Label(new Rect(200, 140, 200, 200), "Health: " + Health, bigFontStyle);
         //GUI.Label(new Rect(200, 160, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
     }
 

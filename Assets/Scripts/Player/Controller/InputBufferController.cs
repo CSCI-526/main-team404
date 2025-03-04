@@ -30,5 +30,29 @@ public class InputBufferController
         {
             player.input.SetAttackBufferTimer();
         }
+        if (player.input.Skill)
+        {
+            player.input.SetSkillGrabBufferTimer();
+        }
+        if (player.input.Deflect)
+        {
+            player.input.SetDeflectBufferTimer();
+        }
+        if (player.input.Grab)
+        {
+            player.input.SetGrabBufferTimer();
+        }
+        if (player.input.SwtichWeapon)
+        {
+            player.input.SetSwitchWeaponBufferTimer();
+        }
+        if(player.input.Yinput > 0)
+        {
+            player.input.SetUpBufferTimer();
+        }
+        if (player.input.Yinput < 0)
+        {
+            player.input.SetDownBufferTimer();
+        }
     }
 }
