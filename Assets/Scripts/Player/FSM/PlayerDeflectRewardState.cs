@@ -9,7 +9,6 @@ public class PlayerDeflectRewardState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.battleInfo = Player.BattleInfo.Peace;
         player.DeflectCtrl.Bump();
         player.ManaCtrl.AddMana(1);
     }

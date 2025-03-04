@@ -265,16 +265,21 @@ public class Player : MonoBehaviour
         switch (battleInfo)
         {
             case BattleInfo.Grab:
+                battleInfo = BattleInfo.Peace;
                 stateMachine.ChangeState(grabRewardState);
                 break;
             case BattleInfo.Deflect:
+                //TODO:Add Deflect successful Debug Text
+                battleInfo = BattleInfo.Peace;
                 stateMachine.ChangeState(deflectRewardState);
                 break;
             case BattleInfo.Doge:
-                ManaCtrl.AddMana(1);
+                //TODO:Add Doge successful Debug Text
                 battleInfo = BattleInfo.Peace;
+                ManaCtrl.AddMana(1);
                 break;
             case BattleInfo.Hit:
+                battleInfo = BattleInfo.Peace;
                 stateMachine.ChangeState(damagePenaltyState);
                 break;
             case BattleInfo.Attack:

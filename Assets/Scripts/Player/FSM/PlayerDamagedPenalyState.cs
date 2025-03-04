@@ -9,7 +9,6 @@ public class PlayerDamagedPenalyState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.battleInfo = Player.BattleInfo.Peace;
         //Lock stateMachine, release until timer is up (player will not be able to control)
         player.stateMachine.stateLocked = true;
 
