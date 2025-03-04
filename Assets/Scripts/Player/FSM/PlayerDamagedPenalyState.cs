@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDamagedPenalyState : PlayerState
@@ -11,6 +12,9 @@ public class PlayerDamagedPenalyState : PlayerState
         base.Enter();
         //Lock stateMachine, release until timer is up (player will not be able to control)
         player.stateMachine.stateLocked = true;
+        //lose health
+        //TODO: Mechanism to get How much health to loose;
+        player.HealthCtrl.LoseHealth(player.trigger.GetComponent<EnemyCanDoDamage>().HealthLost());
 
         player.KnockBackCtrl.ApplyKnockback();
         // change player color

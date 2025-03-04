@@ -44,7 +44,7 @@ public class PlayerAttackState : PlayerState
         {
             return true;
         }
-        stateMachine.ChangeState(player.idleState);
+        stateMachine.ChangeState(player.fallState);
         return true;
         //return false;
     }

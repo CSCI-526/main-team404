@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         
     }
 
-    [Header("Stats")]
+    [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;
     public int frameRate = 60;
     public float gravityScale;
@@ -70,9 +70,6 @@ public class Player : MonoBehaviour
     public float grabDuration;
     public Timer grabTimer;
 
-    [Header("BattleInfo")]
-    public BattleInfo battleInfo;
-    public GameObject trigger;
 
     [Header("Roll")]
     public float rollSpeed;
@@ -82,22 +79,29 @@ public class Player : MonoBehaviour
     public Timer rollDurationTimer;
     public float rollInvincibleDuration;
 
-
-    [Header("HitBox")]
-    public GameObject InvincibleBox;
-    public GameObject HitBox;
-
     [Header("DamagedPenalty")]
     public float knockbackForceMultiplier;
     public float KnockBackDuration;
     public Timer KnockBackTimer;
 
+    [Header("BattleInfo")]
+    public BattleInfo battleInfo;
+    public GameObject trigger;
+
+    [Header("HitBox")]
+    public GameObject InvincibleBox;
+    public GameObject HitBox;
+
     [Header("Weapon")]
     public PlayerWeapon weapon1;
     public PlayerWeapon currentWeapon;
     public WeaponsDiction weaponDictionary;
+
+    [Header("Stats")]
     public int MaxMana = 3;
     public int Mana;
+    public int MaxHealth = 100;
+    public int Health;
 
     [Header("Animation")]
     [SerializeField] private string animState;
@@ -124,6 +128,7 @@ public class Player : MonoBehaviour
     public OnFlyableController OnFlyableCtrl { get; private set; }
     public WeaponController WeaponCtrl { get; private set; }
     public ManaController ManaCtrl { get; private set; }
+    public HealthController HealthCtrl { get; private set; }
     #endregion
 
     #region States
@@ -164,6 +169,7 @@ public class Player : MonoBehaviour
         OnFlyableCtrl = new OnFlyableController(this);
         WeaponCtrl = new WeaponController(this);
         ManaCtrl = new ManaController(this);
+        HealthCtrl = new HealthController(this);
 
 
 
@@ -187,6 +193,8 @@ public class Player : MonoBehaviour
         InvincibleBox.SetActive(false);
 
         battleInfo = BattleInfo.Peace;
+        Mana = MaxMana;
+        Health = MaxHealth;
 
     }
 
@@ -250,9 +258,9 @@ public class Player : MonoBehaviour
         GUIStyle bigFontStyle = new GUIStyle(GUI.skin.label);
         bigFontStyle.fontSize = 16;
         GUI.Label(new Rect(200, 100, 200, 200), "playerState: " + stateMachine.currentState.animBoolName, bigFontStyle);
-        GUI.Label(new Rect(200, 120, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
-        GUI.Label(new Rect(200, 140, 200, 200), "BattleInfo: " + battleInfo, bigFontStyle);
-        GUI.Label(new Rect(200, 160, 200, 200), "Mana: " + Mana, bigFontStyle);
+        GUI.Label(new Rect(200, 120, 200, 200), "Mana: " + Mana, bigFontStyle);
+        GUI.Label(new Rect(200, 140, 200, 200), "Health: " + Health, bigFontStyle);
+        //GUI.Label(new Rect(200, 160, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
     }
 
     private void OnDrawGizmos()

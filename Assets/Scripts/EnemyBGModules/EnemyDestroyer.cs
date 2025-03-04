@@ -18,6 +18,7 @@ public class EnemyDestroyer : MonoBehaviour
 
     public void DestroyMe()
     {
+        //TODO: enemy death +1 event
         if (onDestroyEffect != null)
         {
             Instantiate(onDestroyEffect, transform.position, Quaternion.identity);
