@@ -43,6 +43,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if (quoteText != null)
+        {
+            quoteText.gameObject.SetActive(false); 
+        }
+    }
     void SetupCanvas()
     {
         if (GameObject.FindGameObjectWithTag("EditorOnly") == null)
