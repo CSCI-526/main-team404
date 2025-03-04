@@ -17,6 +17,7 @@ public class HealthController
         else
         {
             //Player dead reset scene
+            Debug.Log("Player Dead");
         }
     }
     public void GainHealth(int _health)

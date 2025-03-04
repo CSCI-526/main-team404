@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
         Hit
         
     }
+    [Header("UI")]
+    public TMPro.TextMeshProUGUI HealthText;
+    public TMPro.TextMeshProUGUI ManaText;
+    public TMPro.TextMeshProUGUI DeflectText;
+    public TMPro.TextMeshProUGUI DodgeText;
 
     [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;
@@ -238,6 +243,10 @@ public class Player : MonoBehaviour
         //Debug
         rawSpeed = rb.linearVelocity;
 
+        //log mana and health
+        HealthText.text = "Health: " + Health.ToString();
+        ManaText.text = "Mana: " + Mana.ToString();
+
 
     }
 
@@ -278,11 +287,15 @@ public class Player : MonoBehaviour
                 break;
             case BattleInfo.Deflect:
                 //TODO:Add Deflect successful Debug Text
+                DeflectText.gameObject.SetActive(true);
+
                 battleInfo = BattleInfo.Peace;
                 stateMachine.ChangeState(deflectRewardState);
                 break;
             case BattleInfo.Doge:
                 //TODO:Add Doge successful Debug Text
+                DodgeText.gameObject.SetActive(true);
+
                 battleInfo = BattleInfo.Peace;
                 ManaCtrl.AddMana(1);
                 break;

@@ -9,6 +9,10 @@ public class RenableMe : MonoBehaviour
 
     private void Update()
     {
+        if (follow == null)
+        {
+            return;
+        }
         transform.SetPositionAndRotation(follow.position, follow.rotation);
     }
 
