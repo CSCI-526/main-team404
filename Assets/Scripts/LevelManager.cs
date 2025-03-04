@@ -15,16 +15,18 @@ public class LevelManager : MonoBehaviour
     public float textFadeDuration = 1.0f; 
 
     private string[] quotes = {
-        "\"Only those who will risk going too far can possibly find out how far one can go.\" ?T.S. Eliot",
-        "\"Courage is found in unlikely places.\" ?J.R.R. Tolkien",
-        "\"You cannot swim for new horizons until you have courage to lose sight of the shore.\" ?William Faulkner",
-        "\"A journey of a thousand miles begins with a single step.\" ?Lao Tzu",
-        "\"He who jumps into the void owes no explanation to those who stand and watch.\" ?Jean-Luc Godard",
-        "\"To explore is to live; to settle is to fade.\" ?Dev Team",
-        "\"Not I, nor anyone else can travel that road for you. You must travel it yourself.\" ?W.W"
+        "\"Only those who will risk going too far can possibly find out how far one can go.\" -T.S. Eliot",
+        "Thanks for playing! Live wild, seek wonder, and let your heart chase the wind",
+        "\"Courage is found in unlikely places.\"  -J.R.R. Tolkien",
+        "\"You cannot swim for new horizons until you have courage to lose sight of the shore.\" -William Faulkner",
+        "\"A journey of a thousand miles begins with a single step.\" -Lao Tzu",
+        "\"He who jumps into the void owes no explanation to those who stand and watch.\"  -Jean-Luc Godard",
+        "\"To explore is to live; to settle is to fade.\"  -Dev Team",
+        "\"Not I, nor anyone else can travel that road for you. You must travel it yourself.\"  -W.W",
+        "\"A river carves stone not by force, but by never stopping.\" -Dev Team",
     };
 
-    private static LevelManager instance;
+    public static LevelManager instance;
     private bool isFirstScene = true;
 
     void Awake()
@@ -43,7 +45,7 @@ public class LevelManager : MonoBehaviour
 
     void SetupCanvas()
     {
-        if (GameObject.Find("Canvas") == null)
+        if (GameObject.FindGameObjectWithTag("EditorOnly") == null)
         {
             GameObject canvasInstance = Instantiate(canvasPrefab);
             DontDestroyOnLoad(canvasInstance);
@@ -54,7 +56,7 @@ public class LevelManager : MonoBehaviour
 
     void FindUIElements()
     {
-        GameObject canvas = GameObject.Find("Canvas");
+        GameObject canvas = GameObject.FindGameObjectWithTag("EditorOnly");
         if (canvas != null)
         {
             fadePanel = canvas.transform.Find("FadePanel")?.GetComponent<Image>();
@@ -62,6 +64,7 @@ public class LevelManager : MonoBehaviour
             quoteCanvasGroup = quoteText.GetComponent<CanvasGroup>(); 
             if (quoteCanvasGroup == null)
             {
+                Debug.LogWarning("CanvasGroup not found. Adding one to the quote text object.");
                 quoteCanvasGroup = quoteText.gameObject.AddComponent<CanvasGroup>();
             }
         }
@@ -73,6 +76,10 @@ public class LevelManager : MonoBehaviour
         {
             StartTransitionToNextLevel();
         }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            StartTransitionToRestartLevel();
+        }
     }
 
     // Public function for changing to the next level
@@ -81,46 +88,68 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(TransitionToNextLevel());
     }
 
+    public void StartTransitionToRestartLevel()
+    {
+        StartCoroutine(TransitionToRestartLevel());
+    }
+
+
     IEnumerator TransitionToNextLevel()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            yield return StartCoroutine(HandleLastLevel());
+        }
+        else
+        {
+            yield return StartCoroutine(HandleTransition(isNextLevel: true));
+            PlayerInput.instance.DisableGamePlayInputs();
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+    }
+
+    IEnumerator HandleLastLevel()
     {
         if (fadePanel == null || quoteText == null || quoteCanvasGroup == null)
         {
             FindUIElements();
         }
-
         fadePanel.gameObject.SetActive(true);
         quoteText.gameObject.SetActive(false);
-
         yield return StartCoroutine(Fade(0, 1, fadeDuration));
 
         quoteText.gameObject.SetActive(true);
+        quoteText.text = quotes[1]; 
+        quoteCanvasGroup.alpha = 1f; 
+    }
 
-        if (isFirstScene)
+    IEnumerator TransitionToRestartLevel()
+    {
+        yield return StartCoroutine(HandleTransition(isNextLevel: false));
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(currentSceneIndex);
+    }
+
+    IEnumerator HandleTransition(bool isNextLevel)
+    {
+        if (fadePanel == null || quoteText == null || quoteCanvasGroup == null)
         {
-            quoteText.text = quotes[0];
-            isFirstScene = false;
+            FindUIElements();
         }
-        else
-        {
-            quoteText.text = quotes[Random.Range(1, quotes.Length)];
-        }
+        fadePanel.gameObject.SetActive(true);
+        quoteText.gameObject.SetActive(false);
+        yield return StartCoroutine(Fade(0, 1, fadeDuration));
+        quoteText.gameObject.SetActive(true);
+
+        quoteText.text = isNextLevel ? (isFirstScene ? quotes[0] : quotes[Random.Range(2, quotes.Length-1)]) : quotes[quotes.Length - 1];
+        if (isFirstScene && isNextLevel) isFirstScene = false;
 
         yield return new WaitForSeconds(displayTime);
-
-        yield return StartCoroutine(FadeOutText()); 
+        yield return StartCoroutine(FadeOutText());
         yield return new WaitForSeconds(1.0f);
-
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            PlayerInput.instance.DisableGamePlayInputs();
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(nextSceneIndex);
-        }
-        else
-        {
-            Debug.Log("Last scene reached. No further transitions.");
-        }
     }
 
     IEnumerator FadeOutText()
