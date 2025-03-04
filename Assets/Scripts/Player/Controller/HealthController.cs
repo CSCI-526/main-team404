@@ -16,8 +16,8 @@ public class HealthController
         }
         else
         {
-            //Player dead reset scene
-            Debug.Log("Player Dead");
+            player.Health -= _health;
+            LevelManager.instance.StartTransitionToRestartLevel();
         }
     }
     public void GainHealth(int _health)

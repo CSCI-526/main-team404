@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
         InvincibleBox.SetActive(false);
 
         battleInfo = BattleInfo.Peace;
-        Mana = MaxMana;
+        //Mana = MaxMana;
         Health = MaxHealth;
 
     }
@@ -250,8 +250,8 @@ public class Player : MonoBehaviour
         rawSpeed = rb.linearVelocity;
 
         //log mana and health
-        HealthText.text = "Health: " + Health.ToString();
-        ManaText.text = "Mana: " + Mana.ToString();
+        HealthText.text = "Health: " + Health.ToString() + "/" + MaxHealth.ToString();
+        ManaText.text = "Mana: " + Mana.ToString() + "/" + MaxMana.ToString();
 
 
     }

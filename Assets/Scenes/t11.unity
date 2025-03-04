@@ -1143,9 +1143,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5141755010661132841, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 555.8264
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141755010661132841, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 56.7168
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141755010661132841, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -508.08676
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141755010661132841, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 320.6416
+      objectReference: {fileID: 0}
     - target: {fileID: 6154383912242399294, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054766255479824645, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
+      propertyPath: MaxMana
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8054766255479824645, guid: 46b962d40462f5c4283b90cc4dc3250c, type: 3}
       propertyPath: NoManaTetx

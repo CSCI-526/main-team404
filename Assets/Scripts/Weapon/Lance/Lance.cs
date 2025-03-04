@@ -78,6 +78,7 @@ public class Lance : PlayerWeapon
                 stateMachine.ChangeState(attackState, ai);
                 return;
             }
+            player.NoManaTetx.gameObject.SetActive(true);
         }
     }
 
