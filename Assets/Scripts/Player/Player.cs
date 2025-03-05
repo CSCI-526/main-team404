@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public TMPro.TextMeshProUGUI DeflectText;
     public TMPro.TextMeshProUGUI DodgeText;
     public TMPro.TextMeshProUGUI NoManaTetx;
+    public TMPro.TextMeshProUGUI ManaPlusText;
+    public TMPro.TextMeshProUGUI ManaMinusText;
 
     [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;
