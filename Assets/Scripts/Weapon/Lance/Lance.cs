@@ -32,12 +32,11 @@ public class Lance : PlayerWeapon
     private void Awake()
     {
         WeaponID = 0;
+        UnEquip();
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
 
         isDisappear = false;
 
@@ -53,10 +52,7 @@ public class Lance : PlayerWeapon
     private void OnEnable()
     {
         transform.position = spwanPoint.position;
-    }
-    private void OnDisable()
-    {
-        
+        UnEquip();
     }
 
     // Update is called once per frame
@@ -82,13 +78,10 @@ public class Lance : PlayerWeapon
                 stateMachine.ChangeState(attackState, ai);
                 return;
             }
+            player.NoManaTetx.gameObject.SetActive(true);
         }
     }
 
-    public override void grabSkill()
-    {
-        base.grabSkill();
-    }
     public override void skill(AttackInfo ai)
     {
         base.skill(ai);
@@ -102,6 +95,19 @@ public class Lance : PlayerWeapon
     public override void DeactivateWeapon()
     {
         base.DeactivateWeapon();
+    }
+
+    public override void Equip()
+    {
+        base.Equip();
+        Appear();
+
+    }
+
+    public override void UnEquip()
+    {
+        base.UnEquip();
+        Disappear();
     }
 
     public void Disappear()

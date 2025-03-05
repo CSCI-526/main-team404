@@ -918,6 +918,7 @@ MonoBehaviour:
   - rid: 3251204238586938345
   - rid: 3251204277822030113
   - rid: 3251204277822030590
+  - rid: 3251204319634259968
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -987,6 +988,14 @@ MonoBehaviour:
           m_Value1: 17737940884948425609
         Name: healthSlider
         m_Value: {fileID: 4422084135361189295}
+    - rid: 3251204319634259968
+      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3262199316284628178
+          m_Value1: 14769924149062425841
+        Name: Health
+        m_Value: 250
     - rid: 3664480283703640393
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -2064,6 +2073,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  damage: 20
 --- !u!70 &9131515366305972783
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2260,6 +2270,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  damage: 20
 --- !u!1 &7565874497745123409
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class LancerWeaponController : EnemyHitBoxBase
+public class LancerWeaponController : EnemyHitBoxBase,EnemyCanDoDamage
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //private int result;
     public LayerMask targetLayer;
+    public int damage = 10;    
 
 
 
-    
+
 
     public void OnEnable()
     {
@@ -28,4 +29,8 @@ public class LancerWeaponController : EnemyHitBoxBase
         //Debug.Log(gameObject.name + "Disabled");
     }
 
+    public int HealthLost()
+    {
+        return damage;
+    }
 }

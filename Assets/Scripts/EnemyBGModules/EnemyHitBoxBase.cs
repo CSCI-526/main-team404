@@ -11,15 +11,7 @@ public class EnemyHitBoxBase : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public virtual int getID()
-    {
-        return 0;
-    }
-
-    public virtual int getAmmo()
-    {
-        return 0;
-    }
+  
 
 
 }

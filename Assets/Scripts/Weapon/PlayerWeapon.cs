@@ -16,10 +16,10 @@ public class PlayerWeapon : MonoBehaviour
     {
         
     }
-    public virtual void grabSkill(){ }
     public virtual void attack(AttackInfo ai) { }
     public virtual void skill(AttackInfo ai) { }
-
+    public virtual void Equip() { }
+    public virtual void UnEquip() { }
     public virtual void ActivateWeapon()
     {
         gameObject.SetActive(true);

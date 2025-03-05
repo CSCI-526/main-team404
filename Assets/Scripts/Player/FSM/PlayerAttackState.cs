@@ -10,18 +10,20 @@ public class PlayerAttackState : PlayerState
     {
         base.Enter();
         input.isAttackBuffered = false;
-        if (player.currentWeapon == null)
+        if (player.weapon0 == null)
         {
             //if there is not weapon, nothing happen;
             return;
         }
         if (input.Yinput >0 || input.isUpBuffered)
         {
+            input.isUpBuffered = false;
             player.WeaponCtrl.Attack(new AttackInfo(0b01));
             return;
         }
         if(input.Yinput < 0 || input.isDownBuffered)
         {
+            input.isDownBuffered = false;
             player.WeaponCtrl.Attack(new AttackInfo(0b10));
             return;
         }

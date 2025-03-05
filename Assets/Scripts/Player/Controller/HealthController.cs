@@ -3,6 +3,7 @@ using UnityEngine;
 public class HealthController
 {
     public Player player;
+    private bool levelTransitionLock = false;   
 
     public HealthController(Player _player)
     {
@@ -16,7 +17,10 @@ public class HealthController
         }
         else
         {
-            //Player dead reset scene
+            if (levelTransitionLock) return;
+            levelTransitionLock = true;
+            player.Health -= _health;
+            LevelManager.instance.StartTransitionToRestartLevel();
         }
     }
     public void GainHealth(int _health)
