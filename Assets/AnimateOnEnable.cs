@@ -3,6 +3,7 @@ using UnityEngine.Splines;
 
 public class AnimateOnEnable : MonoBehaviour
 {
+    public SplineAnimate splineAni;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +18,6 @@ public class AnimateOnEnable : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<SplineAnimate>().Restart(true);
+        splineAni.Restart(true);
     }
 }

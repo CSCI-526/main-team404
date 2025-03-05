@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 7960840201110110375}
-  fadeDuration: 1.5
+  fadeDuration: 1
   displayTime: 3
   textFadeDuration: 1
 --- !u!1001 &5923612950621445003

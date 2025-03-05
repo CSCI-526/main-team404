@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/t11.unity
     guid: 3bcfc4206deb43e45a3c156569b48f02
   - enabled: 1
+    path: Assets/Scenes/t12.unity
+    guid: 17ea1503c445a9241a67485dd7aa77b1
+  - enabled: 1
     path: Assets/Scenes/t10.unity
     guid: 631289eecd972484fbbe4c70f8c9d977
   - enabled: 1
