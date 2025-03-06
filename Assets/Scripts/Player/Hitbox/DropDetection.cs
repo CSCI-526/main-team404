@@ -34,7 +34,9 @@ public class DropDetection : MonoBehaviour
         {
             
             player.ManaCtrl.AddMana(collider.gameObject.GetComponent<Drop>().GetEnergy());
+            // Energy ball will destroy itself after disabled
             Destroy(collider.gameObject);
+            player.ManaPlusText.gameObject.SetActive(true);
             break;
         }
     }

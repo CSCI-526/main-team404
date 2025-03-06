@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 1666643342561094715}
   - component: {fileID: 9187053119042514038}
   - component: {fileID: 7118154518574618052}
-  - component: {fileID: 1329981104044916416}
   m_Layer: 13
   m_Name: EnergyBall
   m_TagString: EnemyGrabbedBox
@@ -232,16 +231,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   circle: {fileID: 0}
---- !u!114 &1329981104044916416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7419014708050322617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a607e5ac37a6cb4687c83d124e47be3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onDestroyEffect: {fileID: 7602609095943078559, guid: 4d7691301d9ba7e4b965d68a9c09445f, type: 3}
