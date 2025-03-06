@@ -6,13 +6,12 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject canvas;
     private Image fadePanel;
     private TextMeshProUGUI quoteText;
-    private CanvasGroup quoteCanvasGroup; 
+    private CanvasGroup quoteCanvasGroup;
     public float fadeDuration = 1.5f;
     public float displayTime = 3.0f;
-    public float textFadeDuration = 1.0f; 
+    public float textFadeDuration = 1.0f;
 
     private string[] quotes = {
         "\"Only those who will risk going too far can possibly find out how far one can go.\" -T.S. Eliot",
@@ -35,51 +34,53 @@ public class LevelManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            SetupCanvas();
         }
-        
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        FindUIElements();
     }
 
     void Start()
     {
         if (quoteText != null)
         {
-            quoteText.gameObject.SetActive(false); 
+            quoteText.gameObject.SetActive(false);
         }
-    }
-    void SetupCanvas()
-    {
-        
-        //if (canvasPrefab == null)
-        //{
-        //    canvasPrefab = Resources.Load<GameObject>("Prefabs/Canvas");
-        //}
-        //if (GameObject.FindGameObjectWithTag("EditorOnly") == null)
-        //{
-        //    GameObject canvasInstance = Instantiate(canvasPrefab);
-        //    DontDestroyOnLoad(canvasInstance);
-        //}
-
-        FindUIElements();
     }
 
     void FindUIElements()
     {
-        
-            fadePanel = canvas.GetComponentInChildren<Image>();
-            quoteText = canvas.transform.GetComponentInChildren<TextMeshProUGUI>();
-            quoteCanvasGroup = quoteText.GetComponent<CanvasGroup>(); 
-            
-        
+        GameObject canvas = GameObject.FindGameObjectWithTag("TransitionUI");
+        if (canvas == null)
+        {
+            Debug.LogError("Transition Canvas not found in scene! Make sure it exists.");
+            return;
+        }
+
+        fadePanel = canvas.transform.Find("FadePanel")?.GetComponent<Image>();
+        quoteText = canvas.transform.Find("QuoteText")?.GetComponent<TextMeshProUGUI>();
+        if (quoteText != null)
+        {
+            quoteCanvasGroup = quoteText.GetComponent<CanvasGroup>();
+            if (quoteCanvasGroup == null)
+            {
+                //Debug.LogWarning("CanvasGroup not found on QuoteText! Adding one dynamically.");
+                quoteCanvasGroup = quoteText.gameObject.AddComponent<CanvasGroup>();
+            }
+        }
+        else
+        {
+            Debug.LogError("QuoteText not found in Transition Canvas!");
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-            //SceneManager.sceneLoaded += OnSceneLoaded;
-            //SceneManager.LoadScene(nextSceneIndex);
             StartTransitionToNextLevel();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -88,7 +89,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Public function for changing to the next level
     public void StartTransitionToNextLevel()
     {
         StartCoroutine(TransitionToNextLevel());
@@ -99,11 +99,8 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(TransitionToRestartLevel());
     }
 
-
     IEnumerator TransitionToNextLevel()
     {
-
-        PlayerInput.instance.DisableGamePlayInputs();
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
@@ -112,51 +109,63 @@ public class LevelManager : MonoBehaviour
         else
         {
             yield return StartCoroutine(HandleTransition(isNextLevel: true));
-            
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadScene(nextSceneIndex);
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nextSceneIndex);
+            asyncLoad.allowSceneActivation = false;
+            while (!asyncLoad.isDone)
+            {
+                if (asyncLoad.progress >= 0.9f)
+                {
+                    asyncLoad.allowSceneActivation = true;
+                }
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator TransitionToRestartLevel()
+    {
+        yield return StartCoroutine(HandleTransition(isNextLevel: false));
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentSceneIndex);
+        asyncLoad.allowSceneActivation = false;
+        while (!asyncLoad.isDone)
+        {
+            if (asyncLoad.progress >= 0.9f)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
         }
     }
 
     IEnumerator HandleLastLevel()
     {
-        if (fadePanel == null || quoteText == null || quoteCanvasGroup == null)
-        {
-            FindUIElements();
-        }
+        FindUIElements();
         fadePanel.gameObject.SetActive(true);
         quoteText.gameObject.SetActive(false);
         yield return StartCoroutine(Fade(0, 1, fadeDuration));
 
         quoteText.gameObject.SetActive(true);
-        quoteText.text = quotes[1]; 
-        quoteCanvasGroup.alpha = 1f; 
-    }
-
-    IEnumerator TransitionToRestartLevel()
-    {
-        PlayerInput.instance.DisableGamePlayInputs();
-        yield return StartCoroutine(HandleTransition(isNextLevel: false));
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(currentSceneIndex);
+        quoteText.text = quotes[1];
+        quoteCanvasGroup.alpha = 1f;
     }
 
     IEnumerator HandleTransition(bool isNextLevel)
     {
-        if (fadePanel == null || quoteText == null || quoteCanvasGroup == null)
-        {
-            FindUIElements();
-        }
+        FindUIElements();
         fadePanel.gameObject.SetActive(true);
         quoteText.gameObject.SetActive(false);
         yield return StartCoroutine(Fade(0, 1, fadeDuration));
+
+        quoteText.text = isNextLevel ? (isFirstScene ? quotes[0] : quotes[Random.Range(2, quotes.Length - 1)]) : quotes[quotes.Length - 1];
+        if (isFirstScene && isNextLevel)
+        {
+            isFirstScene = false;
+        }
+
         quoteText.gameObject.SetActive(true);
-
-        quoteText.text = isNextLevel ? (isFirstScene ? quotes[0] : quotes[Random.Range(2, quotes.Length-1)]) : quotes[quotes.Length - 1];
-        if (isFirstScene && isNextLevel) isFirstScene = false;
-
         yield return new WaitForSeconds(displayTime);
+
         yield return StartCoroutine(FadeOutText());
         yield return new WaitForSeconds(1.0f);
     }
@@ -175,9 +184,18 @@ public class LevelManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //SetupCanvas();
+        StartCoroutine(WaitForUIElements());
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        StartCoroutine(Fade(1, 0, fadeDuration));
+    }
+
+    IEnumerator WaitForUIElements()
+    {
+        yield return new WaitForSeconds(0.1f);
+        FindUIElements();
+        if (fadePanel != null)
+        {
+            StartCoroutine(Fade(1, 0, fadeDuration));
+        }
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha, float duration)
