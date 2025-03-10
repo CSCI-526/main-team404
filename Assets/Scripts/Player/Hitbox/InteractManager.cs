@@ -104,10 +104,15 @@ public class InteractManager : MonoBehaviour
                 }
 
                 // if not found go to Fail state
-                player.currentInteractingSpear.stopDisplayUI();
+                if (player.ladderCheck)
+                {
+                    player.currentInteractingSpear.stopDisplayUI();
+                    
+                    player.ladderCheck = false;
+                    player.currentInteractingSpear = null;
+                    return;
+                }
                 state = State.Fail;
-                player.ladderCheck = false;
-                player.currentInteractingSpear = null;
                 return;
         }
     }

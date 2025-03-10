@@ -13,12 +13,15 @@ public class PlayerDashState : PlayerState
         base.Enter();
         input.isRollBuffered = false;
         player.RollCtrl.Prep();
+        player.rb.gravityScale = 0;
     }
 
     public override void Exit()
     {
-        base.Exit();
+        player.rb.gravityScale = player.gravityScale;
         player.rb.linearVelocity = new Vector2(0, player.rb.linearVelocity.y);
+        base.Exit();
+        
     }
 
     public override bool Update()

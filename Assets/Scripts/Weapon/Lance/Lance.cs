@@ -8,7 +8,8 @@ public class Lance : PlayerWeapon
     public Collider2D col;
     public GameObject skin;
     public GameObject throwableLancePrefabHorizontal;
-    public GameObject throwableLancePrefabVertical;
+    public GameObject throwableLancePrefabVerticalUp;
+    public GameObject throwableLancePrefabVerticalDown;
     public LayerMask ground;
 
 
