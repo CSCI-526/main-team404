@@ -65,7 +65,7 @@ public class InteractManager : MonoBehaviour
             case State.Fail:
                 
                 // update
-                player.ladderCheck = false;
+                //player.ladderCheck = false;
 
                 // check for transition
                 detectedColliders.Clear();
@@ -78,6 +78,7 @@ public class InteractManager : MonoBehaviour
                     {
                         //if found, go to success state
                         state = State.Success;
+                        player.ladderCheck = true;
                         player.currentInteractingSpear = collider.GetComponent<DrpSpearVertical>();
                         player.currentInteractingSpear.displayUI();
                         return;
@@ -87,7 +88,7 @@ public class InteractManager : MonoBehaviour
             case State.Success:
 
                 //update
-                player.ladderCheck = true;
+                //player.ladderCheck = true;
 
                 //check for transition
                 detectedColliders.Clear();
@@ -126,6 +127,7 @@ public class InteractManager : MonoBehaviour
                 // if not found go to Fail state
                 player.currentInteractingSpear.stopDisplayUI();
                 state = State.Fail;
+                player.ladderCheck = false;
                 player.currentInteractingSpear = null;
                 return;
         }
