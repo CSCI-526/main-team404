@@ -21,6 +21,9 @@ public class InteractManager : MonoBehaviour
         if (collision.CompareTag("Ladder"))
         {
             player.ladderCheck = true;
+            player.currentInteractingSpear = collision.GetComponent<DrpSpearVertical>();
+            player.currentInteractingSpear.displayUI();
+
         }
     }
 
@@ -29,6 +32,8 @@ public class InteractManager : MonoBehaviour
         if (collision.CompareTag("Ladder"))
         {
             player.ladderCheck = false;
+            player.currentInteractingSpear.stopDisplayUI();
+            player.currentInteractingSpear = null;
         }
     }
 }

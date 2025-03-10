@@ -54,5 +54,9 @@ public class InputBufferController
         {
             player.input.SetDownBufferTimer();
         }
+        if (player.input.Interact)
+        {
+            player.input.SetInteractBufferTimer();
+        }
     }
 }

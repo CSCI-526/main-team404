@@ -14,11 +14,19 @@ public class PlayerLadderMoveState : PlayerState
         base.Enter();
         player.rb.gravityScale = 0f;
         player.JumpCtrl.ResetCounter(2);
+        player.currentInteractingSpear.TurnOnTopMargin();
+        player.currentInteractingSpear.displayClimbUI();
     }
 
     public override void Exit()
     {
         player.rb.gravityScale = player.gravityScale;
+        if (player.currentInteractingSpear != null)
+        {
+            player.currentInteractingSpear.TurnOffTopMargin();
+            player.currentInteractingSpear.stopDisplayClimbUI();
+        }
+        
         base.Exit();
     }
 
@@ -38,8 +46,10 @@ public class PlayerLadderMoveState : PlayerState
             stateMachine.ChangeState(player.jumpState);
             return true;
         }
+
         //ladder => idle/fall
-        if (!player.ladderCheck)
+        // conflict with interact input buffer, so no buffer here
+        if (!player.ladderCheck || input.Interact)
         {
             if (player.LevelCollisionCtrl.IsGroundDetected())
             {

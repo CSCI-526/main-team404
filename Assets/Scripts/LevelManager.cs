@@ -101,6 +101,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator TransitionToNextLevel()
     {
+        PlayerInput.instance.DisableGamePlayInputs();
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
@@ -124,6 +125,7 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator TransitionToRestartLevel()
     {
+        PlayerInput.instance.DisableGamePlayInputs();
         yield return StartCoroutine(HandleTransition(isNextLevel: false));
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentSceneIndex);

@@ -50,7 +50,7 @@ public class PlayerState
         // any => LadderMove transition to self disable;
         if (stateMachine.currentState != player.ladderMoveState)
         {
-            if (player.ladderCheck && input.Yinput > 0)
+            if (player.ladderCheck && input.Interact)
             {
                 stateMachine.ChangeState(player.ladderMoveState);
                 return true;

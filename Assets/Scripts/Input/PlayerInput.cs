@@ -39,6 +39,10 @@ public class PlayerInput : MonoBehaviour
     public float switchWeaponBufferTimeWindow;
     WaitForSeconds switchWeaponBufferTime;
 
+    public bool Interact => inputActions.GamePlay.Interact.WasPressedThisFrame();
+    public bool isInteractBuffered { get; set; }
+    public float InteractBufferTimeWinodow;
+    WaitForSeconds InteractBufferTime;
     public Vector2 AxesInput => inputActions.GamePlay.Move.ReadValue<Vector2>();
     public float Xinput => AxesInput.x;
     public float Yinput => AxesInput.y;
@@ -60,6 +64,7 @@ public class PlayerInput : MonoBehaviour
             attackBufferTime = new WaitForSeconds(attackBufferTimeWindow);
             upBufferTime = new WaitForSeconds(upBufferTimeWindow);
             downBufferTime = new WaitForSeconds(downBufferTimeWindow);
+            InteractBufferTime = new WaitForSeconds(InteractBufferTimeWinodow);
         }
 
 
@@ -124,6 +129,12 @@ public class PlayerInput : MonoBehaviour
     {
         StopCoroutine(nameof(DownBufferCoroutine));
         StartCoroutine(nameof(DownBufferCoroutine));
+    }
+
+    public void SetInteractBufferTimer()
+    {
+        StopCoroutine(nameof(InteractBufferCoroutine));
+        StartCoroutine(nameof(InteractBufferCoroutine));
     }
     IEnumerator JumpBufferCoroutine()
     {
@@ -193,6 +204,13 @@ public class PlayerInput : MonoBehaviour
         isDownBuffered = true;
         yield return downBufferTime;
         isDownBuffered = false;
+    }
+
+    IEnumerator InteractBufferCoroutine()
+    {
+        isInteractBuffered = true;
+        yield return InteractBufferTime;
+        isInteractBuffered = false;
     }
 
 

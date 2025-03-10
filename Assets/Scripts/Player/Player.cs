@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     public int frameRate = 60;
     public float gravityScale;
     public bool ladderCheck;
+    public DrpSpearVertical currentInteractingSpear;
     public SpriteRenderer Bleeding;
 
     [Header("LevelCollision")]
