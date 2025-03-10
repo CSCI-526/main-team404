@@ -1,0 +1,31 @@
+using UnityEngine;
+
+public class LadderMoveController
+{
+    Player player;
+
+    public LadderMoveController(Player _player)
+    {
+        player = _player;
+    }
+
+    public void climbLadder()
+    {
+        player.rb.gravityScale = 0f;
+        player.JumpCtrl.ResetCounter(2);
+        // set player postion to current spear
+        player.transform.position = new Vector2(player.currentInteractingSpear.transform.position.x, player.transform.position.y);
+        player.currentInteractingSpear.TurnOnTopMargin();
+        player.currentInteractingSpear.displayClimbUI();
+    }
+
+    public void leaveLadder()
+    {
+        player.rb.gravityScale = player.gravityScale;
+        if (player.currentInteractingSpear != null)
+        {
+            player.currentInteractingSpear.TurnOffTopMargin();
+            player.currentInteractingSpear.stopDisplayClimbUI();
+        }
+    }
+}

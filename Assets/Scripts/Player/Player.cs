@@ -138,6 +138,7 @@ public class Player : MonoBehaviour
     public WeaponController WeaponCtrl { get; private set; }
     public ManaController ManaCtrl { get; private set; }
     public HealthController HealthCtrl { get; private set; }
+    public LadderMoveController LadderMoveCtrl { get; private set; }
     #endregion
 
     #region States
@@ -179,6 +180,7 @@ public class Player : MonoBehaviour
         WeaponCtrl = new WeaponController(this);
         ManaCtrl = new ManaController(this);
         HealthCtrl = new HealthController(this);
+        LadderMoveCtrl = new LadderMoveController(this);
 
 
 

@@ -116,6 +116,7 @@ public class InteractManager : MonoBehaviour
                     if (collider.gameObject.CompareTag("Ladder"))
                     {
                         // if find another ladder, stay in success, but change current ladder pointer
+                        player.currentInteractingSpear.stopDisplayUI();
                         player.currentInteractingSpear = collider.GetComponent<DrpSpearVertical>();
                         player.currentInteractingSpear.displayUI();
                         return;

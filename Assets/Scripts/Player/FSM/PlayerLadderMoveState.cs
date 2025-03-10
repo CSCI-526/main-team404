@@ -12,20 +12,12 @@ public class PlayerLadderMoveState : PlayerState
     {
        
         base.Enter();
-        player.rb.gravityScale = 0f;
-        player.JumpCtrl.ResetCounter(2);
-        player.currentInteractingSpear.TurnOnTopMargin();
-        player.currentInteractingSpear.displayClimbUI();
+        player.LadderMoveCtrl.climbLadder();
     }
 
     public override void Exit()
     {
-        player.rb.gravityScale = player.gravityScale;
-        if (player.currentInteractingSpear != null)
-        {
-            player.currentInteractingSpear.TurnOffTopMargin();
-            player.currentInteractingSpear.stopDisplayClimbUI();
-        }
+        player.LadderMoveCtrl.leaveLadder();
         
         base.Exit();
     }
@@ -36,8 +28,8 @@ public class PlayerLadderMoveState : PlayerState
         {
             return true;
         }
+
         player.FlipCtrl.onHorizontalInput();
-        player.rb.linearVelocityX = input.Xinput * player.ladderHorizontalSpeed;
         player.rb.linearVelocityY = input.Yinput * player.ladderVerticalSpeed;
 
         //ladder =>jump

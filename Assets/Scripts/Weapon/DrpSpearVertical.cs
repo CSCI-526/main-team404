@@ -27,7 +27,7 @@ public class DrpSpearVertical : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        StartCoroutine(nameof(DestroySpearVCoroutine));
+        //StartCoroutine(nameof(DestroySpearVCoroutine));
     }
 
     // Update is called once per frame
