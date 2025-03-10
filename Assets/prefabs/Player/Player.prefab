@@ -116,6 +116,37 @@ MonoBehaviour:
   contactLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!1 &138569444007733688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8786553422628105182}
+  m_Layer: 6
+  m_Name: ShootingVPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8786553422628105182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138569444007733688}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.61, y: -0.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2023491267677364655}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &263533513784273853
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 467093814076940570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.006, y: -0.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1214,7 +1245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6905988977369445947}
   m_Layer: 6
-  m_Name: ShootingPosition
+  m_Name: ShootingHPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2616,6 +2647,7 @@ Transform:
   m_Children:
   - {fileID: 1428835279899440327}
   - {fileID: 6905988977369445947}
+  - {fileID: 8786553422628105182}
   - {fileID: 7681895568526626711}
   m_Father: {fileID: 3225298405265458393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2637,12 +2669,13 @@ MonoBehaviour:
   col: {fileID: 7431672209310189672}
   skin: {fileID: 467093814076940570}
   throwableLancePrefabHorizontal: {fileID: 8414946441756651760, guid: 558c247dede70244187a2ccb03dd8a2b, type: 3}
-  throwableLancePrefabVertical: {fileID: 6152305458031132993, guid: 9d640b494e1e6964ea553d2cbffa4841, type: 3}
+  throwableLancePrefabVertical: {fileID: 8150497922205966716, guid: 6def98d7cc2bfe1459d1759bc9d2cb31, type: 3}
   ground:
     serializedVersion: 2
     m_Bits: 8
   spwanPoint: {fileID: 7681895568526626711}
-  shootingPostion: {fileID: 6905988977369445947}
+  shootingHPosition: {fileID: 6905988977369445947}
+  shootingVPosition: {fileID: 8786553422628105182}
   timer: 0
   isDisappear: 0
 --- !u!50 &3321514336966648069
@@ -2706,7 +2739,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.024544306, y: -0.8443264}
+  m_Offset: {x: 0, y: -0.8}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
