@@ -27,8 +27,8 @@ public class LanceAttackState : LanceState
                 shootPoint = hitH.point - Vector2.up * new Vector2(0, lanceHeight);
             }
             
-            throwingLance = Lance.Instantiate(lance.throwableLancePrefabVerticalUp, shootPoint, Quaternion.identity);
-            throwingLance.transform.up = Vector2.down;
+            throwingLance = Lance.Instantiate(lance.throwableLancePrefabVerticalUp, shootPoint, lance.throwableLancePrefabVerticalUp.transform.rotation);
+            //throwingLance.transform.Rotate(0, 0, 180);
             return;
         }
         if (stateMachine.attackInfo.isDownPressed())
@@ -39,7 +39,7 @@ public class LanceAttackState : LanceState
             {
                 shootPoint = hitH.point + Vector2.up * new Vector2(0, lanceHeight);
             }
-            throwingLance = Lance.Instantiate(lance.throwableLancePrefabVerticalDown, shootPoint, Quaternion.identity);
+            throwingLance = Lance.Instantiate(lance.throwableLancePrefabVerticalDown, shootPoint, lance.throwableLancePrefabVerticalDown.transform.rotation);
             return;
         }
         // move shoot location back if too close to wall

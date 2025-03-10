@@ -170,12 +170,12 @@ public class DrpSpearVertical : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDestroy()
-    {
-        if (PlayerInfo.instance.player.currentInteractingSpear == this)
-        {
-            PlayerInfo.instance.player.currentInteractingSpear = null;
-            PlayerInfo.instance.player.ladderCheck = false;
-        }
-    }
+    //private void OnDestroy()
+    //{
+    //    if (PlayerInfo.instance.player.currentInteractingSpear == this)
+    //    {
+    //        PlayerInfo.instance.player.currentInteractingSpear = null;
+    //        PlayerInfo.instance.player.ladderCheck = false;
+    //    }
+    //}
 }

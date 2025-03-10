@@ -56,11 +56,17 @@ public class InteractManager : MonoBehaviour
                     if (collider.gameObject.CompareTag("Ladder"))
                     {
                         //if found, go to success state
-                        state = State.Success;
-                        player.ladderCheck = true;
                         player.currentInteractingSpear = collider.GetComponent<DrpSpearVertical>();
-                        player.currentInteractingSpear.displayUI();
-                        return;
+                        if (player.currentInteractingSpear != null)
+                        {
+                            player.currentInteractingSpear.displayUI();
+                            state = State.Success;
+                            player.ladderCheck = true;
+                            return;
+
+                        }
+                       
+                        
                     }
                 }
                 return;
@@ -96,22 +102,25 @@ public class InteractManager : MonoBehaviour
                     if (collider.gameObject.CompareTag("Ladder"))
                     {
                         // if find another ladder, stay in success, but change current ladder pointer
-                        player.currentInteractingSpear.stopDisplayUI();
+                        if (player.currentInteractingSpear != null)
+                        {
+                            player.currentInteractingSpear.stopDisplayUI();
+                        }
                         player.currentInteractingSpear = collider.GetComponent<DrpSpearVertical>();
+                        
                         player.currentInteractingSpear.displayUI();
+                        
                         return;
                     }
                 }
 
                 // if not found go to Fail state
-                if (player.ladderCheck)
+                if (player.currentInteractingSpear != null)
                 {
                     player.currentInteractingSpear.stopDisplayUI();
-                    
-                    player.ladderCheck = false;
-                    player.currentInteractingSpear = null;
-                    return;
                 }
+                player.ladderCheck = false;
+                player.currentInteractingSpear = null;
                 state = State.Fail;
                 return;
         }

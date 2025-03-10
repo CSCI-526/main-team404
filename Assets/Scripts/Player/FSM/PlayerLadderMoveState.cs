@@ -12,6 +12,7 @@ public class PlayerLadderMoveState : PlayerState
     {
        
         base.Enter();
+        stateMachine.stateLocked = true;
         player.LadderMoveCtrl.climbLadder();
     }
 
@@ -35,6 +36,7 @@ public class PlayerLadderMoveState : PlayerState
         //ladder => roll
         if (player.LevelCollisionCtrl.IsGroundDetected() && ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp()))
         {
+            player.stateMachine.stateLocked = false;
             stateMachine.ChangeState(player.rollState);
             return true;
         }
@@ -42,6 +44,7 @@ public class PlayerLadderMoveState : PlayerState
         if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
         {
 
+            player.stateMachine.stateLocked = false;
             stateMachine.ChangeState(player.dashState);
             return true;
         }
@@ -49,6 +52,7 @@ public class PlayerLadderMoveState : PlayerState
         //ladder =>jump
         if (input.Jump || input.isJumpBuffered)
         {
+            player.stateMachine.stateLocked = false;
             stateMachine.ChangeState(player.jumpState);
             return true;
         }
@@ -59,11 +63,13 @@ public class PlayerLadderMoveState : PlayerState
         {
             if (player.LevelCollisionCtrl.IsGroundDetected())
             {
+                player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.idleState);
                 return true;
             }
             else
             {
+                player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.fallState);
                 return true;
             }

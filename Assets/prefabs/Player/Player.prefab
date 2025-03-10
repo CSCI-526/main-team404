@@ -2585,7 +2585,7 @@ MonoBehaviour:
   JumpInitialSpeed: 100
   JumpCounter: 2
   ladderHorizontalSpeed: 16
-  ladderVerticalSpeed: 20
+  ladderVerticalSpeed: 60
   wallSlideSpeed: 1
   wallJumpSpeedX: 45
   wallJumpSpeedY: 100
@@ -2669,7 +2669,8 @@ MonoBehaviour:
   col: {fileID: 7431672209310189672}
   skin: {fileID: 467093814076940570}
   throwableLancePrefabHorizontal: {fileID: 8414946441756651760, guid: 558c247dede70244187a2ccb03dd8a2b, type: 3}
-  throwableLancePrefabVertical: {fileID: 8150497922205966716, guid: 6def98d7cc2bfe1459d1759bc9d2cb31, type: 3}
+  throwableLancePrefabVerticalUp: {fileID: 0}
+  throwableLancePrefabVerticalDown: {fileID: 0}
   ground:
     serializedVersion: 2
     m_Bits: 8
