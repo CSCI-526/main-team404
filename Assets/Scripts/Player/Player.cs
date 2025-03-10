@@ -35,8 +35,6 @@ public class Player : MonoBehaviour
     public SpriteRenderer playerPrototypeSprite;
     public int frameRate = 60;
     public float gravityScale;
-    public bool ladderCheck;
-    public DrpSpearVertical currentInteractingSpear;
     public SpriteRenderer Bleeding;
 
     [Header("LevelCollision")]
@@ -47,6 +45,8 @@ public class Player : MonoBehaviour
     public Transform wallCheckBottom;
     public float wallCheckDistance;
     public LayerMask level;
+    public bool ladderCheck;
+    public DrpSpearVertical currentInteractingSpear;
 
     [Header("GroundMovement")]
     [SerializeField] private Vector2 rawSpeed;
