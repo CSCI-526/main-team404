@@ -41,7 +41,7 @@ public class PlayerLadderMoveState : PlayerState
 
         //ladder => idle/fall
         // conflict with interact input buffer, so no buffer here
-        if (!player.ladderCheck || input.Interact)
+        if (input.Interact)
         {
             if (player.LevelCollisionCtrl.IsGroundDetected())
             {
