@@ -32,6 +32,20 @@ public class PlayerLadderMoveState : PlayerState
         player.FlipCtrl.onHorizontalInput();
         player.rb.linearVelocityY = input.Yinput * player.ladderVerticalSpeed;
 
+        //ladder => roll
+        if (player.LevelCollisionCtrl.IsGroundDetected() && ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp()))
+        {
+            stateMachine.ChangeState(player.rollState);
+            return true;
+        }
+        //ladder => dash
+        if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
+        {
+
+            stateMachine.ChangeState(player.dashState);
+            return true;
+        }
+
         //ladder =>jump
         if (input.Jump || input.isJumpBuffered)
         {
@@ -41,7 +55,7 @@ public class PlayerLadderMoveState : PlayerState
 
         //ladder => idle/fall
         // conflict with interact input buffer, so no buffer here
-        if (input.Interact)
+        if ((!player.ladderCheck) || input.Interact)
         {
             if (player.LevelCollisionCtrl.IsGroundDetected())
             {

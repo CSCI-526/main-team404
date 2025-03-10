@@ -14,7 +14,8 @@ public class Lance : PlayerWeapon
 
     [Header("Initialization")]
     public Transform spwanPoint;
-    public Transform shootingPostion;
+    public Transform shootingHPosition;
+    public Transform shootingVPosition;
 
     [Header("Timer")]
     public float timer;

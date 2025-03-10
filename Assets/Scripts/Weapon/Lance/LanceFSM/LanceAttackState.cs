@@ -20,8 +20,8 @@ public class LanceAttackState : LanceState
 
         if (stateMachine.attackInfo.isUpPressed())
         {
-            shootPoint = new Vector3(lance.shootingPostion.position.x, lance.shootingPostion.position.y, 0);
-            RaycastHit2D hitH = Physics2D.Raycast(lance.shootingPostion.position, Vector2.up, lanceHeight, lance.ground);
+            shootPoint = new Vector3(lance.shootingVPosition.position.x, lance.shootingVPosition.position.y, 0);
+            RaycastHit2D hitH = Physics2D.Raycast(lance.shootingVPosition.position, Vector2.up, lanceHeight, lance.ground);
             if (hitH.collider != null)
             {
                 shootPoint = hitH.point - Vector2.up * new Vector2(0, lanceHeight);
@@ -33,8 +33,8 @@ public class LanceAttackState : LanceState
         }
         if (stateMachine.attackInfo.isDownPressed())
         {
-            shootPoint = new Vector3(lance.shootingPostion.position.x, lance.shootingPostion.position.y, 0);
-            RaycastHit2D hitH = Physics2D.Raycast(lance.shootingPostion.position, Vector2.down, lanceHeight, lance.ground);
+            shootPoint = new Vector3(lance.shootingHPosition.position.x, lance.shootingHPosition.position.y, 0);
+            RaycastHit2D hitH = Physics2D.Raycast(lance.shootingHPosition.position, Vector2.down, lanceHeight, lance.ground);
             if (hitH.collider != null)
             {
                 shootPoint = hitH.point + Vector2.up * new Vector2(0, lanceHeight);
@@ -43,10 +43,10 @@ public class LanceAttackState : LanceState
             return;
         }
         // move shoot location back if too close to wall
-        shootPoint = new Vector3(lance.shootingPostion.position.x, lance.shootingPostion.position.y, 0);
+        shootPoint = new Vector3(lance.shootingHPosition.position.x, lance.shootingHPosition.position.y, 0);
         BoxCollider2D lanceCollider = lance.throwableLancePrefabHorizontal.GetComponent<BoxCollider2D>();
         float lanceLength = lanceCollider.size.x / 2 + lanceCollider.offset.x;
-        RaycastHit2D hit = Physics2D.Raycast(lance.shootingPostion.position, Vector2.right * lance.player.facingDir, lanceLength, lance.ground);
+        RaycastHit2D hit = Physics2D.Raycast(lance.shootingHPosition.position, Vector2.right * lance.player.facingDir, lanceLength, lance.ground);
         if (hit.collider != null)
         {
             shootPoint = hit.point - lance.player.facingDir * new Vector2(lanceLength, 0);
