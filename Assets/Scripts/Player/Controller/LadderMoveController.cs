@@ -14,7 +14,7 @@ public class LadderMoveController
         player.rb.gravityScale = 0f;
         player.JumpCtrl.ResetCounter(2);
         // set player postion to current spear
-        player.transform.position = new Vector2(player.currentInteractingSpear.transform.position.x, player.transform.position.y);
+        player.transform.position = player.currentInteractingSpear.GetValidPosition(player.transform.position);
         player.rb.linearVelocity = new Vector2(0,player.rb.linearVelocity.y);
         player.currentInteractingSpear.TurnOnTopMargin();
         player.currentInteractingSpear.displayClimbUI();

@@ -10,6 +10,12 @@ public class DrpSpearVertical : MonoBehaviour
         OnGround
     }
 
+    public enum SpearType
+    {
+        Up,
+        Down,
+    }
+    public SpearType type;
     public SpearState state;
     public float moveSpeed;
     public float liveTime;
@@ -19,15 +25,18 @@ public class DrpSpearVertical : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject attackBox;
     public GameObject topMargin;
+    public Transform boundPosition;
     public TMPro.TextMeshProUGUI climbNote;
     public TMPro.TextMeshProUGUI stopClimbNote;
+    public SpriteRenderer tip;
+    public SpriteRenderer body;
     void Start()
     {
         state = SpearState.InAir;
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        //StartCoroutine(nameof(DestroySpearVCoroutine));
+        StartCoroutine(nameof(DestroySpearCoroutine));
     }
 
     // Update is called once per frame
@@ -63,11 +72,11 @@ public class DrpSpearVertical : MonoBehaviour
         }
     }
 
-    IEnumerator DestroySpearVCoroutine()
-    {
-        yield return new WaitForSeconds(liveTime);
-        Destroy(gameObject);
-    }
+    //IEnumerator DestroySpearVCoroutine()
+    //{
+    //    yield return new WaitForSeconds(liveTime);
+    //    Destroy(gameObject);
+    //}
 
     IEnumerator DisableAttacBoxCoroutine()
     {
@@ -110,5 +119,54 @@ public class DrpSpearVertical : MonoBehaviour
     {
         stopClimbNote.gameObject.SetActive(false);
         climbNote.gameObject.SetActive(true);
+    }
+
+    public void SetColor(Color color)
+    {
+        tip.color = color;
+        body.color = color;
+    }
+
+    public Vector2 GetValidPosition(Vector2 position)
+    {
+        switch (type)
+        {
+            case SpearType.Up:
+                if (position.y < boundPosition.position.y)
+                {
+                    return new Vector2(transform.position.x, boundPosition.position.y);
+                }
+                else
+                {
+                    return new Vector2(transform.position.x, position.y);
+                }
+            case SpearType.Down:
+                if (position.y > boundPosition.position.y)
+                {
+                    return new Vector2(transform.position.x, boundPosition.position.y);
+                }
+                else
+                {
+                    return new Vector2(transform.position.x, position.y);
+                }
+
+
+        }
+        return Vector2.zero;
+    }
+
+    IEnumerator DestroySpearCoroutine()
+    {
+        float flashDuration = 0.2f;
+        int numberOfFlashes = 3; 
+        yield return new WaitForSeconds(liveTime);
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            SetColor(Color.red);
+            yield return new WaitForSeconds(flashDuration);
+            SetColor(Color.white);
+            yield return new WaitForSeconds(flashDuration);
+        }
+        Destroy(gameObject);
     }
 }
