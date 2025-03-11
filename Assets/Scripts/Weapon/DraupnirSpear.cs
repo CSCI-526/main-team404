@@ -11,8 +11,15 @@ public class DraupnirSpear : MonoBehaviour
         OnWall
        
     }
+
+    public enum SpearUse
+    {
+        Player,
+        Level
+    }
     
     public SpearState state;
+    public SpearUse useType;
     public float moveSpeed;
     public float liveTime;
     public Transform wallCheckPosition;
@@ -21,6 +28,8 @@ public class DraupnirSpear : MonoBehaviour
     public GameObject attackBox;
     private Rigidbody2D rb;
     private PlatformEffector2D pe;
+    public SpriteRenderer tip;
+    public SpriteRenderer body;
 
 
     void Start()
@@ -30,7 +39,15 @@ public class DraupnirSpear : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         pe = GetComponent<PlatformEffector2D>();
-        StartCoroutine(nameof(DestroySpearCoroutine));
+        if (useType == SpearUse.Level)
+        {
+            state = SpearState.OnWall;
+            StuckToLevel();
+        }
+        else
+        {
+            StartCoroutine(nameof(DestroySpearCoroutine));
+        }
     }
 
     // Update is called once per frame
@@ -55,14 +72,20 @@ public class DraupnirSpear : MonoBehaviour
         bool isWallDetected = Physics2D.Raycast(wallCheckPosition.position, wallCheckPosition.right, wallCheckDistance, wallLayer);
         if (isWallDetected)
         {
-            state = SpearState.OnWall;
-            rb.linearVelocity = Vector2.zero;
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            //transform.parent = other.transform;
-            attackBox.SetActive(false);
-            StartCoroutine(nameof(DisableAttacBoxCoroutine));
+            StuckToLevel();
         }
     }
+
+    private void StuckToLevel()
+    {
+        state = SpearState.OnWall;
+        rb.linearVelocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        //transform.parent = other.transform;
+        attackBox.SetActive(false);
+        StartCoroutine(nameof(DisableAttacBoxCoroutine));
+    }
+
     //private void OnCollisionEnter2D(UnityEngine.Collision2D collision)
     //{
     //    //Debug.Log(collision.gameObject.name);
@@ -70,7 +93,7 @@ public class DraupnirSpear : MonoBehaviour
     //    {
     //        return;
     //    }
-        
+
     //    if (collision.collider.CompareTag("Wall"))
     //    {
     //        state = SpearState.OnWall;
@@ -83,13 +106,8 @@ public class DraupnirSpear : MonoBehaviour
 
     //}
 
-    
 
-    IEnumerator DestroySpearCoroutine()
-    {
-        yield return new WaitForSeconds(liveTime);
-        Destroy(gameObject);
-    }
+
 
     IEnumerator DisableAttacBoxCoroutine()
     {
@@ -100,6 +118,27 @@ public class DraupnirSpear : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(wallCheckPosition.position, wallCheckPosition.position + wallCheckPosition.right * wallCheckDistance);
+    }
+
+    IEnumerator DestroySpearCoroutine()
+    {
+        float flashDuration = 0.2f;
+        int numberOfFlashes = 3;
+        yield return new WaitForSeconds(liveTime);
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            SetColor(Color.red);
+            yield return new WaitForSeconds(flashDuration);
+            SetColor(Color.white);
+            yield return new WaitForSeconds(flashDuration);
+        }
+        Destroy(gameObject);
+    }
+
+    public void SetColor(Color color)
+    {
+        tip.color = color;
+        body.color = color;
     }
 
 

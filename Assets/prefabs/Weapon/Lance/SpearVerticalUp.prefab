@@ -188,7 +188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'E to stop climb
+  m_text: 'E/L/Jump to exit
 
 '
   m_isRightToLeft: 0
@@ -750,6 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   state: 0
+  useType: 0
   moveSpeed: 45
   liveTime: 15
   wallCheckPosition: {fileID: 6390794963482237611}

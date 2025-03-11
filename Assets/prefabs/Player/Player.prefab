@@ -2467,7 +2467,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 33fe294cd1ddd3b4686aaad0a558fbc4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2669,8 +2669,8 @@ MonoBehaviour:
   col: {fileID: 7431672209310189672}
   skin: {fileID: 467093814076940570}
   throwableLancePrefabHorizontal: {fileID: 8414946441756651760, guid: 558c247dede70244187a2ccb03dd8a2b, type: 3}
-  throwableLancePrefabVerticalUp: {fileID: 0}
-  throwableLancePrefabVerticalDown: {fileID: 0}
+  throwableLancePrefabVerticalUp: {fileID: 5778634840990906056, guid: f605bd46c2fe50f49bb282daa58c406d, type: 3}
+  throwableLancePrefabVerticalDown: {fileID: 3967452378674692047, guid: cd8140fa743dbc14f9213ec1acaee254, type: 3}
   ground:
     serializedVersion: 2
     m_Bits: 8

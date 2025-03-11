@@ -4,6 +4,7 @@ using UnityEngine;
 public class DrpSpearVertical : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     public enum SpearState
     {
         InAir,
@@ -15,8 +16,15 @@ public class DrpSpearVertical : MonoBehaviour
         Up,
         Down,
     }
+
+    public enum SpearUse
+    {
+        Player,
+        Level
+    }
     public SpearType type;
     public SpearState state;
+    public SpearUse useType;
     public float moveSpeed;
     public float liveTime;
     public Transform wallCheckPosition;
@@ -36,7 +44,16 @@ public class DrpSpearVertical : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        StartCoroutine(nameof(DestroySpearCoroutine));
+        
+        if (useType == SpearUse.Level)
+        {
+            state = SpearState.OnGround;
+            StuckToLevel();
+        }
+        else
+        {
+            StartCoroutine(nameof(DestroySpearCoroutine));
+        }
     }
 
     // Update is called once per frame
@@ -62,14 +79,19 @@ public class DrpSpearVertical : MonoBehaviour
         bool isWallDetected = Physics2D.Raycast(wallCheckPosition.position, wallCheckPosition.up, wallCheckDistance, wallLayer);
         if (isWallDetected)
         {
-            state = SpearState.OnGround;
-            rb.linearVelocity = Vector2.zero;
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            //transform.parent = other.transform;
-            attackBox.SetActive(false);
-            //topMargin.SetActive(true);
-            StartCoroutine(nameof(DisableAttacBoxCoroutine));
+            StuckToLevel();
         }
+    }
+
+    private void StuckToLevel()
+    {
+        state = SpearState.OnGround;
+        rb.linearVelocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        //transform.parent = other.transform;
+        attackBox.SetActive(false);
+        //topMargin.SetActive(true);
+        StartCoroutine(nameof(DisableAttacBoxCoroutine));
     }
 
     //IEnumerator DestroySpearVCoroutine()
