@@ -1,5 +1,6 @@
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using static Player;
 
 public class PlayerLadderMoveState : PlayerState
 {
@@ -12,7 +13,7 @@ public class PlayerLadderMoveState : PlayerState
     {
        
         base.Enter();
-        stateMachine.stateLocked = true;
+        //stateMachine.stateLocked = true;
         player.LadderMoveCtrl.climbLadder();
     }
 
@@ -25,10 +26,8 @@ public class PlayerLadderMoveState : PlayerState
 
     public override bool Update()
     {
-        if (base.Update())
-        {
-            return true;
-        }
+
+        //Debug.Log("Battle Info: "+ player.battleInfo);
 
         player.FlipCtrl.onHorizontalInput();
         player.rb.linearVelocityY = input.Yinput * player.ladderVerticalSpeed;
@@ -36,7 +35,7 @@ public class PlayerLadderMoveState : PlayerState
         //ladder => roll
         if (player.LevelCollisionCtrl.IsGroundDetected() && ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp()))
         {
-            player.stateMachine.stateLocked = false;
+            //player.stateMachine.stateLocked = false;
             stateMachine.ChangeState(player.rollState);
             return true;
         }
@@ -52,7 +51,7 @@ public class PlayerLadderMoveState : PlayerState
         //ladder =>jump
         if (input.Jump || input.isJumpBuffered)
         {
-            player.stateMachine.stateLocked = false;
+            //player.stateMachine.stateLocked = false;
             stateMachine.ChangeState(player.jumpState);
             return true;
         }
@@ -63,13 +62,13 @@ public class PlayerLadderMoveState : PlayerState
         {
             if (player.LevelCollisionCtrl.IsGroundDetected())
             {
-                player.stateMachine.stateLocked = false;
+                //player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.idleState);
                 return true;
             }
             else
             {
-                player.stateMachine.stateLocked = false;
+                //player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.fallState);
                 return true;
             }
