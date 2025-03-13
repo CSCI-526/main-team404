@@ -12,6 +12,10 @@ public class PlayerDeflectState : PlayerState
         base.Enter();
         input.isDeflectBuffered = false;
         player.DeflectCtrl.Deflect();
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.AddParryCount();
+        }
         //TODO; modify, there must be 1 frame of Fragile when deflect finished
     }
 

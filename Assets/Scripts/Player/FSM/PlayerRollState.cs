@@ -13,6 +13,10 @@ public class PlayerRollState : PlayerState
         base.Enter();
         input.isRollBuffered = false;
         player.RollCtrl.Prep();
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.AddDodgeCount();
+        }
     }
 
     public override void Exit()

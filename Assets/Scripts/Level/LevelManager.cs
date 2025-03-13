@@ -91,11 +91,15 @@ public class LevelManager : MonoBehaviour
 
     public void StartTransitionToNextLevel()
     {
+        SendToGoogle.instance.Send();
+        SendToGoogle.instance.ResetAll();
         StartCoroutine(TransitionToNextLevel());
     }
 
     public void StartTransitionToRestartLevel()
     {
+        SendToGoogle.instance.Send();
+        SendToGoogle.instance.ResetAll();
         StartCoroutine(TransitionToRestartLevel());
     }
 

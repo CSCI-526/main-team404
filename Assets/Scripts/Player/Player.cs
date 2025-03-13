@@ -309,6 +309,10 @@ public class Player : MonoBehaviour
 
                 battleInfo = BattleInfo.Peace;
                 ManaCtrl.AddMana(1);
+                if (SendToGoogle.instance != null)
+                {
+                    SendToGoogle.instance.AddSuccessfulDodgeCount();
+                }
                 break;
             case BattleInfo.Hit:
                 battleInfo = BattleInfo.Peace;

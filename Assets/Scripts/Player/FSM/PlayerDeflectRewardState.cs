@@ -11,6 +11,10 @@ public class PlayerDeflectRewardState : PlayerState
         base.Enter();
         player.DeflectCtrl.Bump();
         player.ManaCtrl.AddMana(1);
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.AddSuccessfulParryCount();
+        }
     }
 
     public override void Exit()

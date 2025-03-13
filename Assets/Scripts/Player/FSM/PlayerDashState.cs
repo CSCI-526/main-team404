@@ -11,6 +11,10 @@ public class PlayerDashState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.AddDodgeCount();      
+        }
         input.isRollBuffered = false;
         player.RollCtrl.Prep();
         player.rb.gravityScale = 0;
