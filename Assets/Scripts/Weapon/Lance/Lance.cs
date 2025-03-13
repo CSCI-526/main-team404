@@ -77,8 +77,8 @@ public class Lance : PlayerWeapon
         {
             if (player.ManaCtrl.CostMana(1))
             {
-                stateMachine.ChangeState(attackState, ai);
                 player.ManaMinusText.gameObject.SetActive(true);
+                stateMachine.ChangeState(attackState, ai);
                 return;
             }
             player.NoManaTetx.gameObject.SetActive(true);

@@ -18,6 +18,7 @@ public class LadderMoveController
         player.rb.linearVelocity = new Vector2(0,player.rb.linearVelocity.y);
         player.currentInteractingSpear.TurnOnTopMargin();
         player.currentInteractingSpear.displayClimbUI();
+        player.weapon0.UnEquip();
     }
 
     public void leaveLadder()
@@ -28,5 +29,6 @@ public class LadderMoveController
             player.currentInteractingSpear.TurnOffTopMargin();
             player.currentInteractingSpear.stopDisplayClimbUI();
         }
+        player.weapon0.Equip();
     }
 }
