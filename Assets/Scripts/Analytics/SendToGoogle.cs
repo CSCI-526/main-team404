@@ -14,6 +14,11 @@ public class SendToGoogle : MonoBehaviour
     public int parrySuccessful;
     public int dodgeAttempted;
     public int dodgeSuccessful;
+    public int jumps;
+    public int doubleJumps;
+    public int attacks;
+    public int verticalAttacks;
+    public int time;
 
     private void Awake()
     {
@@ -48,12 +53,17 @@ public class SendToGoogle : MonoBehaviour
 
         StartCoroutine(Post(_sessionID.ToString(), 
             parryAttempted.ToString(), parrySuccessful.ToString(), 
-            dodgeAttempted.ToString(), dodgeSuccessful.ToString()));
+            dodgeAttempted.ToString(), dodgeSuccessful.ToString(),
+            jumps.ToString(), doubleJumps.ToString(), attacks.ToString(),
+            verticalAttacks.ToString(), time.ToString())
+            );
     }
 
     IEnumerator Post(string sessionID, 
         string parryAttempted, string parrySuccessful, 
-        string dodgeAttempted, string dodgeSuccessful)
+        string dodgeAttempted, string dodgeSuccessful,
+        string jumps, string doubleJumps, string attacks,
+        string verticalAttack, string time)
     {
         // Create the form and enter responses
         WWWForm form = new WWWForm();
@@ -64,6 +74,13 @@ public class SendToGoogle : MonoBehaviour
         form.AddField("entry.2013387407", dodgeAttempted);
         form.AddField("entry.452177833", dodgeSuccessful);
 
+        form.AddField("entry.2080864451", jumps);
+        form.AddField("entry.405082152", doubleJumps);
+        form.AddField("entry.1861830295", time);
+        form.AddField("entry.1609368432", attacks);
+        form.AddField("entry.638529257", verticalAttack);
+
+       
         // Send responses and verify result
         using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
         {
@@ -98,6 +115,26 @@ public class SendToGoogle : MonoBehaviour
     {
         dodgeSuccessful++;
     }
+    public void AddJumps()
+    {
+        jumps++;
+    }
+    public void AddDoubleJumps()
+    {
+        doubleJumps++;
+    }
+    public void AddAttacks()
+    {
+        attacks++;
+    }
+    public void AddVerticalAttacks()
+    {
+        verticalAttacks++;
+    }
+    public void SetTime(int t)
+    {
+        time = t;
+    }
 
     public void ResetAll()
     {
@@ -105,5 +142,10 @@ public class SendToGoogle : MonoBehaviour
         parrySuccessful = 0;
         dodgeAttempted = 0;
         dodgeSuccessful = 0;
+        jumps = 0;
+        doubleJumps = 0;
+        attacks = 0;
+        verticalAttacks = 0;
+        time = 0;
     }
 }

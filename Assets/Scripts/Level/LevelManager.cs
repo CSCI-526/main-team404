@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     public float fadeDuration = 1.5f;
     public float displayTime = 3.0f;
     public float textFadeDuration = 1.0f;
+    public float startTime;
+    
 
     private string[] quotes = {
         "\"Only those who will risk going too far can possibly find out how far one can go.\" -T.S. Eliot",
@@ -91,6 +93,12 @@ public class LevelManager : MonoBehaviour
 
     public void StartTransitionToNextLevel()
     {
+        float currentTime = Time.time;
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.SetTime((int)(currentTime - startTime));
+            startTime = currentTime;
+        }
         SendToGoogle.instance.Send();
         SendToGoogle.instance.ResetAll();
         StartCoroutine(TransitionToNextLevel());
