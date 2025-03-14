@@ -871,6 +871,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSeY4A1l1x3K3anho5MYdgZsPemq6980CobLuXJ0fFmSzpvOiQ/formResponse
+  parryAttempted: 0
+  parrySuccessful: 0
+  dodgeAttempted: 0
+  dodgeSuccessful: 0
 --- !u!4 &553408272
 Transform:
   m_ObjectHideFlags: 0
@@ -3735,7 +3739,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 6.744938, y: 0.7342086}
+  m_Offset: {x: -5.1600037, y: 4.2628207}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3745,7 +3749,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.652899, y: 6.1521873}
+  m_Size: {x: 28.462784, y: 13.2094145}
   m_EdgeRadius: 0
 --- !u!114 &2093117147
 MonoBehaviour:
