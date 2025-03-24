@@ -18,6 +18,7 @@ public class PlayerDetector : MonoBehaviour
             Player player = hit.GetComponent<Player>();
             if (player != null)
             {
+                Debug.Log("Detector see Player");
                 Ray2D ray = new Ray2D(transform.position, player.transform.position - transform.position);
                 RaycastHit2D hitInfo = Physics2D.Raycast(ray.origin, ray.direction, Vector2.Distance(transform.position, player.transform.position), playerAndGroundLayer);
                 if (hitInfo.collider == player.GetComponent<Collider2D>())

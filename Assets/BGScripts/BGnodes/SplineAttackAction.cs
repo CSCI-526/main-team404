@@ -7,7 +7,9 @@ using Unity.Properties;
 using System.Collections;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "SplineAttack", story: "Spline Attack", category: "Action", id: "f1e2f4624e63d615942d20d535a1e6ad")]
+[NodeDescription(name: "SplineAttack", 
+    description:"spline animation that enable attack box, have different sync mode, refer to code and tool tips",
+    story: "Spline Attack", category: "Action", id: "f1e2f4624e63d615942d20d535a1e6ad")]
 public partial class SplineAttackAction : Action
 {
     

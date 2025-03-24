@@ -6,9 +6,12 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "WeaponSpline", story: "Play [SplineAnimation] on my wepaon", category: "Action", id: "083e2cfa0abf64444d6b7137c0973b62")]
+[NodeDescription(name: "WeaponSpline", 
+    description: "Play provided spline animation",
+    story: "Play [SplineAnimation] on my wepaon", category: "Action", id: "083e2cfa0abf64444d6b7137c0973b62")]
 public partial class WeaponSplineAction : Action
 {
+    [Tooltip("spline anim to play, find in black board")]
     [SerializeReference] public BlackboardVariable<SplineAnimate> SplineAnimation;
     private SplineAnimate splineAni;
 
