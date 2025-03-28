@@ -1,12 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class RegionEnabler : MonoBehaviour
 {
-    public GameObject objectRelated;
+    public TMPro.TextMeshProUGUI textRelated;
+    public float fadeDuration;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        textRelated.color = new Color(textRelated.color.r, textRelated.color.g, textRelated.color.b, 0);
     }
 
     // Update is called once per frame
@@ -20,10 +22,11 @@ public class RegionEnabler : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Enable the region
-            if (!objectRelated.activeSelf)
-            {
-                objectRelated.SetActive(true);
-            }
+            Color currentColor = textRelated.color;
+            StopAllCoroutines(); 
+            StartCoroutine(FadeInUICoroutine(1));
+
+
         }
     }
 
@@ -32,11 +35,39 @@ public class RegionEnabler : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Disable the region
-            if (objectRelated == null) return;
-            if (objectRelated.activeSelf)
-            {
-                objectRelated.SetActive(false);
-            }
+            if (textRelated == null) return;
+            Color currentColor = textRelated.color;
+            StopAllCoroutines();
+            StartCoroutine(FadeOutUICoroutine(0));
+
         }
+    }
+
+    IEnumerator FadeInUICoroutine(float targetAlpha)
+    {
+        float time = 0;
+        Color currentColor = textRelated.color;
+        while (time < fadeDuration)
+        {
+            float alpha = Mathf.Lerp(currentColor.a, targetAlpha, time / fadeDuration);
+            textRelated.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        textRelated.color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
+    }
+
+    IEnumerator FadeOutUICoroutine(float targetAlpha)
+    {
+        float time = 0;
+        Color currentColor = textRelated.color;
+        while (time < fadeDuration)
+        {
+            float alpha = Mathf.Lerp(currentColor.a, targetAlpha, time / fadeDuration);
+            textRelated.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        textRelated.color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
     }
 }
