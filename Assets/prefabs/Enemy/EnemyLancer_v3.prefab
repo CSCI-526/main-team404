@@ -2607,8 +2607,8 @@ MonoBehaviour:
           m_Value1: 12355442487983701445
         Name: AttackWeights
         m_Value:
-        - 0
-        - 1
+        - 0.7
+        - 0.3
     - rid: 3664480283703640393
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:

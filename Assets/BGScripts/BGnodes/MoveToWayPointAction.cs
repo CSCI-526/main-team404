@@ -51,6 +51,7 @@ public partial class MoveToWayPointAction : Action
     {
         if (currentWayPoint == null)
         {
+            Debug.LogError("currentWayPoint is null");   
             return Status.Failure;
         }
         // change facing direction to face the next waypoint
