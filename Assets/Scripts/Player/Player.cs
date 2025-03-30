@@ -283,11 +283,6 @@ public class Player : MonoBehaviour
         //GUI.Label(new Rect(200, 160, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
     }
 
-    private void OnDrawGizmos()
-    {
-        //LevelCollisionCtrl.draw();
-    }
-
     private void OnBattle()
     {
         switch (battleInfo)
@@ -338,6 +333,15 @@ public class Player : MonoBehaviour
         InvincibleBox.SetActive(false);
         HitBox.SetActive(true);
         battleInfo = BattleInfo.Peace;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(groundCheckLeft.position, groundCheckLeft.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(groundCheckRight.position, groundCheckRight.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(wallCheckTop.position, wallCheckTop.position + facingDir*Vector3.right * wallCheckDistance);
+        Gizmos.DrawLine(wallCheckBottom.position, wallCheckBottom.position + facingDir*Vector3.right * wallCheckDistance);
     }
 
 }
