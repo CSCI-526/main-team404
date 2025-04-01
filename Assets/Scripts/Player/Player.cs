@@ -31,6 +31,10 @@ public class Player : MonoBehaviour
     public TMPro.TextMeshProUGUI ManaPlusText;
     public TMPro.TextMeshProUGUI ManaMinusText;
     public PlayerEmbeddedUI playerEmbeddedUI;
+    // TODO: call spearPopUp.Pop() when player throw spaer upward
+    // TODO: call spearPopDown.Pop() when player throw spear downward
+    public SpearPop spearPopUp;
+    public SpearPop spearPopDown;
 
     [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;

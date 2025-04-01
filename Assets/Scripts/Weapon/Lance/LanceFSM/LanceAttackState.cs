@@ -20,6 +20,9 @@ public class LanceAttackState : LanceState
 
         if (stateMachine.attackInfo.isUpPressed())
         {
+            // Display UI Spear pop
+            lance.player.spearPopUp.Pop();
+
             shootPoint = new Vector3(lance.shootingVPosition.position.x, lance.shootingVPosition.position.y, 0);
             RaycastHit2D hitH = Physics2D.Raycast(lance.shootingVPosition.position, Vector2.up, lanceHeight, lance.ground);
             if (hitH.collider != null)
@@ -33,6 +36,10 @@ public class LanceAttackState : LanceState
         }
         if (stateMachine.attackInfo.isDownPressed())
         {
+            // Display UI Spear pop
+            lance.player.spearPopDown.Pop();
+
+
             shootPoint = new Vector3(lance.shootingVPosition.position.x, lance.shootingVPosition.position.y, 0);
             RaycastHit2D hitH = Physics2D.Raycast(lance.shootingVPosition.position, Vector2.down, lanceHeight, lance.ground);
             Debug.Log("height is:" + lanceHeight);
