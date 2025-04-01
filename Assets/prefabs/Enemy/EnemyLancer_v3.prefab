@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 72336043475053428}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7527597, y: 0.6582956, z: -0.00000004214685, w: 0.0000000842937}
-  m_LocalPosition: {x: -0.5200383, y: 0.019879473, z: 0.00000009320741}
+  m_LocalPosition: {x: -0.52004004, y: 0.019879818, z: 0.00000009320741}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1090,7 +1090,7 @@ Transform:
   m_GameObject: {fileID: 3818731336779027944}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000031143427, y: 0.0000001937151, z: -0.12241931, w: -0.9924785}
-  m_LocalPosition: {x: -0.020943018, y: 0.00076403766, z: 0}
+  m_LocalPosition: {x: -0.02093792, y: 0.0007636547, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  damage: 20
+  damage: 1
 --- !u!70 &7253911578064599214
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2378,7 +2378,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 31.4, y: -37.3, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1653045839375654165}
@@ -2759,9 +2759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dae07cacffe72a4ba8f5b66b04906f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistanceBack: 20
-  maxDistanceFront: 80
-  maxDistanceUp: 20
+  maxDistanceBack: 4
+  maxDistanceFront: 16
+  maxDistanceUp: 4
   showGizmo: 1
 --- !u!1 &6844466954211133424
 GameObject:
@@ -3315,7 +3315,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  damage: 20
+  damage: 1
 --- !u!1 &8812310477641812133
 GameObject:
   m_ObjectHideFlags: 0

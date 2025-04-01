@@ -5,7 +5,7 @@ public class WayPoint2D : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private static float smallThresh = 1f;
-    private static float largeThresh = 3f;
+    private static float largeThresh = 1f;
     public WayPoint2D nextWayPoint;
     public float groundHeight;
 

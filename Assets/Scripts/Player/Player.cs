@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public TMPro.TextMeshProUGUI NoManaTetx;
     public TMPro.TextMeshProUGUI ManaPlusText;
     public TMPro.TextMeshProUGUI ManaMinusText;
+    public PlayerEmbeddedUI playerEmbeddedUI;
 
     [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;
@@ -52,6 +53,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 rawSpeed;
     public float HorizontalSpeedFalling;
     public float HorizontalSpeedGround;
+    // acceleration and deceleration
+    public float HorizontalAcceleration;
+    public float HorizontalDeceleration;
     public int facingDir;
     public float JumpInitialSpeed;
     public int JumpCounter;
@@ -107,13 +111,14 @@ public class Player : MonoBehaviour
     public WeaponsDiction weaponDictionary;
 
     [Header("Stats")]
-    public int MaxMana = 3;
+    public int MaxMana = 2;
     public int Mana;
-    public int MaxHealth = 100;
+    public int MaxHealth = 9;
     public int Health;
 
     [Header("Animation")]
     [SerializeField] private string animState;
+    public Animator anim;
 
     #region Components
     [Header("Components")]
@@ -228,6 +233,8 @@ public class Player : MonoBehaviour
         WeaponCtrl.ActiveWP(1);
         WeaponCtrl.EquipWP(1, 1);
 
+        //anim.Play("GroundMove");
+
 
     }
 
@@ -253,6 +260,8 @@ public class Player : MonoBehaviour
 
         //Debug
         rawSpeed = rb.linearVelocity;
+
+        //anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
 
         //log mana and health
         HealthText.text = "Health: " + Health.ToString() + "/" + MaxHealth.ToString();

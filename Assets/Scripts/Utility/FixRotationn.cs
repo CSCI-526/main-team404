@@ -9,7 +9,7 @@ public class FixRotationn : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.rotation = Quaternion.identity;
     }

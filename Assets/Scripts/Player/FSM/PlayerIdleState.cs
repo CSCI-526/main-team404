@@ -13,6 +13,7 @@ public class PlayerIdleState : PlayerState
     {
         base.Enter();
         player.GroundMoveCtrl.Freeze();
+
     }
 
     public override void Exit()
@@ -59,6 +60,8 @@ public class PlayerIdleState : PlayerState
             stateMachine.ChangeState(player.moveState);
             return true;
         }
+
+        //player.GroundMoveCtrl.onHorizontalInput(0);
         return false;
 
 
