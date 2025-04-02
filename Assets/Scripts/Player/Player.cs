@@ -38,9 +38,10 @@ public class Player : MonoBehaviour
 
     [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;
-    public int frameRate = 60;
-    public float gravityScale;
     public SpriteRenderer Bleeding;
+    [HideInInspector]
+    public float gravityScale { get; private set; } // a copy of rb.gravityScale for ladder movement
+    
 
     [Header("LevelCollision")]
     public Transform groundCheckLeft;
@@ -221,11 +222,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         
-        Application.targetFrameRate = frameRate;
-        
         //assign component
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = gravityScale;
+        gravityScale = rb.gravityScale;
         weaponDictionary = GetComponentInChildren<WeaponsDiction>();
 
         input.EnableGamePlayInputs();
@@ -264,7 +263,6 @@ public class Player : MonoBehaviour
 
         //Debug
         rawSpeed = rb.linearVelocity;
-
         //anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
 
         //log mana and health

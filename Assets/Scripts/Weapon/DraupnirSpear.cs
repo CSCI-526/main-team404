@@ -63,6 +63,11 @@ public class DraupnirSpear : MonoBehaviour
                 break;
         }
     }
+
+    private void LateUpdate()
+    {
+        
+    }
     private void checkCollision()
     {
         if (state == SpearState.OnWall)
