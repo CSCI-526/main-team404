@@ -69,6 +69,14 @@ public class Player : MonoBehaviour
     [Header("LadderMovement")]
     public float ladderHorizontalSpeed;
     public float ladderVerticalSpeed;
+    [Tooltip("Expected duration of the snapping until play x position is the same as ladder x position, smaller value results in faster snap")]
+    public float ladderSnapTime;
+    public float ladderRemountCoolDown = 0.1f;
+    public Timer ladderRemountCoolDownTimer;
+    public float ladderCenterDeadZone = 0.01f;
+    [HideInInspector]
+    public float ladderSnapSpeedX = 0;
+    public float ladderSnapSpeedY = 0;
 
     [Header("WallJump")]
     public float wallSlideSpeed;
@@ -124,6 +132,7 @@ public class Player : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private string animState;
     public Animator anim;
+
 
     #region Components
     [Header("Components")]
@@ -257,6 +266,7 @@ public class Player : MonoBehaviour
 
         // stateMachine update second; aleast 0 frame on Playerstate.update() is called()
         stateMachine.currentState.Update();
+
 
         //Check if swtich weapon is pressed
         WeaponCtrl.checkSwtichPressed();

@@ -32,19 +32,23 @@ public class DrpSpearVertical : MonoBehaviour
     public LayerMask wallLayer;
     private Rigidbody2D rb;
     public GameObject attackBox;
-    public GameObject topMargin;
     public Transform boundPosition;
     public TMPro.TextMeshProUGUI climbNote;
     public TMPro.TextMeshProUGUI stopClimbNote;
     public SpriteRenderer tip;
     public SpriteRenderer body;
+    public Color normal;
+    public Color mount;
+    private LookAtPlayerWhenActive magnet;
+    public float customLayeredDeadZone = 0.01f;
     void Start()
     {
         state = SpearState.InAir;
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        
+        magnet = GetComponentInChildren<LookAtPlayerWhenActive>();
+
         if (useType == SpearUse.Level)
         {
             state = SpearState.OnGround;
@@ -66,6 +70,44 @@ public class DrpSpearVertical : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnGround:
+                if (PlayerInfo.instance.player.currentInteractingSpear == this)
+                {
+                    if (Mathf.Abs(PlayerInfo.instance.playerPosition.x - transform.position.x) < PlayerInfo.instance.player.ladderCenterDeadZone + customLayeredDeadZone)
+                    {
+                        if (PlayerInput.instance.Xinput == 0)
+                        {
+                            SetColor(mount);
+                            if (magnet.isActive)
+                            {
+                                magnet.Hide();
+                            }
+                        }
+                        else
+                        {
+                            SetColor(normal);
+                            if (!magnet.isActive)
+                            {
+                                magnet.Show();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        SetColor(normal);
+                        if (!magnet.isActive)
+                        {
+                            magnet.Show();
+                        }
+                    }
+                }
+                else
+                {
+                    SetColor(normal);
+                    if (magnet.isActive)
+                    {
+                        magnet.Hide();
+                    }
+                }
                 break;
         }
     }
@@ -112,69 +154,11 @@ public class DrpSpearVertical : MonoBehaviour
         Gizmos.DrawLine(wallCheckPosition.position, wallCheckPosition.position + wallCheckPosition.up * wallCheckDistance);
     }
 
-    public void TurnOffTopMargin()
-    {
-        topMargin.SetActive(false);
-    }
-    public void TurnOnTopMargin()
-    {
-        topMargin.SetActive(true);
-    }
-
-    public void displayUI()
-    {
-        climbNote.gameObject.SetActive(true);
-    }
-
-    public void stopDisplayUI()
-    {
-        climbNote.gameObject.SetActive(false);
-    }
-
-    public void displayClimbUI()
-    {
-        climbNote.gameObject.SetActive(false);
-        stopClimbNote.gameObject.SetActive(true);
-    }
-
-    public void stopDisplayClimbUI()
-    {
-        stopClimbNote.gameObject.SetActive(false);
-        climbNote.gameObject.SetActive(true);
-    }
 
     public void SetColor(Color color)
     {
         tip.color = color;
         body.color = color;
-    }
-
-    public Vector2 GetValidPosition(Vector2 position)
-    {
-        switch (type)
-        {
-            case SpearType.Up:
-                if (position.y < boundPosition.position.y)
-                {
-                    return new Vector2(transform.position.x, boundPosition.position.y);
-                }
-                else
-                {
-                    return new Vector2(transform.position.x, position.y);
-                }
-            case SpearType.Down:
-                if (position.y > boundPosition.position.y)
-                {
-                    return new Vector2(transform.position.x, boundPosition.position.y);
-                }
-                else
-                {
-                    return new Vector2(transform.position.x, position.y);
-                }
-
-
-        }
-        return Vector2.zero;
     }
 
     IEnumerator DestroySpearCoroutine()
@@ -191,13 +175,4 @@ public class DrpSpearVertical : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-    //private void OnDestroy()
-    //{
-    //    if (PlayerInfo.instance.player.currentInteractingSpear == this)
-    //    {
-    //        PlayerInfo.instance.player.currentInteractingSpear = null;
-    //        PlayerInfo.instance.player.ladderCheck = false;
-    //    }
-    //}
 }

@@ -47,15 +47,6 @@ public class PlayerState
             stateMachine.ChangeState(player.grabState);
             return true;
         }
-        // any => LadderMove transition to self disable;
-        if (stateMachine.currentState != player.ladderMoveState)
-        {
-            if (player.ladderCheck && input.Interact)
-            {
-                stateMachine.ChangeState(player.ladderMoveState);
-                return true;
-            }
-        }
         // any => Attack
         if(input.Attack || input.isAttackBuffered)
         {

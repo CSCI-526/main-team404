@@ -30,6 +30,8 @@ public class DraupnirSpear : MonoBehaviour
     private PlatformEffector2D pe;
     public SpriteRenderer tip;
     public SpriteRenderer body;
+    public Color normal;
+    public Color mount;
 
 
     void Start()
@@ -39,6 +41,7 @@ public class DraupnirSpear : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         pe = GetComponent<PlatformEffector2D>();
+        SetColor(normal);
         if (useType == SpearUse.Level)
         {
             state = SpearState.OnWall;
@@ -60,6 +63,14 @@ public class DraupnirSpear : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnWall:
+                if (PlayerInfo.instance.player.transform.parent == this.transform)
+                {
+                    SetColor(mount);
+                }
+                else
+                {
+                    SetColor(normal);
+                }
                 break;
         }
     }

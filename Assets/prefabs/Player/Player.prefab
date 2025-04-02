@@ -3132,7 +3132,7 @@ Transform:
   m_GameObject: {fileID: 6154383912242399294}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.3, y: 25.7, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3261,9 +3261,9 @@ MonoBehaviour:
   ManaPlusText: {fileID: 6726472240241581290}
   ManaMinusText: {fileID: 2774759006599665459}
   playerEmbeddedUI: {fileID: 4166985000124422640}
+  spearPopUp: {fileID: 0}
+  spearPopDown: {fileID: 0}
   playerPrototypeSprite: {fileID: 9025221268093299171}
-  frameRate: 60
-  gravityScale: 6
   Bleeding: {fileID: 9025221268093299171}
   groundCheckLeft: {fileID: 1876711685007687755}
   groundCheckRight: {fileID: 2498297848486172590}
@@ -3286,6 +3286,7 @@ MonoBehaviour:
   JumpCounter: 2
   ladderHorizontalSpeed: 6
   ladderVerticalSpeed: 15
+  ladderSnapSpeed: 0
   wallSlideSpeed: 1
   wallJumpSpeedX: 45
   wallJumpSpeedY: 100

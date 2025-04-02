@@ -1,5 +1,6 @@
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Windows;
 using static Player;
 
 public class PlayerLadderMoveState : PlayerState
@@ -30,7 +31,120 @@ public class PlayerLadderMoveState : PlayerState
         //Debug.Log("Battle Info: "+ player.battleInfo);
 
         player.FlipCtrl.onHorizontalInput();
-        player.rb.linearVelocityY = input.Yinput * player.ladderVerticalSpeed;
+
+
+        #region LaddderMove
+
+        // change state to fall if player interact box leaves ladder
+        if (!(player.ladderCheck && player.currentInteractingSpear != null))
+        {
+            player.stateMachine.ChangeState(player.fallState);
+            return true;
+        }
+
+        // prepare variables
+        DrpSpearVertical.SpearType spearType = player.currentInteractingSpear.type;
+        const DrpSpearVertical.SpearType upType = DrpSpearVertical.SpearType.Up;
+        float ladderX = player.currentInteractingSpear.transform.position.x;
+        float ladderBoundY = player.currentInteractingSpear.boundPosition.transform.position.y;
+        float playerX = player.transform.position.x;
+        float playerY = player.transform.position.y;
+        float Xinput = input.Xinput;
+        float Yinput = input.Yinput;
+
+
+        
+
+
+
+        // vertical movement allowed when very close to ladder
+        // bounds applied to prevent player from walking off the ladder from top or bottom
+        if (Mathf.Abs(playerX - ladderX) < player.ladderCenterDeadZone)
+        {
+            player.ladderSnapSpeedX = 0;
+            if (spearType == upType)
+            {
+                if (playerY > ladderBoundY)
+                {
+                    rb.linearVelocityY = Yinput * player.ladderVerticalSpeed;
+                }
+                else
+                {
+                    if (Yinput > 0)
+                    {
+                        rb.linearVelocityY = Yinput * player.ladderVerticalSpeed;
+
+                    }
+                    else { 
+                        rb.linearVelocityY = 0;
+                    }
+                }
+            }
+            else
+            {
+                if (playerY < ladderBoundY)
+                {
+                    rb.linearVelocityY = Yinput * player.ladderVerticalSpeed;
+                }
+                else
+                {
+                    if (Yinput < 0)
+                    {
+                        rb.linearVelocityY = Yinput * player.ladderVerticalSpeed;
+
+                    }
+                    else
+                    {
+                        rb.linearVelocityY = 0;
+                    }
+                }
+            }
+        }
+
+        // horizontal movement but snapping force applied when no horizontal input
+        if (Xinput != 0 && Yinput == 0)
+        {
+            player.rb.linearVelocityX = Xinput * player.ladderHorizontalSpeed;
+        }
+        else
+        {
+            float goalX = Mathf.SmoothDamp(playerX, ladderX, ref player.ladderSnapSpeedX, player.ladderSnapTime);
+            player.rb.linearVelocityX = (goalX - playerX) / Time.deltaTime;
+        }
+
+
+        // vertical snapping applied player is below ladder boundPosition Y when no vertical input
+
+        if (Yinput == 0 && Xinput == 0)
+        {
+            if (Mathf.Abs(playerY - ladderBoundY) < 0.01)
+            {
+                rb.linearVelocityY = 0;
+            }
+
+
+            if (spearType == upType)
+            {
+                if (playerY < ladderBoundY)
+                {
+                    float goalY = Mathf.SmoothDamp(playerY, ladderBoundY, ref player.ladderSnapSpeedY, player.ladderSnapTime);
+                    rb.linearVelocityY = (goalY - playerY) / Time.deltaTime;
+                }
+            }
+            else
+            {
+                if (playerY > ladderBoundY)
+                {
+                    float goalY = Mathf.SmoothDamp(playerY, ladderBoundY, ref player.ladderSnapSpeedY, player.ladderSnapTime);
+                    rb.linearVelocityY = (goalY - playerY) / Time.deltaTime;
+                }
+            }
+        }
+
+        //
+
+        #endregion
+
 
         //ladder => roll
         if (player.LevelCollisionCtrl.IsGroundDetected() && ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp()))
@@ -51,9 +165,19 @@ public class PlayerLadderMoveState : PlayerState
         //ladder =>jump
         if (input.Jump || input.isJumpBuffered)
         {
-            //player.stateMachine.stateLocked = false;
-            stateMachine.ChangeState(player.jumpState);
-            return true;
+            if (Yinput < 0)
+            {
+                input.isJumpBuffered = false;
+                player.stateMachine.ChangeState(player.fallState);
+                return true;
+            }
+            else
+            {
+                input.isJumpBuffered = false;
+                stateMachine.ChangeState(player.jumpState);
+                return true;
+            }
+            
         }
 
         //ladder => idle/fall
