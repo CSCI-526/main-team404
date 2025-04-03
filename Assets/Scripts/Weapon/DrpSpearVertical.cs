@@ -41,6 +41,7 @@ public class DrpSpearVertical : MonoBehaviour
     public Color mount;
     private LookAtPlayerWhenActive magnet;
     public float customLayeredDeadZone = 0.01f;
+    private bool isCountingDown = false;
     void Start()
     {
         state = SpearState.InAir;
@@ -70,6 +71,11 @@ public class DrpSpearVertical : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnGround:
+                if (isCountingDown)
+                {
+                    return;
+                }
+                
                 if (PlayerInfo.instance.player.currentInteractingSpear == this)
                 {
                     if (Mathf.Abs(PlayerInfo.instance.playerPosition.x - transform.position.x) < PlayerInfo.instance.player.ladderCenterDeadZone + customLayeredDeadZone)
@@ -166,11 +172,12 @@ public class DrpSpearVertical : MonoBehaviour
         float flashDuration = 0.2f;
         int numberOfFlashes = 3; 
         yield return new WaitForSeconds(liveTime);
+        isCountingDown = true;
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            SetColor(Color.red);
+            SetColor(normal);
             yield return new WaitForSeconds(flashDuration);
-            SetColor(Color.white);
+            SetColor(mount);
             yield return new WaitForSeconds(flashDuration);
         }
         Destroy(gameObject);

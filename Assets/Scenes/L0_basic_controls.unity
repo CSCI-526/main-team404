@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpearHorizontalLevel (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8327501042121482042, guid: 3c0e55726b7560f46a5cb9034e994500, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1651,7 +1655,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 19
+      m_TileSpriteIndex: 25
       m_TileMatrixIndex: 5
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2701,7 +2705,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 17
+      m_TileSpriteIndex: 24
       m_TileMatrixIndex: 5
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3581,7 +3585,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 16
+      m_TileSpriteIndex: 23
       m_TileMatrixIndex: 5
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3591,7 +3595,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 5
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3881,7 +3885,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 13
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 5
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3981,7 +3985,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 20
       m_TileMatrixIndex: 5
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4173,6 +4177,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 259
     m_Data: {fileID: 11400000, guid: 8a105e275e5bc7d488952a6c81e6b40e, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -4192,26 +4200,38 @@ Tilemap:
     m_Data: {fileID: 7294363450701953473, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 45
     m_Data: {fileID: -7346461237703047350, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1650023329908019272, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 7290162375959806825, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 688007926861043513, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 25
     m_Data: {fileID: 4637698295941334323, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -6217798121129213625, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 24
     m_Data: {fileID: -4092324726233954841, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -9116499934671461491, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1650023329908019272, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -6217798121129213625, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -2463554785647527484, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -6987007970747429516, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -6265240932569966483, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -2463554785647527484, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 128509962288093330, guid: f7853566fe6b5404a9a8c94f6e89006d, type: 3}
   m_TileMatrixArray:
@@ -4330,7 +4350,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -56, y: -11, z: 0}
-  m_Size: {x: 83, y: 28, z: 1}
+  m_Size: {x: 83, y: 41, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -4774,6 +4794,10 @@ PrefabInstance:
     - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_Name
       value: LevelSpearVerticalDown (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5308081873467875214, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5317,6 +5341,10 @@ PrefabInstance:
     - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_Name
       value: LevelSpearVerticalDown (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5308081873467875214, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7585,6 +7613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpearHorizontalLevel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8327501042121482042, guid: 3c0e55726b7560f46a5cb9034e994500, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8018,6 +8050,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpearHorizontalLevel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8327501042121482042, guid: 3c0e55726b7560f46a5cb9034e994500, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8034,6 +8070,10 @@ PrefabInstance:
     - target: {fileID: 6852372803432289980, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
       propertyPath: m_Name
       value: LevelSpearVerticalUp (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852372803432289980, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180702663825529972, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8561,6 +8601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpearVerticalUp (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6852372803432289980, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7180702663825529972, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.99
@@ -8873,6 +8917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpearVerticalDown (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5308081873467875214, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.7
@@ -8929,6 +8977,10 @@ PrefabInstance:
     - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_Name
       value: LevelSpearVerticalDown (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5308081873467875214, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9395,6 +9447,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSpearVerticalUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6852372803432289980, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7180702663825529972, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.034191
@@ -9536,6 +9592,10 @@ PrefabInstance:
     - target: {fileID: 6852372803432289980, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
       propertyPath: m_Name
       value: LevelSpearVerticalUp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852372803432289980, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180702663825529972, guid: 01ad5429b0291974e9df3df2b8268c4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10041,6 +10101,10 @@ PrefabInstance:
     - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_Name
       value: LevelSpearVerticalDown (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 318742564703232126, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5308081873467875214, guid: a59d9b6d9a8b4b449b564f599238ab5a, type: 3}
       propertyPath: m_LocalPosition.x

@@ -32,6 +32,7 @@ public class DraupnirSpear : MonoBehaviour
     public SpriteRenderer body;
     public Color normal;
     public Color mount;
+    private bool isCountingDown = false;
 
 
     void Start()
@@ -63,6 +64,10 @@ public class DraupnirSpear : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnWall:
+                if (isCountingDown)
+                {
+                    return;
+                }
                 if (PlayerInfo.instance.player.transform.parent == this.transform)
                 {
                     SetColor(mount);
@@ -141,11 +146,12 @@ public class DraupnirSpear : MonoBehaviour
         float flashDuration = 0.2f;
         int numberOfFlashes = 3;
         yield return new WaitForSeconds(liveTime);
+        isCountingDown = true;
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            SetColor(Color.red);
+            SetColor(normal);
             yield return new WaitForSeconds(flashDuration);
-            SetColor(Color.white);
+            SetColor(mount);
             yield return new WaitForSeconds(flashDuration);
         }
         Destroy(gameObject);
