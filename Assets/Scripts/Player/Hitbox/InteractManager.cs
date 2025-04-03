@@ -59,7 +59,6 @@ public class InteractManager : MonoBehaviour
                         player.currentInteractingSpear = collider.GetComponent<DrpSpearVertical>();
                         if (player.currentInteractingSpear != null)
                         {
-                            player.currentInteractingSpear.displayUI();
                             state = State.Success;
                             player.ladderCheck = true;
                             return;
@@ -101,24 +100,15 @@ public class InteractManager : MonoBehaviour
                 {
                     if (collider.gameObject.CompareTag("Ladder"))
                     {
-                        // if find another ladder, stay in success, but change current ladder pointer
-                        if (player.currentInteractingSpear != null)
-                        {
-                            player.currentInteractingSpear.stopDisplayUI();
-                        }
+                        
                         player.currentInteractingSpear = collider.GetComponent<DrpSpearVertical>();
                         
-                        player.currentInteractingSpear.displayUI();
                         
                         return;
                     }
                 }
 
-                // if not found go to Fail state
-                if (player.currentInteractingSpear != null)
-                {
-                    player.currentInteractingSpear.stopDisplayUI();
-                }
+               
                 player.ladderCheck = false;
                 player.currentInteractingSpear = null;
                 state = State.Fail;

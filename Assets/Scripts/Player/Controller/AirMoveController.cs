@@ -13,7 +13,7 @@ public class AirMoveController
     
     public void OnHorizontalInput(float Xinput)
     {
-        player.rb.linearVelocity = new Vector2(Xinput* player.HorizontalSpeedFalling, player.rb.linearVelocity.y);
+        player.rb.linearVelocityX = Xinput * player.HorizontalSpeedFalling;
     }
 
     public void Freeze()

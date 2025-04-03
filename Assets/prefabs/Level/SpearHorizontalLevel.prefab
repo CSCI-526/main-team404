@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 296913183713787375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.49, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57,8 +57,8 @@ Transform:
   m_GameObject: {fileID: 2613234632866421245}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.4547, y: -0.1563, z: 0.62281775}
-  m_LocalScale: {x: 15.589722, y: 0.7022518, z: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 4, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6839773595384714884}
@@ -104,11 +104,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -852083793
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -185,7 +185,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 9.008736, y: -0.28972816}
+  m_Offset: {x: 2.25, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -195,7 +195,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 19.017471, y: 3.510975}
+  m_Size: {x: 4.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &921496468545256183
 MonoBehaviour:
@@ -236,8 +236,8 @@ Transform:
   m_GameObject: {fileID: 7617272711626151090}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
-  m_LocalPosition: {x: 16.55, y: -0.22, z: 0.62281775}
-  m_LocalScale: {x: 1.6602222, y: 4.5785456, z: 1}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6839773595384714884}
@@ -283,11 +283,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -852083793
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -326,7 +326,7 @@ Transform:
   m_GameObject: {fileID: 8327501042121482042}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49, y: -13.5, z: -0.62281775}
+  m_LocalPosition: {x: -23.351154, y: 5.0433536, z: -0.62281775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -397,7 +397,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 9.062826, y: -0.1620884}
+  m_Offset: {x: 2.1162844, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -407,7 +407,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 17.088963, y: 0.9429207}
+  m_Size: {x: 4.2325687, y: 0.12}
   m_EdgeRadius: 0
 --- !u!114 &1745992768082573312
 MonoBehaviour:
@@ -423,16 +423,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   useType: 1
-  moveSpeed: 45
+  moveSpeed: 18
   liveTime: 15
   wallCheckPosition: {fileID: 7991998921056778884}
-  wallCheckDistance: 2.53
+  wallCheckDistance: 0.24
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
   attackBox: {fileID: 3430280168856667007}
   tip: {fileID: 6510129578519726817}
   body: {fileID: 2502847933014101236}
+  normal: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
+  mount: {r: 1, g: 1, b: 1, a: 1}
 --- !u!251 &4029091337245974214
 PlatformEffector2D:
   m_ObjectHideFlags: 0

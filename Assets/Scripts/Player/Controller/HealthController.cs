@@ -11,9 +11,12 @@ public class HealthController
     }
     public void LoseHealth(int _health)
     {
+        // TODO: update date health lost mechanism
+        // TODO cancelled, I updated health using playerINFO
         if (player.Health > _health) 
         { 
             player.Health -= _health;
+            //player.playerEmbeddedUI.decreaseHealth();
         }
         else
         {

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XInput;
+using UnityEngine.Windows;
 
 public class PlayerJumpState : PlayerState
 {
@@ -30,8 +32,16 @@ public class PlayerJumpState : PlayerState
         player.FlipCtrl.onHorizontalInput();
         player.AirMoveCtrl.OnHorizontalInput(input.Xinput);
 
+
+        // jump => ladder
+        if (player.input.Xinput == 0 && player.ladderCheck && player.currentInteractingSpear != null && player.ladderRemountCoolDownTimer.TimeUp())
+        {
+            player.stateMachine.ChangeState(player.ladderMoveState);
+            return true;
+        }
+
         //jump => dash
-        if((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
+        if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
         {
             stateMachine.ChangeState(player.dashState);
             return true;
@@ -48,6 +58,7 @@ public class PlayerJumpState : PlayerState
             stateMachine.ChangeState(player.fallState);
             return true;
         }
+
         return false;
 
     }

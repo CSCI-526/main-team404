@@ -23,19 +23,18 @@ public class Player : MonoBehaviour
         
     }
     [Header("UI")]
-    public TMPro.TextMeshProUGUI HealthText;
-    public TMPro.TextMeshProUGUI ManaText;
-    public TMPro.TextMeshProUGUI DeflectText;
-    public TMPro.TextMeshProUGUI DodgeText;
-    public TMPro.TextMeshProUGUI NoManaTetx;
-    public TMPro.TextMeshProUGUI ManaPlusText;
-    public TMPro.TextMeshProUGUI ManaMinusText;
+    public PlayerEmbeddedUI playerEmbeddedUI;
+    // TODO: call spearPopUp.Pop() when player throw spaer upward
+    // TODO: call spearPopDown.Pop() when player throw spear downward
+    public SpearPop spearPopUp;
+    public SpearPop spearPopDown;
 
     [Header("Info")]
     public SpriteRenderer playerPrototypeSprite;
-    public int frameRate = 60;
-    public float gravityScale;
     public SpriteRenderer Bleeding;
+    [HideInInspector]
+    public float gravityScale { get; private set; } // a copy of rb.gravityScale for ladder movement
+    
 
     [Header("LevelCollision")]
     public Transform groundCheckLeft;
@@ -52,6 +51,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Vector2 rawSpeed;
     public float HorizontalSpeedFalling;
     public float HorizontalSpeedGround;
+    // acceleration and deceleration
+    public float HorizontalAcceleration;
+    public float HorizontalDeceleration;
     public int facingDir;
     public float JumpInitialSpeed;
     public int JumpCounter;
@@ -60,6 +62,14 @@ public class Player : MonoBehaviour
     [Header("LadderMovement")]
     public float ladderHorizontalSpeed;
     public float ladderVerticalSpeed;
+    [Tooltip("Expected duration of the snapping until play x position is the same as ladder x position, smaller value results in faster snap")]
+    public float ladderSnapTime;
+    public float ladderRemountCoolDown = 0.1f;
+    public Timer ladderRemountCoolDownTimer;
+    public float ladderCenterDeadZone = 0.01f;
+    [HideInInspector]
+    public float ladderSnapSpeedX = 0;
+    public float ladderSnapSpeedY = 0;
 
     [Header("WallJump")]
     public float wallSlideSpeed;
@@ -107,13 +117,15 @@ public class Player : MonoBehaviour
     public WeaponsDiction weaponDictionary;
 
     [Header("Stats")]
-    public int MaxMana = 3;
+    public int MaxMana = 2;
     public int Mana;
-    public int MaxHealth = 100;
+    public int MaxHealth = 9;
     public int Health;
 
     [Header("Animation")]
     [SerializeField] private string animState;
+    public Animator anim;
+
 
     #region Components
     [Header("Components")]
@@ -212,11 +224,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         
-        Application.targetFrameRate = frameRate;
-        
         //assign component
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = gravityScale;
+        gravityScale = rb.gravityScale;
         weaponDictionary = GetComponentInChildren<WeaponsDiction>();
 
         input.EnableGamePlayInputs();
@@ -227,6 +237,8 @@ public class Player : MonoBehaviour
         WeaponCtrl.EquipWP(0,0);
         WeaponCtrl.ActiveWP(1);
         WeaponCtrl.EquipWP(1, 1);
+
+        //anim.Play("GroundMove");
 
 
     }
@@ -248,15 +260,14 @@ public class Player : MonoBehaviour
         // stateMachine update second; aleast 0 frame on Playerstate.update() is called()
         stateMachine.currentState.Update();
 
+
         //Check if swtich weapon is pressed
         WeaponCtrl.checkSwtichPressed();
 
         //Debug
         rawSpeed = rb.linearVelocity;
+        //anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
 
-        //log mana and health
-        HealthText.text = "Health: " + Health.ToString() + "/" + MaxHealth.ToString();
-        ManaText.text = "Mana: " + Mana.ToString() + "/" + MaxMana.ToString();
 
 
     }
@@ -283,11 +294,6 @@ public class Player : MonoBehaviour
         //GUI.Label(new Rect(200, 160, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
     }
 
-    private void OnDrawGizmos()
-    {
-        //LevelCollisionCtrl.draw();
-    }
-
     private void OnBattle()
     {
         switch (battleInfo)
@@ -297,16 +303,10 @@ public class Player : MonoBehaviour
                 stateMachine.ChangeState(grabRewardState);
                 break;
             case BattleInfo.Deflect:
-                //TODO:Add Deflect successful Debug Text
-                DeflectText.gameObject.SetActive(true);
-
                 battleInfo = BattleInfo.Peace;
                 stateMachine.ChangeState(deflectRewardState);
                 break;
             case BattleInfo.Doge:
-                //TODO:Add Doge successful Debug Text
-                DodgeText.gameObject.SetActive(true);
-
                 battleInfo = BattleInfo.Peace;
                 ManaCtrl.AddMana(1);
                 if (SendToGoogle.instance != null)
@@ -338,6 +338,15 @@ public class Player : MonoBehaviour
         InvincibleBox.SetActive(false);
         HitBox.SetActive(true);
         battleInfo = BattleInfo.Peace;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(groundCheckLeft.position, groundCheckLeft.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(groundCheckRight.position, groundCheckRight.position + Vector3.down * groundCheckDistance);
+        Gizmos.DrawLine(wallCheckTop.position, wallCheckTop.position + facingDir*Vector3.right * wallCheckDistance);
+        Gizmos.DrawLine(wallCheckBottom.position, wallCheckBottom.position + facingDir*Vector3.right * wallCheckDistance);
     }
 
 }

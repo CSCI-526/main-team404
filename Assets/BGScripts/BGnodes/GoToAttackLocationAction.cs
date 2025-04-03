@@ -62,6 +62,11 @@ public partial class GoToAttackLocationAction : Action
         speed = (Mathf.Abs(distance) - attackDistance) / sprintDuration.Value;
         timer = sprintDuration.Value;
         rb = self.Value.GetComponent<Rigidbody2D>();
+        // return immediately if already close enough
+        if (speed < 0)
+        {
+            return Status.Success;
+        }
         return Status.Running;
     }
 

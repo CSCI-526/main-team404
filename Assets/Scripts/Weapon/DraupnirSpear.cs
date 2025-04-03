@@ -30,6 +30,9 @@ public class DraupnirSpear : MonoBehaviour
     private PlatformEffector2D pe;
     public SpriteRenderer tip;
     public SpriteRenderer body;
+    public Color normal;
+    public Color mount;
+    private bool isCountingDown = false;
 
 
     void Start()
@@ -39,6 +42,7 @@ public class DraupnirSpear : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         pe = GetComponent<PlatformEffector2D>();
+        SetColor(normal);
         if (useType == SpearUse.Level)
         {
             state = SpearState.OnWall;
@@ -60,8 +64,25 @@ public class DraupnirSpear : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnWall:
+                if (isCountingDown)
+                {
+                    return;
+                }
+                if (PlayerInfo.instance.player.transform.parent == this.transform)
+                {
+                    SetColor(mount);
+                }
+                else
+                {
+                    SetColor(normal);
+                }
                 break;
         }
+    }
+
+    private void LateUpdate()
+    {
+        
     }
     private void checkCollision()
     {
@@ -125,11 +146,12 @@ public class DraupnirSpear : MonoBehaviour
         float flashDuration = 0.2f;
         int numberOfFlashes = 3;
         yield return new WaitForSeconds(liveTime);
+        isCountingDown = true;
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            SetColor(Color.red);
+            SetColor(normal);
             yield return new WaitForSeconds(flashDuration);
-            SetColor(Color.white);
+            SetColor(mount);
             yield return new WaitForSeconds(flashDuration);
         }
         Destroy(gameObject);
