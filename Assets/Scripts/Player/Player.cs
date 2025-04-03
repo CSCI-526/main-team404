@@ -23,13 +23,6 @@ public class Player : MonoBehaviour
         
     }
     [Header("UI")]
-    public TMPro.TextMeshProUGUI HealthText;
-    public TMPro.TextMeshProUGUI ManaText;
-    public TMPro.TextMeshProUGUI DeflectText;
-    public TMPro.TextMeshProUGUI DodgeText;
-    public TMPro.TextMeshProUGUI NoManaTetx;
-    public TMPro.TextMeshProUGUI ManaPlusText;
-    public TMPro.TextMeshProUGUI ManaMinusText;
     public PlayerEmbeddedUI playerEmbeddedUI;
     // TODO: call spearPopUp.Pop() when player throw spaer upward
     // TODO: call spearPopDown.Pop() when player throw spear downward
@@ -275,9 +268,6 @@ public class Player : MonoBehaviour
         rawSpeed = rb.linearVelocity;
         //anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
 
-        //log mana and health
-        HealthText.text = "Health: " + Health.ToString() + "/" + MaxHealth.ToString();
-        ManaText.text = "Mana: " + Mana.ToString() + "/" + MaxMana.ToString();
 
 
     }
@@ -313,16 +303,10 @@ public class Player : MonoBehaviour
                 stateMachine.ChangeState(grabRewardState);
                 break;
             case BattleInfo.Deflect:
-                //TODO:Add Deflect successful Debug Text
-                DeflectText.gameObject.SetActive(true);
-
                 battleInfo = BattleInfo.Peace;
                 stateMachine.ChangeState(deflectRewardState);
                 break;
             case BattleInfo.Doge:
-                //TODO:Add Doge successful Debug Text
-                DodgeText.gameObject.SetActive(true);
-
                 battleInfo = BattleInfo.Peace;
                 ManaCtrl.AddMana(1);
                 if (SendToGoogle.instance != null)

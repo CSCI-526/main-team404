@@ -17,7 +17,7 @@ public class ManaController
     {
         //TODO: update mana UI change
         player.Mana = Mathf.Min(player.Mana + mana, player.MaxMana);
-        player.playerEmbeddedUI.increaseMana();
+        //player.playerEmbeddedUI.increaseMana();
     }
     //return true if mana is enough, and cost mana
     //return false if mana is not enough
@@ -26,7 +26,7 @@ public class ManaController
         //TODO: update mana UI change
         if (player.Mana >= mana)
         {
-            player.playerEmbeddedUI.decreaseMana();
+            //player.playerEmbeddedUI.decreaseMana();  
             player.Mana -= mana;
             return true;
         }

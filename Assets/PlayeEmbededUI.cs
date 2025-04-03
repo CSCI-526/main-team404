@@ -57,6 +57,7 @@ public class PlayerEmbeddedUI : MonoBehaviour
         
 
         health = PlayerInfo.instance.player.Health;
+        mana = PlayerInfo.instance.player.Mana;
         if (PlayerInfo.instance.player.facingDir == 1)
         {
             SetColorFaceRight();
@@ -65,6 +66,9 @@ public class PlayerEmbeddedUI : MonoBehaviour
         {
             SetColorFaceLeft();
         }
+
+        syncMana();
+
 
     }
 
@@ -159,6 +163,25 @@ public class PlayerEmbeddedUI : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public void syncMana()
+    {
+        if (mana == 0)
+        {
+            toTransparent(m2_0);
+            toTransparent(m2_1);
+        }
+        else if (mana == 1)
+        {
+            toSolid(m2_0);
+            toTransparent(m2_1);
+        }
+        else if (mana == 2)
+        {
+            toSolid(m2_0);
+            toSolid(m2_1);
         }
     }
     private void SpriteDecrease(StatefulSprite b, float duration)

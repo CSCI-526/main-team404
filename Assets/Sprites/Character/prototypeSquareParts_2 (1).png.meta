@@ -116,12 +116,12 @@ TextureImporter:
       name: prototypeSquareParts_2 (1)_0
       rect:
         serializedVersion: 2
-        x: 68
-        y: 82
-        width: 52
-        height: 36
+        x: 72
+        y: 86
+        width: 44
+        height: 30
       alignment: 9
-      pivot: {x: 0.5, y: -0.16666667}
+      pivot: {x: 0.5, y: -0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,12 +138,12 @@ TextureImporter:
       name: prototypeSquareParts_2 (1)_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 121
-        width: 52
-        height: 35
+        x: 72
+        y: 123
+        width: 44
+        height: 29
       alignment: 9
-      pivot: {x: 0.5, y: -1.2857143}
+      pivot: {x: 0.5, y: -1.6206896}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
