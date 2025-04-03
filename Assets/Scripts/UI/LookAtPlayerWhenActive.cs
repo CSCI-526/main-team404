@@ -27,12 +27,12 @@ public class LookAtPlayerWhenActive : MonoBehaviour
         currentAlpha = Mathf.MoveTowards(currentAlpha, targetAlphaValue, (targetAlpha / transitionTime) * Time.deltaTime);
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, currentAlpha);
 
-        if (isActive)
-        {
-            Transform playerTransform = PlayerInfo.instance.player.transform;
-            Vector2 direction = playerTransform.position - transform.position;
-            transform.up = direction;
-        }
+        //if (isActive)
+        //{
+        //    Transform playerTransform = PlayerInfo.instance.player.transform;
+        //    Vector2 direction = playerTransform.position - transform.position;
+        //    transform.up = direction;
+        //}
     }
 
     public void Show()
