@@ -48,6 +48,11 @@ public class PlayerEmbeddedUI : MonoBehaviour
         {
             Debug.LogError("Max health cannot be greater than 13");
         }
+
+        health = PlayerInfo.instance.player.Health;
+        mana = PlayerInfo.instance.player.Mana;
+        SetColorFaceRight();
+        syncMana();
     }
 
     // Update is called once per frame
