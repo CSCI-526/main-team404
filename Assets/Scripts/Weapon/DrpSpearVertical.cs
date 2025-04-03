@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DrpSpearVertical : MonoBehaviour
+public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
@@ -42,6 +42,8 @@ public class DrpSpearVertical : MonoBehaviour
     private LookAtPlayerWhenActive magnet;
     public float customLayeredDeadZone = 0.01f;
     private bool isCountingDown = false;
+    [Tooltip("Layers for both horizontal and vertial spear, this is for destory check when spear is close to another")]
+    public LayerMask spearsLayer;
     void Start()
     {
         state = SpearState.InAir;
@@ -136,10 +138,29 @@ public class DrpSpearVertical : MonoBehaviour
         state = SpearState.OnGround;
         rb.linearVelocity = Vector2.zero;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        //transform.parent = other.transform;
         attackBox.SetActive(false);
-        //topMargin.SetActive(true);
+
+        // destroy spear if there is some close by spear and reset the life time of that spear
+        Collider2D[] results = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(spearsLayer);
+        filter.useTriggers = true;
+        int colliderCount = GetComponent<Collider2D>().Overlap(filter, results);
+
+        for (int i = 0; i < colliderCount; i++)
+        {
+            Debug.Log(results[i].gameObject.name);
+            var spear = results[i].GetComponent<SpearLifeTimeReset>();
+            if (spear != null)
+            {
+                spear.ResetLifeTime();
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         StartCoroutine(nameof(DisableAttacBoxCoroutine));
+        // use overlap collider to check for other spears (Class DrpSpearVertical or DraupnirSpear) , both have implemented SpearLifeTimeReset
     }
 
     //IEnumerator DestroySpearVCoroutine()
@@ -181,5 +202,18 @@ public class DrpSpearVertical : MonoBehaviour
             yield return new WaitForSeconds(flashDuration);
         }
         Destroy(gameObject);
+    }
+
+    public void ResetLifeTime()
+    {
+        if (useType == SpearUse.Level)
+        {
+            return;
+        }
+        else
+        {
+            StopCoroutine(nameof(DestroySpearCoroutine));
+            StartCoroutine(nameof(DestroySpearCoroutine));
+        }
     }
 }

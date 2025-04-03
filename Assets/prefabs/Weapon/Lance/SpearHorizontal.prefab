@@ -435,6 +435,9 @@ MonoBehaviour:
   body: {fileID: 4480670903701699498}
   normal: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
   mount: {r: 1, g: 1, b: 1, a: 1}
+  spearsLayer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!251 &8999599304965456753
 PlatformEffector2D:
   m_ObjectHideFlags: 0

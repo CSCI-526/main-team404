@@ -415,6 +415,9 @@ MonoBehaviour:
   normal: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
   mount: {r: 1, g: 1, b: 1, a: 1}
   customLayeredDeadZone: 0.1
+  spearsLayer:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!61 &383831081877855507
 BoxCollider2D:
   m_ObjectHideFlags: 0

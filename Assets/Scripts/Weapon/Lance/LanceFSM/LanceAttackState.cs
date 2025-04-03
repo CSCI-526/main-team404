@@ -42,7 +42,6 @@ public class LanceAttackState : LanceState
 
             shootPoint = new Vector3(lance.shootingVPosition.position.x, lance.shootingVPosition.position.y, 0);
             RaycastHit2D hitH = Physics2D.Raycast(lance.shootingVPosition.position, Vector2.down, lanceHeight, lance.ground);
-            Debug.Log("height is:" + lanceHeight);
             if (hitH.collider != null)
             {
                 shootPoint = hitH.point + Vector2.up * new Vector2(0, lanceHeight);

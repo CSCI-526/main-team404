@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DraupnirSpear : MonoBehaviour
+public class DraupnirSpear : MonoBehaviour, SpearLifeTimeReset
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public enum SpearState
@@ -33,6 +33,7 @@ public class DraupnirSpear : MonoBehaviour
     public Color normal;
     public Color mount;
     private bool isCountingDown = false;
+    public LayerMask spearsLayer;
 
 
     void Start()
@@ -104,6 +105,26 @@ public class DraupnirSpear : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         //transform.parent = other.transform;
         attackBox.SetActive(false);
+
+
+        Collider2D[] results = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(spearsLayer);
+        int colliderCount = GetComponent<Collider2D>().Overlap(filter, results);
+
+        for (int i = 0; i < colliderCount; i++)
+        {
+            Debug.Log(results[i].gameObject.name);
+            var spear = results[i].GetComponent<SpearLifeTimeReset>();
+            if (spear != null)
+            {
+                spear.ResetLifeTime();
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+
         StartCoroutine(nameof(DisableAttacBoxCoroutine));
     }
 
@@ -163,5 +184,13 @@ public class DraupnirSpear : MonoBehaviour
         body.color = color;
     }
 
-
+    public void ResetLifeTime()
+    {
+        if (useType == SpearUse.Level)
+        {
+            return;
+        }
+        StopCoroutine(nameof(DestroySpearCoroutine));
+        StartCoroutine(nameof(DestroySpearCoroutine));
+    }
 }
