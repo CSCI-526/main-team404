@@ -82,7 +82,10 @@ public class Player : MonoBehaviour
     public GameObject deflectBox;
     public float deflectDuration;
     public Timer deflectTimer;
+    public float deflectCoolDown;
+    public Timer deflectCoolDownTimer;
     public float deflectJumpSpeed;
+    public int deflectSignal;
 
     [Header("Grab")]
     public GameObject grabBox;
@@ -304,7 +307,10 @@ public class Player : MonoBehaviour
                 break;
             case BattleInfo.Deflect:
                 battleInfo = BattleInfo.Peace;
-                stateMachine.ChangeState(deflectRewardState);
+                //stateMachine.ChangeState(deflectRewardState);
+                // replace deflect reward logic here
+                deflectSignal = 1;
+
                 break;
             case BattleInfo.Doge:
                 battleInfo = BattleInfo.Peace;

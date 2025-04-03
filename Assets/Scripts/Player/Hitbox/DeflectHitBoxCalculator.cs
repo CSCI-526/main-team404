@@ -50,14 +50,14 @@ public class DeflectHitBoxCalculator : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (player.facingDir == 1)
-        {
-            transform.position = new Vector2(player.transform.position.x + offSet.x, player.transform.position.y + offSet.y);
-        }
-        else
-        {
-            transform.position = new Vector2(player.transform.position.x - offSet.x, player.transform.position.y + offSet.y);
-        }
+        //if (player.facingDir == 1)
+        //{
+        //    transform.position = new Vector2(player.transform.position.x + offSet.x, player.transform.position.y + offSet.y);
+        //}
+        //else
+        //{
+        //    transform.position = new Vector2(player.transform.position.x - offSet.x, player.transform.position.y + offSet.y);
+        //}
         rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
         contactFilter.useTriggers = true;
         contactFilter.SetLayerMask(contactLayer);

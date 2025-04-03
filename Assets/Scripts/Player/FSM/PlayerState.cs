@@ -36,7 +36,7 @@ public class PlayerState
     {
 
         //any => deflect
-        if (input.Deflect || input.isDeflectBuffered)
+        if ((input.Deflect || input.isDeflectBuffered) && player.deflectCoolDownTimer.TimeUp() )
         {
             stateMachine.ChangeState(player.deflectState);
             return true;

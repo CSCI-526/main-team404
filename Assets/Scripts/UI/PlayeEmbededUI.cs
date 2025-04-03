@@ -35,6 +35,10 @@ public class PlayerEmbeddedUI : MonoBehaviour
     [SerializeField] private Color l1 = Color.yellow;
     [SerializeField] private Color l0 = Color.red;
 
+    private bool isBlocking = false;
+
+    public bool animationTrigger = false;
+
     private Coroutine b0Coroutine;
     private Coroutine b1Coroutine;
     private Coroutine b2Coroutine;
@@ -173,7 +177,13 @@ public class PlayerEmbeddedUI : MonoBehaviour
 
     public void syncMana()
     {
-        if (mana == 0)
+        
+        if (isBlocking)
+        {
+            toTransparent(m2_0);
+            toTransparent(m2_1);
+        }
+        else if (mana == 0)
         {
             toTransparent(m2_0);
             toTransparent(m2_1);
@@ -542,5 +552,25 @@ public class PlayerEmbeddedUI : MonoBehaviour
 
 
         }
+    }
+
+    public void startBlock()
+    {
+        isBlocking = true;
+        
+    }
+    public void endBlock()
+    {
+        isBlocking = false;
+    }
+
+    public void SetAnimTrigger()
+    {
+        animationTrigger = true;
+    }
+
+    public void UnSetAnimTrigger()
+    {
+        animationTrigger = false;
     }
 }
