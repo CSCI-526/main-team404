@@ -20,14 +20,22 @@ public class HealthController
         }
         else
         {
-            if (levelTransitionLock) return;
-            levelTransitionLock = true;
-            player.Health -= _health;
-            LevelManager.instance.StartTransitionToRestartLevel();
+            //if (levelTransitionLock) return;
+            //levelTransitionLock = true;
+            //player.Health -= _health;
+            //LevelManager.instance.StartTransitionToRestartLevel();
+            //reset to Last Good position
+            ResetToCheckPoint();
         }
     }
     public void GainHealth(int _health)
     {
         player.Health = Mathf.Min(player.Health + _health, player.MaxHealth);
+    }
+
+    public void ResetToCheckPoint()
+    {
+        player.transform.position = new Vector3(player.LastGoodPosition.x, player.LastGoodPosition.y, player.LastGoodPosition.z);
+        player.Health = 9;
     }
 }

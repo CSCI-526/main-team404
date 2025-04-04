@@ -18,7 +18,7 @@ public class PlayerDamagedPenalyState : PlayerState
 
         player.KnockBackCtrl.ApplyKnockback();
         // change player color
-        player.Bleeding.color = Color.red;
+        //player.Bleeding.color = Color.red;
     }
 
     public override void Exit()
@@ -27,7 +27,7 @@ public class PlayerDamagedPenalyState : PlayerState
         // Freeze Player
         player.GroundMoveCtrl.Freeze();
         // change player color
-        player.Bleeding.color = Color.gray;
+        //player.Bleeding.color = Color.gray;
     }
 
     public override void LateUpdate()

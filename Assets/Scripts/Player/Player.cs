@@ -133,6 +133,9 @@ public class Player : MonoBehaviour
     public CinemachineImpulseSource impulseSource;
     public Vector2 vector2mostRecentHit;
 
+    [Header("LevelInfo")]
+    public Vector3 LastGoodPosition;
+
 
     #region Components
     [Header("Components")]
@@ -275,6 +278,7 @@ public class Player : MonoBehaviour
         //Debug
         rawSpeed = rb.linearVelocity;
         //anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+        //Debug.Log(LastGoodPosition);
 
 
 
@@ -301,6 +305,7 @@ public class Player : MonoBehaviour
         //GUI.Label(new Rect(200, 140, 200, 200), "Health: " + Health, bigFontStyle);
         //GUI.Label(new Rect(200, 160, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
     }
+
 
     private void OnBattle()
     {
