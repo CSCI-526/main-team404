@@ -4,7 +4,7 @@ public class RadialAbsorb : MonoBehaviour
 {
     public ParticleSystem ps;
     public Transform centerPoint;
-    public float pullSpeed = 2f;
+    public float pullSpeed = 1.5f;
 
     ParticleSystem.Particle[] particles;
 
