@@ -18,6 +18,50 @@ public class PlayerEmbeddedUI : MonoBehaviour
     public StatefulSprite m3_0;
     public StatefulSprite m3_1;
     public StatefulSprite m3_2;
+    public StatefulSprite charge;
+    public float flashDuration = 0.1f; // time for charge to stay lit (alpha = 1)
+    private Coroutine chargeFlashCoroutine;
+
+    public void chargeFlash()
+    {
+        if (chargeFlashCoroutine != null)
+        {
+            StopCoroutine(chargeFlashCoroutine);
+        }
+        chargeFlashCoroutine = StartCoroutine(ChargeFlashCoroutine());
+    }
+
+    private IEnumerator ChargeFlashCoroutine()
+    {
+        float time = 0;
+        Color startColor = charge.renderer.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 1);
+
+        // Change alpha from 0 to 1
+        while (time < flashStartDuration)
+        {
+            charge.renderer.color = Color.Lerp(startColor, targetColor, time / flashStartDuration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        charge.renderer.color = targetColor;
+
+        // Wait for flashDuration
+        yield return new WaitForSeconds(flashDuration);
+
+        // Change alpha from 1 to 0
+        time = 0;
+        startColor = charge.renderer.color;
+        targetColor = new Color(startColor.r, startColor.g, startColor.b, 0);
+        while (time < flashStartDuration)
+        {
+            charge.renderer.color = Color.Lerp(startColor, targetColor, time / flashStartDuration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        charge.renderer.color = targetColor;
+    }
+    public float flashStartDuration = 0.1f; // time for charge to change alpha from 0 to 1(or from 1 to 0)
 
 
     [Header("Stats")]
@@ -573,4 +617,5 @@ public class PlayerEmbeddedUI : MonoBehaviour
     {
         animationTrigger = false;
     }
+
 }

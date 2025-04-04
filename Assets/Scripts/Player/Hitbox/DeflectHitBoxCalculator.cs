@@ -42,6 +42,9 @@ public class DeflectHitBoxCalculator : MonoBehaviour
             if (collider.gameObject.CompareTag("EnemyAttackBox"))
             {
                 player.trigger = collider.gameObject;
+                // aquire vector from player to delfect contact point
+                player.vector2mostRecentHit = collider.transform.position - player.transform.position;
+                player.vector2mostRecentHit.Normalize();
                 player.battleInfo = Player.BattleInfo.Deflect;
                 player.trigger.gameObject.GetComponent<EnemyHitBoxBase>().playerDestroy(2);
                 break;

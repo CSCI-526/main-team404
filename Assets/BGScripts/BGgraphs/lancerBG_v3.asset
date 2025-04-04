@@ -40,7 +40,7 @@ MonoBehaviour:
           rid: 3251204915413909777
         m_EndedNodes:
           rid: 3251204915413909778
-        m_VersionTimestamp: 638789877202353551
+        m_VersionTimestamp: 638793455040475605
     - rid: 3251204915413909775
       type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -1982,7 +1982,7 @@ MonoBehaviour:
   - rid: 3251204761559761507
   - rid: 3251204761559761847
   - rid: 3251204762456555588
-  m_VersionTimestamp: 638789877202353551
+  m_VersionTimestamp: 638793455040475605
   m_DebugInfo: {fileID: 2707092926558388257}
   m_RuntimeGraph: {fileID: -3327767368474696651}
   AssetID:
@@ -3213,6 +3213,25 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1090720031006786084
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: ChannelVariable
+        Type:
+          m_SerializableType: Unity.Behavior.EventChannelBase, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 1090720031006786085
+        LinkedVariable:
+          rid: -2
+    - rid: 1090720031006786085
+      type: {class: 'BlackboardVariable`1[[Unity.Behavior.EventChannelBase, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
     - rid: 3251204237526302940
       type: {class: RunInParallelNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -6966,7 +6985,7 @@ MonoBehaviour:
           m_Value0: 9965463903622711961
           m_Value1: 5344335246459382461
         m_FieldValues:
-        - rid: 3251204915413910174
+        - rid: 1090720031006786084
     - rid: 3251204762456555589
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -6985,25 +7004,6 @@ MonoBehaviour:
         m_NodeModel:
           rid: 3251204762456555588
         m_Connections: []
-    - rid: 3251204915413910174
-      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
-      data:
-        FieldName: ChannelVariable
-        Type:
-          m_SerializableType: Unity.Behavior.EventChannelBase, Unity.Behavior, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        LocalValue:
-          rid: 3251204915413910175
-        LinkedVariable:
-          rid: -2
-    - rid: 3251204915413910175
-      type: {class: 'BlackboardVariable`1[[Unity.Behavior.EventChannelBase, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: {fileID: 0}
     - rid: 3664480282713260253
       type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:

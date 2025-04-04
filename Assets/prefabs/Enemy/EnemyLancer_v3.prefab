@@ -2056,6 +2056,7 @@ GameObject:
   - component: {fileID: 5118895292411582847}
   - component: {fileID: 1054270211477935965}
   - component: {fileID: 7253911578064599214}
+  - component: {fileID: 6182739670324725235}
   m_Layer: 9
   m_Name: AttackBox
   m_TagString: EnemyAttackBox
@@ -2072,8 +2073,8 @@ Transform:
   m_GameObject: {fileID: 6015305119844127162}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.70710653}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.2158, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.1039, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5623193234101956800}
@@ -2159,6 +2160,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.19999966, y: 0.5000012}
   m_Size: {x: 0.4999992, y: 3.0999985}
   m_Direction: 0
+--- !u!114 &6182739670324725235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015305119844127162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b414a5e76c47441a26bf7abaaf3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 597821654987807001}
+  - {fileID: 3352968077575325904}
+  normal: {r: 0.9960785, g: 0.9960785, b: 0.9960785, a: 1}
+  alert: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6043909215041398778
 GameObject:
   m_ObjectHideFlags: 0
@@ -3204,6 +3222,7 @@ GameObject:
   - component: {fileID: 5844463302160137381}
   - component: {fileID: 3446530412719617179}
   - component: {fileID: 5841155180454512544}
+  - component: {fileID: 484167210676819005}
   m_Layer: 9
   m_Name: AttackBox2
   m_TagString: EnemyAttackBox
@@ -3316,6 +3335,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   damage: 1
+--- !u!114 &484167210676819005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8406204459468442445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b414a5e76c47441a26bf7abaaf3531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 597821654987807001}
+  - {fileID: 3352968077575325904}
+  normal: {r: 1, g: 1, b: 1, a: 1}
+  alert: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8812310477641812133
 GameObject:
   m_ObjectHideFlags: 0

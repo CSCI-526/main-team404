@@ -49,6 +49,19 @@ public class PlayerDeflectState : PlayerState
                 SendToGoogle.instance.AddSuccessfulParryCount();
             }
             // put frame freeze here
+            player.playerEmbeddedUI.chargeFlash();
+            // aquire vector from player to delfect contact point
+            // this vector should be normalized, but incase not, normalize this vector and pass it in to GenerateImpulseWithVelocity
+            
+            Vector2 hitVector = player.vector2mostRecentHit;
+            if (Mathf.Abs(hitVector.y) < 2 * Mathf.Abs(hitVector.x))
+            {
+                hitVector.y = 0;
+                hitVector.x = Mathf.Sign(hitVector.x);
+            }
+            Debug.Log("HitVector:" + hitVector);
+            player.impulseSource.GenerateImpulseWithVelocity(hitVector/2);
+            TimeManager.instance.SlowTime(0.1f, 0.1f);
 
             // frame freeze end
             player.deflectSignal = 0;

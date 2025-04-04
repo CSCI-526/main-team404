@@ -8,6 +8,7 @@ public class UIInputButtonFadeInOut : MonoBehaviour
     private TMPro.TextMeshProUGUI text;
     private bool isActive = false;
     public float alphaChangeSpeed; // Speed of alpha change
+    public float finalAlpha = 1f; // Final alpha value when fully visible
     void Start()
     {
         image = GetComponent<Image>();
@@ -26,10 +27,10 @@ public class UIInputButtonFadeInOut : MonoBehaviour
         if (isActive)
         {
             Color color = image.color;
-            color.a = Mathf.MoveTowards(color.a, 1f, alphaChangeSpeed * Time.deltaTime);
+            color.a = Mathf.MoveTowards(color.a, finalAlpha, alphaChangeSpeed * Time.deltaTime);
             image.color = color;
             Color textColor = text.color;
-            textColor.a = Mathf.MoveTowards(textColor.a, 1f, alphaChangeSpeed * Time.deltaTime);
+            textColor.a = Mathf.MoveTowards(textColor.a, finalAlpha, alphaChangeSpeed * Time.deltaTime);
             text.color = textColor;
         }
         else

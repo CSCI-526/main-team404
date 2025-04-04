@@ -129,6 +129,10 @@ public class Player : MonoBehaviour
     [SerializeField] private string animState;
     public Animator anim;
 
+    [Header("CameraEffect")]
+    public CinemachineImpulseSource impulseSource;
+    public Vector2 vector2mostRecentHit;
+
 
     #region Components
     [Header("Components")]
@@ -231,6 +235,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         gravityScale = rb.gravityScale;
         weaponDictionary = GetComponentInChildren<WeaponsDiction>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         input.EnableGamePlayInputs();
         stateMachine.Initialize(fallState);

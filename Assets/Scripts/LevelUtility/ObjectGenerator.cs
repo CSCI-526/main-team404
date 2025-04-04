@@ -22,7 +22,7 @@ public class ObjectGenerator : MonoBehaviour
         
         if (timer <= 0)
         {
-            generatedObject = Instantiate(objectToGenerate, transform.position, Quaternion.identity);
+            generatedObject = Instantiate(objectToGenerate, transform.position, transform.rotation);
             timer = timeInterval;
         }
     }
