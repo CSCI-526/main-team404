@@ -38,6 +38,7 @@ public class CheckPoint : MonoBehaviour
             isReached = true;
             // Send last good position to player
             PlayerInfo.instance.player.LastGoodPosition = transform.position;
+            PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
         }
     }
 }

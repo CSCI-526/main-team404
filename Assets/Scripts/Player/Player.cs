@@ -298,9 +298,9 @@ public class Player : MonoBehaviour
     {
         // Set the font size
         //TODO:Discard when implemnt UI
-        GUIStyle bigFontStyle = new GUIStyle(GUI.skin.label);
-        bigFontStyle.fontSize = 16;
-        GUI.Label(new Rect(200, 100, 200, 200), "playerState: " + stateMachine.currentState.animBoolName, bigFontStyle);
+        //GUIStyle bigFontStyle = new GUIStyle(GUI.skin.label);
+        //bigFontStyle.fontSize = 16;
+        //GUI.Label(new Rect(200, 100, 200, 200), "playerState: " + stateMachine.currentState.animBoolName, bigFontStyle);
         //GUI.Label(new Rect(200, 120, 200, 200), "Mana: " + Mana, bigFontStyle);
         //GUI.Label(new Rect(200, 140, 200, 200), "Health: " + Health, bigFontStyle);
         //GUI.Label(new Rect(200, 160, 200, 200), "Jumpable: " + JumpCounter, bigFontStyle);
