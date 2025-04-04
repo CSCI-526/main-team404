@@ -16,7 +16,7 @@ public class CheckPoint : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         Color color = sr.color;
-        color.a = 0.5f; // Set transparency (0 = fully transparent, 1 = fully opaque)
+        color.a = 0.3f; // Set transparency (0 = fully transparent, 1 = fully opaque)
         sr.color = color;
     }
 

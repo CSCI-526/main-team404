@@ -6,6 +6,7 @@ public class StaticSpike : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private SpikeAttackController spikeDamger;
     public float attackPeriod = 1f; // Time in seconds before the spike reactivates
+    private Coroutine spikeCoroutine;
     void Start()
     {
         spikeDamger = GetComponentInChildren<SpikeAttackController>();
@@ -16,17 +17,18 @@ public class StaticSpike : MonoBehaviour
     {
         if (!spikeDamger.gameObject.activeSelf)
         {
-            StartCoroutine(enableSpike());
+            if (spikeCoroutine == null)
+            {
+                spikeCoroutine = StartCoroutine(enableSpike());
+            }
         }
     }
 
+
     IEnumerator enableSpike()
     {
-        if (spikeDamger.gameObject.activeSelf)
-        {
-            yield break;
-        }
         yield return new WaitForSeconds(attackPeriod);
         spikeDamger.gameObject.SetActive(true);
+        spikeCoroutine = null;
     }
 }

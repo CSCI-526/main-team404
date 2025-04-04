@@ -2524,11 +2524,20 @@ MonoBehaviour:
   - rid: 3251204739620143544
   - rid: 3251204742715539559
   - rid: 3251204760150474877
+  - rid: 1090720031006786553
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
+    - rid: 1090720031006786553
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14117764545665395062
+          m_Value1: 6197794731777207831
+        Name: Weapon
+        m_Value: {fileID: 72336043475053428}
     - rid: 3251204237526303078
       type: {class: 'BlackboardVariable`1[[UnityEngine.Splines.SplineAnimate, Unity.Splines]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:

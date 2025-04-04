@@ -26,6 +26,7 @@ public class HealthController
             //LevelManager.instance.StartTransitionToRestartLevel();
             //reset to Last Good position
             ResetToCheckPoint();
+            FadeBlackOut.Instance.BlackOut();
         }
     }
     public void GainHealth(int _health)
@@ -37,5 +38,6 @@ public class HealthController
     {
         player.transform.position = new Vector3(player.LastGoodPosition.x, player.LastGoodPosition.y, player.LastGoodPosition.z);
         player.Health = 9;
+        player.Mana = 0;
     }
 }

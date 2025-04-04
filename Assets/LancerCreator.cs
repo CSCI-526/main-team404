@@ -1,13 +1,16 @@
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectGenerator : MonoBehaviour
+public class LancerCreator : MonoBehaviour
 {
     public GameObject objectToGenerate;
     public float timeInterval;
     private float timer;
     private GameObject generatedObject;
-
+    public WayPoint2D startWayPoint;
+    public LanceInRegion lanceInRegion;
+    public bool involveTutorial = false;
     public Image loadingImage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,10 +29,31 @@ public class ObjectGenerator : MonoBehaviour
 
         if (timer <= 0)
         {
-            generatedObject = Instantiate(objectToGenerate, transform.position, transform.rotation);
-            timer = timeInterval;
-            SetLoadingImageAlpha(0);
+            if (!involveTutorial) {
+                CreateLancer();
+            }
+            else
+            {
+                if (!lanceInRegion.DetectInteractableLadder())
+                {
+                    CreateLancer();
+                }
+            }
         }
+    }
+
+    private void CreateLancer()
+    {
+        generatedObject = Instantiate(objectToGenerate, transform.position, transform.rotation);
+        BehaviorGraphAgent agent = generatedObject.GetComponent<BehaviorGraphAgent>();
+        agent.SetVariableValue("currentWayPoint", startWayPoint);
+        timer = timeInterval;
+        SetLoadingImageAlpha(0);
+    }
+
+    public bool haveSpawned()
+    {
+        return generatedObject != null;
     }
 
     private void UpdateLoadingImage()
@@ -50,4 +74,5 @@ public class ObjectGenerator : MonoBehaviour
             loadingImage.color = color;
         }
     }
+
 }
