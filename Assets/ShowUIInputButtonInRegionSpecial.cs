@@ -8,7 +8,7 @@ public class ShowUIInputButtonInRegionSpecial : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (PlayerInfo.instance.player.Mana == 2)
+        if (PlayerInfo.instance.player.Mana > 0)
         {
             
             if (collision.CompareTag("Player"))

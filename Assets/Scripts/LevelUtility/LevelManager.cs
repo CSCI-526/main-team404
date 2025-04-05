@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public float fadeDuration = 1.5f;
     public float displayTime = 3.0f;
     public float textFadeDuration = 1.0f;
+    private int currentQuoteIndex = 2;
 
     private string[] quotes = {
         "\"Only those who will risk going too far can possibly find out how far one can go.\" -T.S. Eliot",
@@ -67,7 +68,6 @@ public class LevelManager : MonoBehaviour
             quoteCanvasGroup = quoteText.GetComponent<CanvasGroup>();
             if (quoteCanvasGroup == null)
             {
-                //Debug.LogWarning("CanvasGroup not found on QuoteText! Adding one dynamically.");
                 quoteCanvasGroup = quoteText.gameObject.AddComponent<CanvasGroup>();
             }
         }
@@ -163,10 +163,29 @@ public class LevelManager : MonoBehaviour
         quoteText.gameObject.SetActive(false);
         yield return StartCoroutine(Fade(0, 1, fadeDuration));
 
-        quoteText.text = isNextLevel ? (isFirstScene ? quotes[0] : quotes[Random.Range(2, quotes.Length - 1)]) : quotes[quotes.Length - 1];
-        if (isFirstScene && isNextLevel)
+        //quoteText.text = isNextLevel ? (isFirstScene ? quotes[0] : quotes[Random.Range(2, quotes.Length - 1)]) : quotes[quotes.Length - 1];
+        //if (isFirstScene && isNextLevel)
+        //{
+        //    isFirstScene = false;
+        //}
+
+        if (isNextLevel)
         {
-            isFirstScene = false;
+            if (isFirstScene)
+            {
+                quoteText.text = quotes[0];
+                isFirstScene = false;
+            }
+            else
+            {
+                quoteText.text = quotes[currentQuoteIndex];
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.Length;
+                if (currentQuoteIndex < 2) currentQuoteIndex = 2; 
+            }
+        }
+        else
+        {
+            quoteText.text = quotes[quotes.Length - 1];
         }
 
         quoteText.gameObject.SetActive(true);
