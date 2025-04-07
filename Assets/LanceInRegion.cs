@@ -13,10 +13,6 @@ public class LanceInRegion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log("DetectInteractableLadder: " + DetectInteractableLadder());
-        }
     }
 
     public bool DetectInteractableLadder()
