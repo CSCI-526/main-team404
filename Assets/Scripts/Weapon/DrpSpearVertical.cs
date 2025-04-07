@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
 {
@@ -44,6 +45,8 @@ public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
     private bool isCountingDown = false;
     [Tooltip("Layers for both horizontal and vertial spear, this is for destory check when spear is close to another")]
     public LayerMask spearsLayer;
+    private Light2D light2D; 
+    public float volumeIntensity = 0.2f;
     void Start()
     {
         state = SpearState.InAir;
@@ -51,6 +54,7 @@ public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         magnet = GetComponentInChildren<LookAtPlayerWhenActive>();
+        light2D = GetComponentInChildren<Light2D>();
 
         if (useType == SpearUse.Level)
         {
@@ -186,6 +190,15 @@ public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
     {
         tip.color = color;
         body.color = color;
+        if (light2D == null) { return; }
+        if (color == normal)
+        {
+            light2D.volumeIntensity = 0f;
+        }
+        else
+        {
+            light2D.volumeIntensity = volumeIntensity;
+        }
     }
 
     IEnumerator DestroySpearCoroutine()
