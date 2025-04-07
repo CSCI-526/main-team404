@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class DraupnirSpear : MonoBehaviour, SpearLifeTimeReset
 {
@@ -34,6 +35,7 @@ public class DraupnirSpear : MonoBehaviour, SpearLifeTimeReset
     public Color mount;
     private bool isCountingDown = false;
     public LayerMask spearsLayer;
+    private Light2D light2D;  
 
 
     void Start()
@@ -43,6 +45,7 @@ public class DraupnirSpear : MonoBehaviour, SpearLifeTimeReset
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         pe = GetComponent<PlatformEffector2D>();
+        light2D = GetComponentInChildren<Light2D>();
         SetColor(normal);
         if (useType == SpearUse.Level)
         {
@@ -182,6 +185,14 @@ public class DraupnirSpear : MonoBehaviour, SpearLifeTimeReset
     {
         tip.color = color;
         body.color = color;
+        if (color == normal)
+        {
+            light2D.volumeIntensity = 0;
+        }
+        else
+        {
+            light2D.volumeIntensity = 0.2f;
+        }
     }
 
     public void ResetLifeTime()
