@@ -77,11 +77,10 @@ public class Lance : PlayerWeapon
         {
             if (player.ManaCtrl.CostMana(1))
             {
-                player.ManaMinusText.gameObject.SetActive(true);
                 stateMachine.ChangeState(attackState, ai);
                 return;
             }
-            player.NoManaTetx.gameObject.SetActive(true);
+            // TODO: add not enough mana feed back
         }
     }
 

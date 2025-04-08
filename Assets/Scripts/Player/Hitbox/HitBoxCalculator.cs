@@ -45,6 +45,7 @@ public class  HitBoxCalculator: MonoBehaviour
         {
             if (collider.gameObject.CompareTag("EnemyAttackBox"))
             {
+                Debug.Log("Hit by enemy attack box" + collider.gameObject.name);
                 player.trigger = collider.gameObject;
                 player.battleInfo = Player.BattleInfo.Hit;
                 player.trigger.gameObject.GetComponent<EnemyHitBoxBase>().playerDestroy(1);

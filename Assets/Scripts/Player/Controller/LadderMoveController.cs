@@ -7,28 +7,28 @@ public class LadderMoveController
     public LadderMoveController(Player _player)
     {
         player = _player;
+        player.ladderRemountCoolDownTimer = new Timer();
+        player.TimerCountDownCtrl.register(player.ladderRemountCoolDownTimer);
     }
 
     public void climbLadder()
     {
         player.rb.gravityScale = 0f;
+        player.rb.linearVelocityY = 0;
         player.JumpCtrl.ResetCounter(2);
-        // set player postion to current spear
-        player.transform.position = player.currentInteractingSpear.GetValidPosition(player.transform.position);
         player.rb.linearVelocity = new Vector2(0,player.rb.linearVelocity.y);
-        player.currentInteractingSpear.TurnOnTopMargin();
-        player.currentInteractingSpear.displayClimbUI();
-        player.weapon0.UnEquip();
+        player.weapon0.DeactivateWeapon();
     }
 
     public void leaveLadder()
     {
         player.rb.gravityScale = player.gravityScale;
-        if (player.currentInteractingSpear != null)
-        {
-            player.currentInteractingSpear.TurnOffTopMargin();
-            player.currentInteractingSpear.stopDisplayClimbUI();
-        }
+        player.rb.linearVelocityY = 0;
+        
+        player.weapon0.ActivateWeapon();
         player.weapon0.Equip();
+        player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
     }
+
+
 }

@@ -28,6 +28,14 @@ public class PlayerFallState : PlayerState
         player.FlipCtrl.onHorizontalInput();
         player.AirMoveCtrl.OnHorizontalInput(input.Xinput);
 
+
+        // fall => ladder
+        if (player.input.Xinput == 0 && player.ladderCheck && player.currentInteractingSpear != null && player.ladderRemountCoolDownTimer.TimeUp())
+        {
+            player.stateMachine.ChangeState(player.ladderMoveState);
+            return true;
+        }
+
         //fall => dash
         if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
         {

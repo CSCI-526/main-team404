@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DraupnirSpear : MonoBehaviour
+public class DraupnirSpear : MonoBehaviour, SpearLifeTimeReset
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public enum SpearState
@@ -30,6 +30,10 @@ public class DraupnirSpear : MonoBehaviour
     private PlatformEffector2D pe;
     public SpriteRenderer tip;
     public SpriteRenderer body;
+    public Color normal;
+    public Color mount;
+    private bool isCountingDown = false;
+    public LayerMask spearsLayer;
 
 
     void Start()
@@ -39,6 +43,7 @@ public class DraupnirSpear : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         pe = GetComponent<PlatformEffector2D>();
+        SetColor(normal);
         if (useType == SpearUse.Level)
         {
             state = SpearState.OnWall;
@@ -60,8 +65,25 @@ public class DraupnirSpear : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnWall:
+                if (isCountingDown)
+                {
+                    return;
+                }
+                if (PlayerInfo.instance.player.transform.parent == this.transform)
+                {
+                    SetColor(mount);
+                }
+                else
+                {
+                    SetColor(normal);
+                }
                 break;
         }
+    }
+
+    private void LateUpdate()
+    {
+        
     }
     private void checkCollision()
     {
@@ -83,6 +105,26 @@ public class DraupnirSpear : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         //transform.parent = other.transform;
         attackBox.SetActive(false);
+
+
+        Collider2D[] results = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(spearsLayer);
+        int colliderCount = GetComponent<Collider2D>().Overlap(filter, results);
+
+        for (int i = 0; i < colliderCount; i++)
+        {
+            Debug.Log(results[i].gameObject.name);
+            var spear = results[i].GetComponent<SpearLifeTimeReset>();
+            if (spear != null)
+            {
+                spear.ResetLifeTime();
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+
         StartCoroutine(nameof(DisableAttacBoxCoroutine));
     }
 
@@ -125,11 +167,12 @@ public class DraupnirSpear : MonoBehaviour
         float flashDuration = 0.2f;
         int numberOfFlashes = 3;
         yield return new WaitForSeconds(liveTime);
+        isCountingDown = true;
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            SetColor(Color.red);
+            SetColor(normal);
             yield return new WaitForSeconds(flashDuration);
-            SetColor(Color.white);
+            SetColor(mount);
             yield return new WaitForSeconds(flashDuration);
         }
         Destroy(gameObject);
@@ -141,5 +184,13 @@ public class DraupnirSpear : MonoBehaviour
         body.color = color;
     }
 
-
+    public void ResetLifeTime()
+    {
+        if (useType == SpearUse.Level)
+        {
+            return;
+        }
+        StopCoroutine(nameof(DestroySpearCoroutine));
+        StartCoroutine(nameof(DestroySpearCoroutine));
+    }
 }

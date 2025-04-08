@@ -55,6 +55,11 @@ public partial class DamageCheckAction : Action
             Vector2 pos = Self.Value.transform.position;
             GameObject gb = GameObject.Instantiate(Drop.Value, pos, Quaternion.identity);
             ///
+            //Update kills
+            if (SendToGoogle.instance != null)
+            {
+                SendToGoogle.instance.AddKills();
+            }
 
             Destroyer.Value.DestroyMe();
         }

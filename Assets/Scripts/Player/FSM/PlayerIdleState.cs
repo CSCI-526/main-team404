@@ -13,6 +13,7 @@ public class PlayerIdleState : PlayerState
     {
         base.Enter();
         player.GroundMoveCtrl.Freeze();
+
     }
 
     public override void Exit()
@@ -27,6 +28,15 @@ public class PlayerIdleState : PlayerState
             return true;
         }
         player.FlipCtrl.onHorizontalInput();
+
+
+
+        // idle => ladder
+        if (player.input.Xinput == 0 && player.ladderCheck && player.currentInteractingSpear != null && player.ladderRemountCoolDownTimer.TimeUp())
+        {
+            player.stateMachine.ChangeState(player.ladderMoveState);
+            return true;
+        }
 
         // stand on spear
         if (player.OnFlyableCtrl.OnFlyingPlatform)
@@ -59,6 +69,7 @@ public class PlayerIdleState : PlayerState
             stateMachine.ChangeState(player.moveState);
             return true;
         }
+
         return false;
 
 

@@ -42,6 +42,9 @@ public class DeflectHitBoxCalculator : MonoBehaviour
             if (collider.gameObject.CompareTag("EnemyAttackBox"))
             {
                 player.trigger = collider.gameObject;
+                // aquire vector from player to delfect contact point
+                player.vector2mostRecentHit = collider.transform.position - player.transform.position;
+                player.vector2mostRecentHit.Normalize();
                 player.battleInfo = Player.BattleInfo.Deflect;
                 player.trigger.gameObject.GetComponent<EnemyHitBoxBase>().playerDestroy(2);
                 break;
@@ -50,14 +53,14 @@ public class DeflectHitBoxCalculator : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (player.facingDir == 1)
-        {
-            transform.position = new Vector2(player.transform.position.x + offSet.x, player.transform.position.y + offSet.y);
-        }
-        else
-        {
-            transform.position = new Vector2(player.transform.position.x - offSet.x, player.transform.position.y + offSet.y);
-        }
+        //if (player.facingDir == 1)
+        //{
+        //    transform.position = new Vector2(player.transform.position.x + offSet.x, player.transform.position.y + offSet.y);
+        //}
+        //else
+        //{
+        //    transform.position = new Vector2(player.transform.position.x - offSet.x, player.transform.position.y + offSet.y);
+        //}
         rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
         contactFilter.useTriggers = true;
         contactFilter.SetLayerMask(contactLayer);

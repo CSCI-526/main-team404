@@ -3,20 +3,23 @@ using UnityEngine;
 public class DeflectController
 {
     Player player;
-    public Timer timer;
+    //public Timer timer;
 
     public DeflectController(Player player)
     {
         this.player = player;
-        timer = new Timer();
-        player.deflectTimer = timer;
-        player.TimerCountDownCtrl.register(timer);
+        //timer = new Timer();
+        //player.deflectTimer = timer;
+        //player.TimerCountDownCtrl.register(timer);
+        player.deflectSignal = 0;
+        player.deflectCoolDownTimer = new Timer();
+        player.TimerCountDownCtrl.register(player.deflectCoolDownTimer);
     }
 
     public void Deflect()
     {
         player.deflectBox.SetActive(true);
-        timer.Set(player.deflectDuration);
+        //timer.Set(player.deflectDuration);
     }
 
     public void Bump()

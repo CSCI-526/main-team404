@@ -23,14 +23,6 @@ public class CameraSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SwitchCamera("R0");
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SwitchFromFixedtoFollowPlayer();
-        }
     }
 
     public void SwitchCamera(string name)

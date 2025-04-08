@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DrpSpearVertical : MonoBehaviour
+public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
@@ -32,19 +32,26 @@ public class DrpSpearVertical : MonoBehaviour
     public LayerMask wallLayer;
     private Rigidbody2D rb;
     public GameObject attackBox;
-    public GameObject topMargin;
     public Transform boundPosition;
     public TMPro.TextMeshProUGUI climbNote;
     public TMPro.TextMeshProUGUI stopClimbNote;
     public SpriteRenderer tip;
     public SpriteRenderer body;
+    public Color normal;
+    public Color mount;
+    private LookAtPlayerWhenActive magnet;
+    public float customLayeredDeadZone = 0.01f;
+    private bool isCountingDown = false;
+    [Tooltip("Layers for both horizontal and vertial spear, this is for destory check when spear is close to another")]
+    public LayerMask spearsLayer;
     void Start()
     {
         state = SpearState.InAir;
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        
+        magnet = GetComponentInChildren<LookAtPlayerWhenActive>();
+
         if (useType == SpearUse.Level)
         {
             state = SpearState.OnGround;
@@ -66,6 +73,49 @@ public class DrpSpearVertical : MonoBehaviour
                 checkCollision();
                 break;
             case SpearState.OnGround:
+                if (isCountingDown)
+                {
+                    return;
+                }
+                
+                if (PlayerInfo.instance.player.currentInteractingSpear == this)
+                {
+                    if (Mathf.Abs(PlayerInfo.instance.playerPosition.x - transform.position.x) < PlayerInfo.instance.player.ladderCenterDeadZone + customLayeredDeadZone)
+                    {
+                        if (PlayerInput.instance.Xinput == 0)
+                        {
+                            SetColor(mount);
+                            if (magnet.isActive)
+                            {
+                                magnet.Hide();
+                            }
+                        }
+                        else
+                        {
+                            SetColor(normal);
+                            if (!magnet.isActive)
+                            {
+                                magnet.Show();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        SetColor(normal);
+                        if (!magnet.isActive)
+                        {
+                            magnet.Show();
+                        }
+                    }
+                }
+                else
+                {
+                    SetColor(normal);
+                    if (magnet.isActive)
+                    {
+                        magnet.Hide();
+                    }
+                }
                 break;
         }
     }
@@ -88,10 +138,29 @@ public class DrpSpearVertical : MonoBehaviour
         state = SpearState.OnGround;
         rb.linearVelocity = Vector2.zero;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        //transform.parent = other.transform;
         attackBox.SetActive(false);
-        //topMargin.SetActive(true);
+
+        // destroy spear if there is some close by spear and reset the life time of that spear
+        Collider2D[] results = new Collider2D[10];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(spearsLayer);
+        filter.useTriggers = true;
+        int colliderCount = GetComponent<Collider2D>().Overlap(filter, results);
+
+        for (int i = 0; i < colliderCount; i++)
+        {
+            Debug.Log(results[i].gameObject.name);
+            var spear = results[i].GetComponent<SpearLifeTimeReset>();
+            if (spear != null)
+            {
+                spear.ResetLifeTime();
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         StartCoroutine(nameof(DisableAttacBoxCoroutine));
+        // use overlap collider to check for other spears (Class DrpSpearVertical or DraupnirSpear) , both have implemented SpearLifeTimeReset
     }
 
     //IEnumerator DestroySpearVCoroutine()
@@ -112,36 +181,6 @@ public class DrpSpearVertical : MonoBehaviour
         Gizmos.DrawLine(wallCheckPosition.position, wallCheckPosition.position + wallCheckPosition.up * wallCheckDistance);
     }
 
-    public void TurnOffTopMargin()
-    {
-        topMargin.SetActive(false);
-    }
-    public void TurnOnTopMargin()
-    {
-        topMargin.SetActive(true);
-    }
-
-    public void displayUI()
-    {
-        climbNote.gameObject.SetActive(true);
-    }
-
-    public void stopDisplayUI()
-    {
-        climbNote.gameObject.SetActive(false);
-    }
-
-    public void displayClimbUI()
-    {
-        climbNote.gameObject.SetActive(false);
-        stopClimbNote.gameObject.SetActive(true);
-    }
-
-    public void stopDisplayClimbUI()
-    {
-        stopClimbNote.gameObject.SetActive(false);
-        climbNote.gameObject.SetActive(true);
-    }
 
     public void SetColor(Color color)
     {
@@ -149,55 +188,32 @@ public class DrpSpearVertical : MonoBehaviour
         body.color = color;
     }
 
-    public Vector2 GetValidPosition(Vector2 position)
-    {
-        switch (type)
-        {
-            case SpearType.Up:
-                if (position.y < boundPosition.position.y)
-                {
-                    return new Vector2(transform.position.x, boundPosition.position.y);
-                }
-                else
-                {
-                    return new Vector2(transform.position.x, position.y);
-                }
-            case SpearType.Down:
-                if (position.y > boundPosition.position.y)
-                {
-                    return new Vector2(transform.position.x, boundPosition.position.y);
-                }
-                else
-                {
-                    return new Vector2(transform.position.x, position.y);
-                }
-
-
-        }
-        return Vector2.zero;
-    }
-
     IEnumerator DestroySpearCoroutine()
     {
         float flashDuration = 0.2f;
         int numberOfFlashes = 3; 
         yield return new WaitForSeconds(liveTime);
+        isCountingDown = true;
         for (int i = 0; i < numberOfFlashes; i++)
         {
-            SetColor(Color.red);
+            SetColor(normal);
             yield return new WaitForSeconds(flashDuration);
-            SetColor(Color.white);
+            SetColor(mount);
             yield return new WaitForSeconds(flashDuration);
         }
         Destroy(gameObject);
     }
 
-    //private void OnDestroy()
-    //{
-    //    if (PlayerInfo.instance.player.currentInteractingSpear == this)
-    //    {
-    //        PlayerInfo.instance.player.currentInteractingSpear = null;
-    //        PlayerInfo.instance.player.ladderCheck = false;
-    //    }
-    //}
+    public void ResetLifeTime()
+    {
+        if (useType == SpearUse.Level)
+        {
+            return;
+        }
+        else
+        {
+            StopCoroutine(nameof(DestroySpearCoroutine));
+            StartCoroutine(nameof(DestroySpearCoroutine));
+        }
+    }
 }

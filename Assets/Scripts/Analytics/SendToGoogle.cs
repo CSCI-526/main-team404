@@ -19,6 +19,13 @@ public class SendToGoogle : MonoBehaviour
     public int attacks;
     public int verticalAttacks;
     public int time;
+    public int duration;
+    public int checkStart;
+    public int checkEnds;
+    public int deaths;
+    public int kills;
+    public string completeLevel;
+    
 
     private void Awake()
     {
@@ -55,7 +62,7 @@ public class SendToGoogle : MonoBehaviour
             parryAttempted.ToString(), parrySuccessful.ToString(), 
             dodgeAttempted.ToString(), dodgeSuccessful.ToString(),
             jumps.ToString(), doubleJumps.ToString(), attacks.ToString(),
-            verticalAttacks.ToString(), time.ToString())
+            verticalAttacks.ToString(), duration.ToString(), checkStart.ToString(), checkEnds.ToString(), deaths.ToString(), completeLevel)
             );
     }
 
@@ -63,7 +70,7 @@ public class SendToGoogle : MonoBehaviour
         string parryAttempted, string parrySuccessful, 
         string dodgeAttempted, string dodgeSuccessful,
         string jumps, string doubleJumps, string attacks,
-        string verticalAttack, string time)
+        string verticalAttack, string duration, string checkS, string checkE, string deaths, string complete)
     {
         // Create the form and enter responses
         WWWForm form = new WWWForm();
@@ -76,11 +83,15 @@ public class SendToGoogle : MonoBehaviour
 
         form.AddField("entry.2080864451", jumps);
         form.AddField("entry.405082152", doubleJumps);
-        form.AddField("entry.1861830295", time);
+        form.AddField("entry.1861830295", duration);
         form.AddField("entry.1609368432", attacks);
         form.AddField("entry.638529257", verticalAttack);
+        form.AddField("entry.309811429", checkS);
+        form.AddField("entry.1325056948", checkE);
+        form.AddField("entry.864959927", deaths);
+        form.AddField("entry.182684281", kills);
+        form.AddField("entry.2050549034", complete);
 
-       
         // Send responses and verify result
         using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
         {
@@ -133,7 +144,28 @@ public class SendToGoogle : MonoBehaviour
     }
     public void SetTime(int t)
     {
+        duration = t - time;
         time = t;
+    }
+    public void UpdateCheckStart(int startPoint)
+    {
+        checkStart = startPoint;
+    }
+    public void UpdateCheckEnds(int endPoint)
+    {
+        checkEnds = endPoint;
+    }
+    public void AddDeath()
+    {
+        deaths++;
+    }
+    public void AddKills()
+    {
+        kills++;
+    }
+    public void UpdateCompletion(string status)
+    {
+        completeLevel = status;
     }
 
     public void ResetAll()
@@ -146,6 +178,12 @@ public class SendToGoogle : MonoBehaviour
         doubleJumps = 0;
         attacks = 0;
         verticalAttacks = 0;
-        time = 0;
+        time = (int)Time.time;
+        duration = 0;
+        checkStart = 0;
+        checkEnds = 0;
+        completeLevel = "False";
+        deaths = 0;
+        kills = 0;
     }
 }

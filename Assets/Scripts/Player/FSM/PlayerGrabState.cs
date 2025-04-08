@@ -12,6 +12,14 @@ public class PlayerGrabState : PlayerState
         base.Enter();
         input.isGrabBuffered = false;
         player.GrabCtrl.Grab();
+
+        //Use grab key for now to send data
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.SetTime((int)Time.time);
+            SendToGoogle.instance.Send();
+            SendToGoogle.instance.ResetAll();
+        }
     }
 
     public override void Exit()
