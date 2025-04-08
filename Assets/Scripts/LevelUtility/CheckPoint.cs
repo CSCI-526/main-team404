@@ -39,6 +39,9 @@ public class CheckPoint : MonoBehaviour
             // Send last good position to player
             PlayerInfo.instance.player.LastGoodPosition = transform.position;
             PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
+
+            // For heatmap analysis
+            HeatmapAnalyzer.Instance.isCheckPointCompleted(this);
         }
     }
 }
