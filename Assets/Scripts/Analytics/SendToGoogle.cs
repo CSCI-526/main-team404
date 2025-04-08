@@ -45,6 +45,7 @@ public class SendToGoogle : MonoBehaviour
 
     void Start()
     {
+        ResetAll();
         
     }
 

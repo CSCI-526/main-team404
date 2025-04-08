@@ -1,6 +1,7 @@
 using System.Collections;
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerEmbeddedUI : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerEmbeddedUI : MonoBehaviour
     public StatefulSprite charge;
     public float flashDuration = 0.1f; // time for charge to stay lit (alpha = 1)
     private Coroutine chargeFlashCoroutine;
+    [Header ("chargeIcon")]
+    public Light2D chargeLight2D;
 
     public void chargeFlash()
     {
@@ -40,6 +43,7 @@ public class PlayerEmbeddedUI : MonoBehaviour
         while (time < flashStartDuration)
         {
             charge.renderer.color = Color.Lerp(startColor, targetColor, time / flashStartDuration);
+            chargeLight2D.intensity = Mathf.Lerp(0f, 4f, time / flashStartDuration);
             time += Time.deltaTime;
             yield return null;
         }
@@ -55,10 +59,12 @@ public class PlayerEmbeddedUI : MonoBehaviour
         while (time < flashStartDuration)
         {
             charge.renderer.color = Color.Lerp(startColor, targetColor, time / flashStartDuration);
+            chargeLight2D.intensity = Mathf.Lerp(4f, 0f, time / flashStartDuration);
             time += Time.deltaTime;
             yield return null;
         }
         charge.renderer.color = targetColor;
+        chargeLight2D.intensity = 0f; // Ensure final intensity is set
     }
     public float flashStartDuration = 0.1f; // time for charge to change alpha from 0 to 1(or from 1 to 0)
 
@@ -385,12 +391,14 @@ public class PlayerEmbeddedUI : MonoBehaviour
     {
         Color currentColor = s.renderer.color;
         s.renderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0);
+        //chargeLight2D.intensity = 0f;
     }
 
     private void toSolid(StatefulSprite s)
     {
         Color currentColor = s.renderer.color;
-        s.renderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, 1);
+        s.renderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0.4f);
+        //chargeLight2D.intensity = 4f;
     }
 
     private void SetColorFaceRight()

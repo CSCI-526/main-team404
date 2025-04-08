@@ -29,10 +29,7 @@ public class FadeBlackOut : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            BlackOut();
-        }
+        
     }
 
     public void BlackOut()

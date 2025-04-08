@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 604190364354811449}
   serializedVersion: 2
   m_LocalRotation: {x: 0.29445773, y: 0.9556645, z: -0.000007733703, w: -0.0000024288893}
-  m_LocalPosition: {x: 0.58392334, y: 0.9020958, z: 0}
+  m_LocalPosition: {x: 0.58395004, y: 0.9020977, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1195,8 +1195,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1841872199
-  m_SortingLayer: 5
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2002,8 +2002,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1841872199
-  m_SortingLayer: 5
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2030,7 +2030,7 @@ GameObject:
   - component: {fileID: 4415708691145431006}
   - component: {fileID: 5242480207746494742}
   m_Layer: 7
-  m_Name: BetterDummy
+  m_Name: BetterDummyLowHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
