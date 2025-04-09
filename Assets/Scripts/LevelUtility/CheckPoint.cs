@@ -6,6 +6,7 @@ public class CheckPoint : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public bool isReached;
     SpriteRenderer sr;
+    public bool enableDash;
 
     private void Awake()
     {
@@ -39,6 +40,14 @@ public class CheckPoint : MonoBehaviour
             // Send last good position to player
             PlayerInfo.instance.player.LastGoodPosition = transform.position;
             PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
+            if (enableDash)
+            {
+                PlayerInfo.instance.player.canDash = true;
+            }
+            else
+            {
+                PlayerInfo.instance.player.canDash = false;
+            }
         }
     }
 }

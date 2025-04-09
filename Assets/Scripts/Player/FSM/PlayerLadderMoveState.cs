@@ -61,6 +61,8 @@ public class PlayerLadderMoveState : PlayerState
         // bounds applied to prevent player from walking off the ladder from top or bottom
         if (Mathf.Abs(playerX - ladderX) < player.ladderCenterDeadZone)
         {
+            // reset timer: onLadderSignal
+            
             player.ladderSnapSpeedX = 0;
             if (spearType == upType)
             {
@@ -157,9 +159,12 @@ public class PlayerLadderMoveState : PlayerState
         if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
         {
 
-            player.stateMachine.stateLocked = false;
-            stateMachine.ChangeState(player.dashState);
-            return true;
+            if (player.canDash)
+            {
+                player.stateMachine.stateLocked = false;
+                stateMachine.ChangeState(player.dashState);
+                return true;  
+            }
         }
 
         //ladder =>jump
