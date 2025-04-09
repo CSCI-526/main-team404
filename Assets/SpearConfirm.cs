@@ -35,7 +35,6 @@ public class SpearConfirm : MonoBehaviour
         {
             StartCoroutine(ChangeLightIntensity());
         }
-        Debug.Log("Confirm: " + confirmed);
     }
 
     private IEnumerator ChangeLightIntensity()

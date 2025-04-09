@@ -152,6 +152,7 @@ public class PlayerLadderMoveState : PlayerState
         if (player.LevelCollisionCtrl.IsGroundDetected() && ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp()))
         {
             //player.stateMachine.stateLocked = false;
+            player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
             stateMachine.ChangeState(player.rollState);
             return true;
         }
@@ -163,6 +164,7 @@ public class PlayerLadderMoveState : PlayerState
             {
                 player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.dashState);
+                player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
                 return true;  
             }
         }
@@ -174,12 +176,14 @@ public class PlayerLadderMoveState : PlayerState
             {
                 input.isJumpBuffered = false;
                 player.stateMachine.ChangeState(player.fallState);
+                player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown + 0.2f);
                 return true;
             }
             else
             {
                 input.isJumpBuffered = false;
                 stateMachine.ChangeState(player.jumpState);
+                player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
                 return true;
             }
             
@@ -187,18 +191,20 @@ public class PlayerLadderMoveState : PlayerState
 
         //ladder => idle/fall
         // conflict with interact input buffer, so no buffer here
-        if ((!player.ladderCheck) || input.Interact)
+        if (!player.ladderCheck)
         {
             if (player.LevelCollisionCtrl.IsGroundDetected())
             {
                 //player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.idleState);
+                player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
                 return true;
             }
             else
             {
                 //player.stateMachine.stateLocked = false;
                 stateMachine.ChangeState(player.fallState);
+                player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
                 return true;
             }
         }

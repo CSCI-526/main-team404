@@ -27,7 +27,7 @@ public class LadderMoveController
         
         player.weapon0.ActivateWeapon();
         player.weapon0.Equip();
-        player.ladderRemountCoolDownTimer.Set(player.ladderRemountCoolDown);
+        
     }
 
 
