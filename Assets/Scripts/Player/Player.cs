@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
 
     [Header("Input")]
     public bool canDash;
+    public bool canComboAttack;
 
 
     [Header("GroundMovement")]
@@ -235,6 +236,7 @@ public class Player : MonoBehaviour
 
         //input
         canDash = false;
+        canComboAttack = false;
 
     }
 
