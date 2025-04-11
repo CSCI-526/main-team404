@@ -58,6 +58,8 @@ public class SendToGoogle : MonoBehaviour
         // Assign variables
         //parryAttempted = UnityEngine.Random.Range(0, 100);
         //parrySuccessful = UnityEngine.Random.Range(0, parryAttempted);
+
+        //update time
         SetTime((int)Time.time);
 
         StartCoroutine(Post(_sessionID.ToString(), 
