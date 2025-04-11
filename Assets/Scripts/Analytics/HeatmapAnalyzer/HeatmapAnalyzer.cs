@@ -6,7 +6,9 @@ using System.Xml.Schema;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+
 
 public class HeatmapAnalyzer : MonoBehaviour
 {
@@ -100,6 +102,15 @@ public class HeatmapAnalyzer : MonoBehaviour
 
     void Update()
     {
+        // Get the current scene index dynamically
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Ignore Update logic if the current scene is the first scene (index == 0)
+        if (currentSceneIndex == 0)
+        {
+            return;
+        }
+
         CountTime();
     }
 
@@ -219,7 +230,7 @@ public class HeatmapAnalyzer : MonoBehaviour
     {
         Debug.Log("Send to Google.");
         SendToGoogle.instance.Send();
-        foreach(var entry in timeMap){
+        foreach (var entry in timeMap){
             if (entry.Value > 1e-5)
             {
                 SendACeil(entry.Key.Item1, entry.Key.Item2, entry.Value);
@@ -256,7 +267,7 @@ public class HeatmapAnalyzer : MonoBehaviour
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Upload failed: " + www.error);
+            Debug.Log("Player is player too fast, some data will be dropped");
         }
         else
         {
