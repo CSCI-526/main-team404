@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5953727128274639407, guid: b82d7ad674c1df542a9956acf1cf1712, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1322963943}
     - target: {fileID: 8814224883078082191, guid: b82d7ad674c1df542a9956acf1cf1712, type: 3}
       propertyPath: m_LocalPosition.x
       value: 606

@@ -55,6 +55,12 @@ public class HeatmapAnalyzer : MonoBehaviour
     [SerializeField] public Dictionary<CheckPoint, bool> visited;
     [SerializeField] private int checkPointsN;
 
+    [Header("Buffered Uploading with Rate Limiting")]
+    private Queue<(int row, int col, double time, bool isCompleted, int checkPointIdx)> uploadQueue = new Queue<(int, int, double, bool, int)>();
+    private float uploadInterval = 0.5f;
+    private bool isUploading = false;
+
+
     public static HeatmapAnalyzer Instance { get; private set; }
 
     private void Awake()
@@ -102,16 +108,14 @@ public class HeatmapAnalyzer : MonoBehaviour
 
     void Update()
     {
-        //// Get the current scene index dynamically
-        //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        //// Ignore Update logic if the current scene is the first scene (index == 0)
-        //if (currentSceneIndex == 0)
-        //{
-        //    return;
-        //}
 
         CountTime();
+
+        if (!isUploading && uploadQueue.Count > 0)
+        {
+            Debug.Log("Start to upload remaining records in queue...");
+            StartCoroutine(UploadHeatmapCoroutine());
+        }
     }
 
     void OnApplicationQuit()
@@ -228,29 +232,40 @@ public class HeatmapAnalyzer : MonoBehaviour
 
     public void SendAHeatmap()
     {
-        Debug.Log("Send to Google.");
+        Debug.Log("Send to Google.");  // Send to google.
         SendToGoogle.instance.Send();
-        foreach (var entry in timeMap){
-            if (entry.Value > 1e-5)
+
+        foreach (var entry in timeMap)
+        {
+            if (entry.Value > 0.01)
             {
-                SendACeil(entry.Key.Item1, entry.Key.Item2, entry.Value);
+                uploadQueue.Enqueue((entry.Key.Item1, entry.Key.Item2, entry.Value, completed, checkPointIndex));
             }
         }
     }
 
-    public void SendACeil(int ceilRowIndex, int ceilColumnIndex, double timeSpentOnTheCeil)
+    IEnumerator UploadHeatmapCoroutine()
     {
-        StartCoroutine(Post(ceilRowIndex, ceilColumnIndex, timeSpentOnTheCeil));
+        isUploading = true;
+
+        while (uploadQueue.Count > 0)
+        {
+            var data = uploadQueue.Dequeue();
+            yield return Post(data.row, data.col, data.time, data.isCompleted, data.checkPointIdx);
+            yield return new WaitForSeconds(uploadInterval);
+        }
+
+        isUploading = false;
     }
 
-    IEnumerator Post(int ceilRowIndex, int ceilColumnIndex, double timeSpentOnTheCeil)
+    IEnumerator Post(int ceilRowIndex, int ceilColumnIndex, double timeSpentOnTheCeil, bool isCompleted, int checkPointIdx)
     {
         WWWForm form = new WWWForm();
 
         form.AddField("entry.510782445", _sessionID.ToString());   // Session ID
         form.AddField("entry.1043537761", level.ToString());       // Level
-        form.AddField("entry.1095019868", checkPointIndex.ToString());  // CheckPoint
-        form.AddField("entry.1424100887", completed.ToString().ToLower());  // Completed (boolean to 1/0)
+        form.AddField("entry.1095019868", checkPointIdx.ToString());  // CheckPoint
+        form.AddField("entry.1424100887", isCompleted.ToString().ToLower());  // Completed (boolean to 1/0)
         form.AddField("entry.1132444678", levelTopLeftPointX.ToString());  // Level top-left point x
         form.AddField("entry.137265583", levelTopLeftPointY.ToString());  // Level top-left point y
         form.AddField("entry.279170956", levelBottomRightX.ToString()); // Level bottom-right point x
@@ -260,7 +275,7 @@ public class HeatmapAnalyzer : MonoBehaviour
         form.AddField("entry.369261424", ceilSize.ToString());     // Ceil size
         form.AddField("entry.426122945", ceilRowIndex.ToString()); // Ceil row index
         form.AddField("entry.1682497881", ceilColumnIndex.ToString()); // Ceil column index
-        form.AddField("entry.498027340", timeSpentOnTheCeil.ToString("F5")); // Time spent on the ceil
+        form.AddField("entry.498027340", timeSpentOnTheCeil.ToString("F2")); // Time spent on the ceil
 
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
         yield return www.SendWebRequest();
