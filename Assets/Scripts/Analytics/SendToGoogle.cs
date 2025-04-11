@@ -58,6 +58,7 @@ public class SendToGoogle : MonoBehaviour
         // Assign variables
         //parryAttempted = UnityEngine.Random.Range(0, 100);
         //parrySuccessful = UnityEngine.Random.Range(0, parryAttempted);
+        SetTime((int)Time.time);
 
         StartCoroutine(Post(_sessionID.ToString(), 
             parryAttempted.ToString(), parrySuccessful.ToString(), 
@@ -65,6 +66,7 @@ public class SendToGoogle : MonoBehaviour
             jumps.ToString(), doubleJumps.ToString(), attacks.ToString(),
             verticalAttacks.ToString(), duration.ToString(), checkStart.ToString(), checkEnds.ToString(), deaths.ToString(), completeLevel)
             );
+        ResetAll();
     }
 
     IEnumerator Post(string sessionID, 
