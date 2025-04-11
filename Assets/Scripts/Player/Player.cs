@@ -377,13 +377,13 @@ public class Player : MonoBehaviour
         //when player quits the game
         if (SendToGoogle.instance != null)
         {
-            SendToGoogle.instance.SetTime((int)Time.time);
+            
             // send player position?
             // int x = (int)PlayerInfo.instance.player.rb.position.x;
             // int y = (int)PlayerInfo.instance.player.rb.position.y;
             // SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
             SendToGoogle.instance.Send();
-            SendToGoogle.instance.ResetAll();
+            
         }
     }
 
