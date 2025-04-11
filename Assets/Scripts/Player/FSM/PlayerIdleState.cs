@@ -48,8 +48,11 @@ public class PlayerIdleState : PlayerState
         if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
         {
 
-            stateMachine.ChangeState(player.rollState);
-            return true;
+            if (player.canDash)
+            {
+                stateMachine.ChangeState(player.dashState);
+                return true;
+            }
         }
         // idle => Jump
         if ((input.Jump || input.isJumpBuffered) && player.jumpable)

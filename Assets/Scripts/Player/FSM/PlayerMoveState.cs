@@ -32,8 +32,11 @@ public class PlayerMoveState : PlayerState
         if ((input.Roll || input.isRollBuffered) && player.RollCtrl.rollCoolDownTimer.TimeUp())
         {
 
-            stateMachine.ChangeState(player.rollState);
-            return true;
+            if (player.canDash)
+            {
+                stateMachine.ChangeState(player.rollState);
+                return true;
+            }
         }
         // move => jump
         if ((input.Jump || input.isJumpBuffered) && player.jumpable)

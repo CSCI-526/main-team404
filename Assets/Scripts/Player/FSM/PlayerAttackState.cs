@@ -15,6 +15,11 @@ public class PlayerAttackState : PlayerState
             //if there is not weapon, nothing happen;
             return;
         }
+        if (!player.canComboAttack)
+        {
+            player.WeaponCtrl.Attack(new AttackInfo(0b00));
+            return;
+        }
         if (input.Yinput >0 || input.isUpBuffered)
         {
             input.isUpBuffered = false;
@@ -36,10 +41,13 @@ public class PlayerAttackState : PlayerState
             return;
         }
         player.WeaponCtrl.Attack(new AttackInfo(0b00));
+
         if (SendToGoogle.instance != null)
         {
             SendToGoogle.instance.AddAttacks();
         }
+
+        return;
     }
 
     public override void Exit()

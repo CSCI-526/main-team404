@@ -82,7 +82,7 @@ public class DrpSpearVertical : MonoBehaviour, SpearLifeTimeReset
                     return;
                 }
                 
-                if (PlayerInfo.instance.player.currentInteractingSpear == this)
+                if (PlayerInfo.instance.player.currentInteractingSpear == this && PlayerInfo.instance.player.stateMachine.currentState.animBoolName == "LadderMove")
                 {
                     if (Mathf.Abs(PlayerInfo.instance.playerPosition.x - transform.position.x) < PlayerInfo.instance.player.ladderCenterDeadZone + customLayeredDeadZone)
                     {

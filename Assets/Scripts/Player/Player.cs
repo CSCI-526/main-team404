@@ -47,6 +47,11 @@ public class Player : MonoBehaviour
     public bool ladderCheck;
     public DrpSpearVertical currentInteractingSpear;
 
+    [Header("Input")]
+    public bool canDash;
+    public bool canComboAttack;
+
+
     [Header("GroundMovement")]
     [SerializeField] private Vector2 rawSpeed;
     public float HorizontalSpeedFalling;
@@ -228,6 +233,10 @@ public class Player : MonoBehaviour
         battleInfo = BattleInfo.Peace;
         //Mana = MaxMana;
         Health = MaxHealth;
+
+        //input
+        canDash = false;
+        canComboAttack = false;
 
     }
 

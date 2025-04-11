@@ -6,6 +6,8 @@ public class CheckPoint : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public bool isReached;
     SpriteRenderer sr;
+    public bool enableDash = true;
+    public bool enableComboAttack = true;
 
     private void Awake()
     {
@@ -36,20 +38,32 @@ public class CheckPoint : MonoBehaviour
             sr.color = color;
 
             isReached = true;
-            // Send last good position to player
-            PlayerInfo.instance.player.LastGoodPosition = transform.position;
-            PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
+
             // send google form, clear form if needed
             if (SendToGoogle.instance != null)
             {
                 //very simple and lazy way to generate a "id" of the checkpoint for now.
                 //porb should replace this part in future
-                int x = (int)transform.position.x / 10;
-                int y = (int)transform.position.y / 10;
-                int z = (int)transform.position.z / 10;
-                SendToGoogle.instance.UpdateCheckEnds(x*10000+y*100+z);
+                int x = (int)transform.position.x;
+                int y = (int)transform.position.y;
+
+                SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
+                //x = (int)PlayerInfo.instance.player.LastGoodPosition.x;
+                //y = (int)PlayerInfo.instance.player.LastGoodPosition.y;
+                //SendToGoogle.instance.UpdateCheckStart(x * 10000 + y);
             }
+
+            // Send last good position to player
+            PlayerInfo.instance.player.LastGoodPosition = transform.position;
+            PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
+
+            
         
+
+            PlayerInfo.instance.player.canDash = enableDash;
+            PlayerInfo.instance.player.canComboAttack = enableComboAttack;
+
+
         }
     }
 }

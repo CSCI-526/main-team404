@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class ReferenceLine : MonoBehaviour
 {
@@ -21,6 +22,15 @@ public class ReferenceLine : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Show();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Hide();
+        }
+
         // Handle light activation/deactivation
         if (isActive)
         {
