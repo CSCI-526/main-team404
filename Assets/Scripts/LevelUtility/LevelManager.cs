@@ -95,8 +95,14 @@ public class LevelManager : MonoBehaviour
         
         if (SendToGoogle.instance != null)
         {
-            //SendToGoogle.instance.SetTime((int)Time.time);
+            //send data when transit to next level 
+            // while we can use Q key to manually send data
+            SendToGoogle.instance.SetTime((int)Time.time);
             SendToGoogle.instance.UpdateCompletion("True");
+            // send player position?
+            // int x = (int)PlayerInfo.instance.player.rb.position.x;
+            // int y = (int)PlayerInfo.instance.player.rb.position.y;
+            // SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
             SendToGoogle.instance.Send();
             SendToGoogle.instance.ResetAll();
         }
@@ -106,8 +112,9 @@ public class LevelManager : MonoBehaviour
 
     public void StartTransitionToRestartLevel()
     {
-        SendToGoogle.instance.Send();
-        SendToGoogle.instance.ResetAll();
+        //comment out since we use Q key to manually send data
+        // SendToGoogle.instance.Send();
+        // SendToGoogle.instance.ResetAll();
         StartCoroutine(TransitionToRestartLevel());
     }
 

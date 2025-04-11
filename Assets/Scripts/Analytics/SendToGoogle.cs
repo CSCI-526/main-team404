@@ -181,7 +181,7 @@ public class SendToGoogle : MonoBehaviour
         verticalAttacks = 0;
         time = (int)Time.time;
         duration = 0;
-        checkStart = 0;
+        checkStart = checkEnds;
         checkEnds = 0;
         completeLevel = "False";
         deaths = 0;

@@ -48,17 +48,12 @@ public class CheckPoint : MonoBehaviour
                 int y = (int)transform.position.y;
 
                 SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
-                //x = (int)PlayerInfo.instance.player.LastGoodPosition.x;
-                //y = (int)PlayerInfo.instance.player.LastGoodPosition.y;
-                //SendToGoogle.instance.UpdateCheckStart(x * 10000 + y);
             }
 
             // Send last good position to player
             PlayerInfo.instance.player.LastGoodPosition = transform.position;
             PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
 
-            
-        
 
             PlayerInfo.instance.player.canDash = enableDash;
             PlayerInfo.instance.player.canComboAttack = enableComboAttack;
