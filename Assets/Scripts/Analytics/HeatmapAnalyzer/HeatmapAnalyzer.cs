@@ -217,6 +217,8 @@ public class HeatmapAnalyzer : MonoBehaviour
 
     public void SendAHeatmap()
     {
+        Debug.Log("Send to Google.");
+        SendToGoogle.instance.Send();
         foreach(var entry in timeMap){
             if (entry.Value > 1e-5)
             {
