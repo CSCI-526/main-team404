@@ -24,15 +24,29 @@ public class PlayerAttackState : PlayerState
         {
             input.isUpBuffered = false;
             player.WeaponCtrl.Attack(new AttackInfo(0b01));
+            if (SendToGoogle.instance != null)
+            {
+                SendToGoogle.instance.AddVerticalAttacks();
+            }
             return;
         }
         if(input.Yinput < 0 || input.isDownBuffered)
         {
             input.isDownBuffered = false;
             player.WeaponCtrl.Attack(new AttackInfo(0b10));
+            if (SendToGoogle.instance != null)
+            {
+                SendToGoogle.instance.AddVerticalAttacks();
+            }
             return;
         }
         player.WeaponCtrl.Attack(new AttackInfo(0b00));
+
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.AddAttacks();
+        }
+
         return;
     }
 

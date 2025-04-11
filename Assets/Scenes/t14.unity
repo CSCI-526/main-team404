@@ -862,10 +862,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   URL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSeY4A1l1x3K3anho5MYdgZsPemq6980CobLuXJ0fFmSzpvOiQ/formResponse
+<<<<<<< HEAD
   parryAttempted: 0
   parrySuccessful: 0
   dodgeAttempted: 0
   dodgeSuccessful: 0
+  jumps: 0
+  doubleJumps: 0
+  attacks: 0
+  verticalAttacks: 0
+  time: 0
+||||||| b63bf74
+=======
+  parryAttempted: 0
+  parrySuccessful: 0
+  dodgeAttempted: 0
+  dodgeSuccessful: 0
+>>>>>>> 2d7321e38771b8e2fcd3ef484234dabcc9374155
 --- !u!4 &553408272
 Transform:
   m_ObjectHideFlags: 0
@@ -3327,6 +3340,18 @@ PrefabInstance:
     - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775453175246992272, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775453175246992272, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1280
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775453175246992272, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 720
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

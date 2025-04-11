@@ -15,6 +15,10 @@ public class PlayerJumpState : PlayerState
         base.Enter();
         input.isJumpBuffered = false;
         player.JumpCtrl.Bump();
+        if (SendToGoogle.instance != null)
+        {
+            SendToGoogle.instance.AddJumps();
+        }
     }
 
     public override void Exit()
@@ -53,6 +57,10 @@ public class PlayerJumpState : PlayerState
         if ((input.Jump || input.isJumpBuffered) && player.jumpable)
         {
             stateMachine.ChangeState(player.jumpState);
+            if (SendToGoogle.instance != null)
+            {
+                SendToGoogle.instance.AddDoubleJumps();
+            }
             return true;
         }
         //jump => fall

@@ -38,12 +38,26 @@ public class CheckPoint : MonoBehaviour
             sr.color = color;
 
             isReached = true;
+
+            // send google form, clear form if needed
+            if (SendToGoogle.instance != null)
+            {
+                //very simple and lazy way to generate a "id" of the checkpoint for now.
+                //porb should replace this part in future
+                int x = (int)transform.position.x;
+                int y = (int)transform.position.y;
+
+                SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
+            }
+
             // Send last good position to player
             PlayerInfo.instance.player.LastGoodPosition = transform.position;
             PlayerInfo.instance.player.Health = PlayerInfo.instance.player.MaxHealth;
 
+
             PlayerInfo.instance.player.canDash = enableDash;
             PlayerInfo.instance.player.canComboAttack = enableComboAttack;
+
 
         }
     }
