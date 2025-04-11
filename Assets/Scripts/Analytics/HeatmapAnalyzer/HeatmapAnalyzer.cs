@@ -102,14 +102,14 @@ public class HeatmapAnalyzer : MonoBehaviour
 
     void Update()
     {
-        // Get the current scene index dynamically
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        //// Get the current scene index dynamically
+        //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        // Ignore Update logic if the current scene is the first scene (index == 0)
-        if (currentSceneIndex == 0)
-        {
-            return;
-        }
+        //// Ignore Update logic if the current scene is the first scene (index == 0)
+        //if (currentSceneIndex == 0)
+        //{
+        //    return;
+        //}
 
         CountTime();
     }
