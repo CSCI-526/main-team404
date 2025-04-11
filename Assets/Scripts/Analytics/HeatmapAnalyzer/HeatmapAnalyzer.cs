@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Xml.Schema;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;

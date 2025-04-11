@@ -494,6 +494,7 @@ MonoBehaviour:
   uiButtons:
   - {fileID: 1127384990}
   referenceLines: []
+  requireOnSpear: 0
 --- !u!61 &93693872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -48093,6 +48094,111 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1001 &835415127
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4345537563799362348, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_Name
+      value: TransitionCanvas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434962849928206141, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6113212615775344222, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068066960467019765, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eff2c2f2503ac9342a1d74cfb145d6c8, type: 3}
 --- !u!1 &840523030
 GameObject:
   m_ObjectHideFlags: 0
@@ -48208,6 +48314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightChangeTime: 0.2
+  lightActivationDelay: 0.05
   finalIntensity: 7
   finalVolumetricIntensity: 0.1
 --- !u!114 &841341906
@@ -48420,6 +48527,17 @@ MonoBehaviour:
   parrySuccessful: 0
   dodgeAttempted: 0
   dodgeSuccessful: 0
+  jumps: 0
+  doubleJumps: 0
+  attacks: 0
+  verticalAttacks: 0
+  time: 0
+  duration: 0
+  checkStart: 0
+  checkEnds: 0
+  deaths: 0
+  kills: 0
+  completeLevel: 
 --- !u!114 &845468416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49517,6 +49635,7 @@ MonoBehaviour:
   - {fileID: 1765665633}
   - {fileID: 845870063}
   referenceLines: []
+  requireOnSpear: 0
 --- !u!61 &953223330
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -49604,6 +49723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightChangeTime: 0.2
+  lightActivationDelay: 0.05
   finalIntensity: 7
   finalVolumetricIntensity: 0.1
 --- !u!114 &973575292
@@ -54779,6 +54899,7 @@ MonoBehaviour:
   referenceLines:
   - {fileID: 2124701761}
   - {fileID: 973575291}
+  requireOnSpear: 0
 --- !u!61 &1499912043
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55145,6 +55266,7 @@ MonoBehaviour:
   - {fileID: 1125308696}
   - {fileID: 1005657710}
   referenceLines: []
+  requireOnSpear: 0
 --- !u!61 &1539560462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55686,6 +55808,7 @@ MonoBehaviour:
   - {fileID: 14374981}
   referenceLines:
   - {fileID: 841341905}
+  requireOnSpear: 0
 --- !u!61 &1632253356
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -55963,6 +56086,7 @@ MonoBehaviour:
   - {fileID: 1730686870}
   - {fileID: 1444277584}
   referenceLines: []
+  requireOnSpear: 0
 --- !u!1 &1665370379
 GameObject:
   m_ObjectHideFlags: 0
@@ -60364,6 +60488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightChangeTime: 0.2
+  lightActivationDelay: 0.05
   finalIntensity: 7
   finalVolumetricIntensity: 0.1
 --- !u!114 &2124701762
@@ -60750,3 +60875,4 @@ SceneRoots:
   - {fileID: 1331755641}
   - {fileID: 996056168}
   - {fileID: 290747679}
+  - {fileID: 835415127}
