@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     private string[] quotes = {
         "\"Only those who will risk going too far can possibly find out how far one can go.\" -T.S. Eliot",
         "Thanks for playing! Live wild, seek wonder, and let your heart chase the wind",
-        "\"Courage is found in unlikely places.\"  -J.R.R. Tolkien",
+        "\"If you gaze long into an abyss, the abyss gazes also into you\"  -FromAbyss",
         "\"You cannot swim for new horizons until you have courage to lose sight of the shore.\" -William Faulkner",
         "\"A journey of a thousand miles begins with a single step.\" -Lao Tzu",
         "\"He who jumps into the void owes no explanation to those who stand and watch.\"  -Jean-Luc Godard",
@@ -79,14 +79,14 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            StartTransitionToNextLevel();
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            StartTransitionToRestartLevel();
-        }
+        //if (Input.GetKeyDown(KeyCode.DownArrow))
+        //{
+        //    StartTransitionToNextLevel();
+        //}
+        //if (Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    StartTransitionToRestartLevel();
+        //}
     }
 
     public void StartTransitionToNextLevel()
