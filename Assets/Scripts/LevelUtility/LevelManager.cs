@@ -95,7 +95,7 @@ public class LevelManager : MonoBehaviour
         
         if (SendToGoogle.instance != null)
         {
-            SendToGoogle.instance.SetTime((int)Time.time);
+            //SendToGoogle.instance.SetTime((int)Time.time);
             SendToGoogle.instance.UpdateCompletion("True");
             SendToGoogle.instance.Send();
             SendToGoogle.instance.ResetAll();
