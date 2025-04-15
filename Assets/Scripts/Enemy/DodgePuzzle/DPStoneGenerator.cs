@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class DPMissleGenerator : MonoBehaviour
+public class DPStoneGenerator : MonoBehaviour
 {
-    public GameObject missilePrefab; 
+    public GameObject stonePrefab; 
     public Transform[] spawnPoints; 
-    public float spawnInterval = 2f;
-    private int numberOfMissiles = 4;
+    public float spawnInterval = 2f; 
+    public int numberOfStones = 4;
     private bool isPlayerInArea = false; 
     private float nextSpawnTime = 0f;
 
@@ -13,17 +13,17 @@ public class DPMissleGenerator : MonoBehaviour
     {
         if (isPlayerInArea && Time.time >= nextSpawnTime)
         {
-            SpawnMissiles();
+            SpawnStones();
             nextSpawnTime = Time.time + spawnInterval;
         }
     }
 
-    private void SpawnMissiles()
+    private void SpawnStones()
     {
-        int[] selectedIndices = GetRandomIndices(numberOfMissiles, spawnPoints.Length);
+        int[] selectedIndices = GetRandomIndices(numberOfStones, spawnPoints.Length);
         foreach (int index in selectedIndices)
         {
-            Instantiate(missilePrefab, spawnPoints[index].position, missilePrefab.transform.rotation);
+            Instantiate(stonePrefab, spawnPoints[index].position, stonePrefab.transform.rotation);
         }
     }
 
@@ -47,7 +47,6 @@ public class DPMissleGenerator : MonoBehaviour
         {
             isPlayerInArea = true;
         }
-        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
