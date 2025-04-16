@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   result: 0
-  damage: 1
+  damage: 8
 --- !u!1 &1128518070124990011
 GameObject:
   m_ObjectHideFlags: 0

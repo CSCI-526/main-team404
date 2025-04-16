@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
         "\"Only those who will risk going too far can possibly find out how far one can go.\" -T.S. Eliot",
         "Thanks for playing! Live wild, seek wonder, and let your heart chase the wind",
         "\"If you gaze long into an abyss, the abyss gazes also into you\"  -FromAbyss",
-        "\"You cannot swim for new horizons until you have courage to lose sight of the shore.\" -William Faulkner",
+        "\"Falling stars, rising hearts.\" -SkyFall",
         "\"A journey of a thousand miles begins with a single step.\" -Lao Tzu",
         "\"He who jumps into the void owes no explanation to those who stand and watch.\"  -Jean-Luc Godard",
         "\"To explore is to live; to settle is to fade.\"  -Dev Team",
