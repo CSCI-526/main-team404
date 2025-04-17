@@ -20,10 +20,10 @@ public class LevelManager : MonoBehaviour
         "Thanks for playing! Live wild, seek wonder, and let your heart chase the wind",
         "\"If you gaze long into an abyss, the abyss gazes also into you\"  -FromAbyss",
         "\"Falling stars, rising hearts.\" -SkyFall",
+        "\"Not I, nor anyone else can travel that road for you. You must travel it yourself.\"  -W.W",
         "\"A journey of a thousand miles begins with a single step.\" -Lao Tzu",
         "\"He who jumps into the void owes no explanation to those who stand and watch.\"  -Jean-Luc Godard",
         "\"To explore is to live; to settle is to fade.\"  -Dev Team",
-        "\"Not I, nor anyone else can travel that road for you. You must travel it yourself.\"  -W.W",
         "\"A river carves stone not by force, but by never stopping.\" -Dev Team",
     };
 
