@@ -14,9 +14,9 @@ public class PlayerRollState : PlayerState
         player.anim.SetBool(animBoolName, true);
         input.isRollBuffered = false;
         player.RollCtrl.Prep();
-        if (SendToGoogle.instance != null)
+        if(ExternalDataManager.instance != null)
         {
-            SendToGoogle.instance.AddDodgeCount();
+            ExternalDataManager.instance.PlayerDodge();
         }
     }
 

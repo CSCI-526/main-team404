@@ -8,6 +8,8 @@ public class CheckPoint : MonoBehaviour
     SpriteRenderer sr;
     public bool enableDash = true;
     public bool enableComboAttack = true;
+    // string id should follow the following rule: x_y where x is the level index and y is the checkpoint index within the levels
+    public string id;
 
     private void Awake()
     {
@@ -40,14 +42,9 @@ public class CheckPoint : MonoBehaviour
             isReached = true;
 
             // send google form, clear form if needed
-            if (SendToGoogle.instance != null)
+            if(ExternalDataManager.instance != null)
             {
-                //very simple and lazy way to generate a "id" of the checkpoint for now.
-                //porb should replace this part in future
-                int x = (int)transform.position.x;
-                int y = (int)transform.position.y;
-
-                SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
+                ExternalDataManager.instance.NewCheckPointReached(transform.position);
             }
 
             // Send last good position to player

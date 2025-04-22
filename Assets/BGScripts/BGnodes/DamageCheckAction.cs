@@ -56,9 +56,9 @@ public partial class DamageCheckAction : Action
             GameObject gb = GameObject.Instantiate(Drop.Value, pos, Quaternion.identity);
             ///
             //Update kills
-            if (SendToGoogle.instance != null)
+            if(ExternalDataManager.instance != null)
             {
-                SendToGoogle.instance.AddKills();
+                ExternalDataManager.instance.PlayerKills();
             }
 
             Destroyer.Value.DestroyMe();

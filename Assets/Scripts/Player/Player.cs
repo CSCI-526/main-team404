@@ -334,9 +334,9 @@ public class Player : MonoBehaviour
             case BattleInfo.Doge:
                 battleInfo = BattleInfo.Peace;
                 ManaCtrl.AddMana(1);
-                if (SendToGoogle.instance != null)
+                if(ExternalDataManager.instance != null)
                 {
-                    SendToGoogle.instance.AddSuccessfulDodgeCount();
+                    ExternalDataManager.instance.PlayerDodgeSuccess();
                 }
                 break;
             case BattleInfo.Hit:

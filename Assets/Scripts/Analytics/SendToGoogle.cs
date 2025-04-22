@@ -25,6 +25,13 @@ public class SendToGoogle : MonoBehaviour
     public int deaths;
     public int kills;
     public string completeLevel;
+
+    // new matrix,
+    // 1. time spend between each checkpoint
+    // 2. death count and death location at each checkpoint
+    // 3. checkpoint complete in general (how many checkpoint are completed) (or last check point)
+
+
     
 
     private void Awake()
@@ -137,7 +144,7 @@ public class SendToGoogle : MonoBehaviour
     }
     public void AddDoubleJumps()
     {
-        doubleJumps++;
+        //doubleJumps++;
     }
     public void AddAttacks()
     {
@@ -160,7 +167,7 @@ public class SendToGoogle : MonoBehaviour
     {
         checkEnds = endPoint;
     }
-    public void AddDeath()
+    public void AddDeaths()
     {
         deaths++;
     }

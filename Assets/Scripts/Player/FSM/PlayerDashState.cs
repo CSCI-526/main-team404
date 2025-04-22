@@ -11,9 +11,9 @@ public class PlayerDashState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        if (SendToGoogle.instance != null)
+        if(ExternalDataManager.instance != null)
         {
-            SendToGoogle.instance.AddDodgeCount();      
+            ExternalDataManager.instance.PlayerDodge();
         }
         player.anim.SetBool(animBoolName, true);
         input.isRollBuffered = false;

@@ -24,9 +24,9 @@ public class PlayerAttackState : PlayerState
         {
             input.isUpBuffered = false;
             player.WeaponCtrl.Attack(new AttackInfo(0b01));
-            if (SendToGoogle.instance != null)
+            if(ExternalDataManager.instance != null)
             {
-                SendToGoogle.instance.AddVerticalAttacks();
+                ExternalDataManager.instance.PlayerAttack();
             }
             return;
         }
@@ -34,17 +34,17 @@ public class PlayerAttackState : PlayerState
         {
             input.isDownBuffered = false;
             player.WeaponCtrl.Attack(new AttackInfo(0b10));
-            if (SendToGoogle.instance != null)
+            if (ExternalDataManager.instance != null)
             {
-                SendToGoogle.instance.AddVerticalAttacks();
+                ExternalDataManager.instance.PlayerAttack();
             }
             return;
         }
         player.WeaponCtrl.Attack(new AttackInfo(0b00));
 
-        if (SendToGoogle.instance != null)
+        if(ExternalDataManager.instance != null)
         {
-            SendToGoogle.instance.AddAttacks();
+            ExternalDataManager.instance.PlayerAttack();
         }
 
         return;

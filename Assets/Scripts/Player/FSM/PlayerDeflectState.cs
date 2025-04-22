@@ -13,9 +13,9 @@ public class PlayerDeflectState : PlayerState
         input.isDeflectBuffered = false;
         player.DeflectCtrl.Deflect();
         player.anim.SetBool("Deflect", true);
-        if (SendToGoogle.instance != null)
+        if (ExternalDataManager.instance != null)
         {
-            SendToGoogle.instance.AddParryCount();
+            ExternalDataManager.instance.PlayerDeflect();
         }
         player.weapon0.DeactivateWeapon();
         //TODO; modify, there must be 1 frame of Fragile when deflect finished
@@ -44,9 +44,9 @@ public class PlayerDeflectState : PlayerState
         if(player.deflectSignal == 1)
         {
             player.ManaCtrl.AddMana(1);
-            if (SendToGoogle.instance != null)
+            if (ExternalDataManager.instance != null)
             {
-                SendToGoogle.instance.AddSuccessfulParryCount();
+                ExternalDataManager.instance.PlayerDeflectSuccess();
             }
             // put frame freeze here
             player.playerEmbeddedUI.chargeFlash();
@@ -66,6 +66,7 @@ public class PlayerDeflectState : PlayerState
             // frame freeze end
             player.deflectSignal = 0;
         }
+
         player.AirMoveCtrl.Freeze();
 
         if (player.playerEmbeddedUI.animationTrigger == false)

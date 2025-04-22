@@ -92,20 +92,11 @@ public class LevelManager : MonoBehaviour
     public void StartTransitionToNextLevel()
     {
         
-        if (SendToGoogle.instance != null)
+        if(ExternalDataManager.instance != null)
         {
-            //send data when transit to next level 
-            // while we can use Q key to manually send data
-            SendToGoogle.instance.SetTime((int)Time.time);
-            SendToGoogle.instance.UpdateCompletion("True");
-            // send player position?
-            // int x = (int)PlayerInfo.instance.player.rb.position.x;
-            // int y = (int)PlayerInfo.instance.player.rb.position.y;
-            // SendToGoogle.instance.UpdateCheckEnds(x * 10000 + y);
-            SendToGoogle.instance.Send();
-            SendToGoogle.instance.ResetAll();
+            ExternalDataManager.instance.OnLevelTransition();
         }
-        
+
         StartCoroutine(TransitionToNextLevel());
     }
 

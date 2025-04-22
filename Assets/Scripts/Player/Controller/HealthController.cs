@@ -25,9 +25,9 @@ public class HealthController
             //player.Health -= _health;
             //LevelManager.instance.StartTransitionToRestartLevel();
             //reset to Last Good position
-            if (SendToGoogle.instance != null)
+            if (ExternalDataManager.instance != null)
             {
-                SendToGoogle.instance.AddDeath();
+                ExternalDataManager.instance.PlayerDeaths();
             }
             ResetToCheckPoint();
             FadeBlackOut.Instance.BlackOut();
