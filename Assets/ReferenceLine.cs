@@ -22,14 +22,14 @@ public class ReferenceLine : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Show();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Hide();
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    Show();
+        //}
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    Hide();
+        //}
 
         // Handle light activation/deactivation
         if (isActive)

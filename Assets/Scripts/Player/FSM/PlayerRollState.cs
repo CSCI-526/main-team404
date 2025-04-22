@@ -11,6 +11,7 @@ public class PlayerRollState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.anim.SetBool(animBoolName, true);
         input.isRollBuffered = false;
         player.RollCtrl.Prep();
         if (SendToGoogle.instance != null)
@@ -23,6 +24,7 @@ public class PlayerRollState : PlayerState
     {
         base.Exit();
         player.rb.linearVelocity = new Vector2(0,player.rb.linearVelocity.y);
+        player.anim.SetBool(animBoolName, false);
 
     }
 

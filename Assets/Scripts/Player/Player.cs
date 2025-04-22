@@ -216,7 +216,7 @@ public class Player : MonoBehaviour
         moveState = new PlayerMoveState(this, stateMachine, "Move");
         fallState = new PlayerFallState(this, stateMachine, "Fall");
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
-        rollState = new PlayerRollState(this, stateMachine, "Roll");
+        rollState = new PlayerRollState(this, stateMachine, "Dash");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         deflectState = new PlayerDeflectState(this, stateMachine, "Deflect");
         grabState = new PlayerGrabState(this, stateMachine, "Grab");

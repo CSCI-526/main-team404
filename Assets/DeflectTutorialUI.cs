@@ -25,14 +25,14 @@ public class DeflectTutorialUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Show();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Hide();
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    Show();
+        //}
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    Hide();
+        //}
 
         if (isActive)
         {

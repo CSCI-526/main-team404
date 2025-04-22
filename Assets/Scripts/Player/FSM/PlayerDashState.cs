@@ -15,6 +15,7 @@ public class PlayerDashState : PlayerState
         {
             SendToGoogle.instance.AddDodgeCount();      
         }
+        player.anim.SetBool(animBoolName, true);
         input.isRollBuffered = false;
         player.RollCtrl.Prep();
         player.rb.gravityScale = 0;
@@ -24,6 +25,7 @@ public class PlayerDashState : PlayerState
     {
         player.rb.gravityScale = player.gravityScale;
         player.rb.linearVelocity = new Vector2(0, player.rb.linearVelocity.y);
+        player.anim.SetBool(animBoolName, false);
         base.Exit();
         
     }
