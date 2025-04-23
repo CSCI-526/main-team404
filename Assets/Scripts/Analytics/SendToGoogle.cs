@@ -70,7 +70,7 @@ public class SendToGoogle : MonoBehaviour
         //update time
         SetTime((int)Time.time);
 
-        StartCoroutine(Post(_sessionID.ToString(), 
+        StartCoroutine(Post(_sessionID.ToString(), version,
             parryAttempted.ToString(), parrySuccessful.ToString(), 
             dodgeAttempted.ToString(), dodgeSuccessful.ToString(),
             jumps.ToString(), doubleJumps.ToString(), attacks.ToString(),
