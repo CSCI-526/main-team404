@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5191a061c4e05d440aa0c2710358d9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 10
   lifetime: 5
   wallCheckDistance: 0.45
   wallLayer:
