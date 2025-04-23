@@ -25,6 +25,7 @@ public class SendToGoogle : MonoBehaviour
     public int deaths;
     public int kills;
     public string completeLevel;
+    public string version = "gold-1";
 
     // new matrix,
     // 1. time spend between each checkpoint
@@ -69,7 +70,7 @@ public class SendToGoogle : MonoBehaviour
         //update time
         SetTime((int)Time.time);
 
-        StartCoroutine(Post(_sessionID.ToString(), 
+        StartCoroutine(Post(_sessionID.ToString(), version,
             parryAttempted.ToString(), parrySuccessful.ToString(), 
             dodgeAttempted.ToString(), dodgeSuccessful.ToString(),
             jumps.ToString(), doubleJumps.ToString(), attacks.ToString(),
@@ -78,7 +79,7 @@ public class SendToGoogle : MonoBehaviour
         ResetAll();
     }
 
-    IEnumerator Post(string sessionID, 
+    IEnumerator Post(string sessionID, string version,
         string parryAttempted, string parrySuccessful, 
         string dodgeAttempted, string dodgeSuccessful,
         string jumps, string doubleJumps, string attacks,
@@ -88,6 +89,7 @@ public class SendToGoogle : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("entry.139774989", sessionID);
         form.AddField("entry.2104169773", SceneManager.GetActiveScene().buildIndex.ToString());
+        form.AddField("entry.1526695763", version);
         form.AddField("entry.353296791", parryAttempted);
         form.AddField("entry.1606299993", parrySuccessful);
         form.AddField("entry.2013387407", dodgeAttempted);

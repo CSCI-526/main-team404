@@ -119,7 +119,7 @@ public class ExternalDataManager : MonoBehaviour
             {
                 //send data when transit to next level 
                 // while we can use Q key to manually send data
-                SendToGoogle.instance.SetTime((int)Time.time);
+                //SendToGoogle.instance.SetTime((int)Time.time);
                 SendToGoogle.instance.UpdateCompletion("True");
                 // send player position?
                 // int x = (int)PlayerInfo.instance.player.rb.position.x;
