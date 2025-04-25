@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/newLevel_1/L0_SkyFall.unity
     guid: 4f9fe86e3fb12ef49a4bfb3d07498c44
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/newLevel_1/L0_NewMarch.unity
     guid: cf328ec1f22f0ef489f2fd1e106ade40
   m_configObjects:
