@@ -1,43 +1,72 @@
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Xml.Schema;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using static UnityEngine.EventSystems.EventTrigger;
 
 
 public class HeatmapAnalyzer : MonoBehaviour
 {
+    [System.Serializable]
+    public class CeilData
+    {
+        public int ceilRowIndex;
+        public int ceilColIndex;
+        public double time;
+    }
+
+    [System.Serializable]
+    public class CeilDatatListWrapper
+    {
+        public List<CeilData> ceilDataList;
+
+        public CeilDatatListWrapper(List<CeilData> ceilDataList)
+        {
+            this.ceilDataList = ceilDataList;
+        }
+    } 
+
     [Header("Input")]
-    public Player player;
     public Transform checkPointsParent;
     public Tilemap map;
+    public Transform goal;
     public int levelIndex = 0;
     public int ceilSizeDefault = 4;
-    //public double cellSizeSetting = 0;
 
 
     [Header("Google Form Uploading Setting")]
-    private string URL = "https://docs.google.com/forms/d/e/1FAIpQLSfa4CcFog8e_IqVMQMcTlTi2RcSpMuxXIW0ZqAprpGSX47WpQ/formResponse";
-
-    //public static HeatmapAnalyzer instance;
+    private string URL = "https://docs.google.com/forms/d/e/1FAIpQLSf24zV4F-XhBMBknAWDErOCJN4WvykR5jPe0AtKrWeSBJQMUw/formResponse";
 
     [Header("Level Info")]
     [SerializeField] private long _sessionID;
-    [SerializeField] private int level;
-    [SerializeField] private int checkPointIndex;
+    [SerializeField] private string level;
+    [SerializeField] private int checkPointsPlusGoalCounter;
+    [SerializeField] private string checkPointName;
     [SerializeField] private bool completed;
+    [SerializeField] private bool success;
     [SerializeField] private float levelWidth;
     [SerializeField] private float levelHeight;
-    [SerializeField] private float levelTopLeftPointX;
-    [SerializeField] private float levelTopLeftPointY;
-    [SerializeField] private float levelBottomRightX;
-    [SerializeField] private float levelBottomRightY;
+    [SerializeField] private string heatmapJSONString;
+    [SerializeField] private Vector2 goalPos;
+    //[SerializeField] private float levelTopLeftPointX;
+    //[SerializeField] private float levelTopLeftPointY;
+    //[SerializeField] private float levelBottomRightX;
+    //[SerializeField] private float levelBottomRightY;
 
-    [Header("Heatmap Ceil Info")]
+    [Header("Player Info")]
+    [SerializeField] private float playerX;
+    [SerializeField] private float playerY;
+
+    [Header("Heatmap Info")]
+    //[SerializeField] private CeilDatatListWrapper ceilDataListWrapper;
     [SerializeField] private float ceilSize;
     [SerializeField] private int ceilRowIndex;
     [SerializeField] private int ceilColumnIndex;
@@ -50,15 +79,10 @@ public class HeatmapAnalyzer : MonoBehaviour
     [SerializeField] private float MAPH;
     [SerializeField] private float MAPW;
     [SerializeField] private Vector2 MAP_TOP_LEFT_POINT;
-    [SerializeField] private Vector2 MAP_BOTTOM_RIGHT_POINT;
+    //[SerializeField] private Vector2 MAP_BOTTOM_RIGHT_POINT;
     [SerializeField] public Dictionary<CheckPoint, bool> visited;
-    [SerializeField] private int checkPointsN;
-
-    [Header("Buffered Uploading with Rate Limiting")]
-    private Queue<(int row, int col, double time, bool isCompleted, int checkPointIdx)> uploadQueue = new Queue<(int, int, double, bool, int)>();
-    private float uploadInterval = 0.5f;
-    private bool isUploading = false;
-
+    [SerializeField] private int checkPointsPlusGoalNumber;
+    //[SerializeField] private bool isGoalReached = false;
 
     public static HeatmapAnalyzer Instance { get; private set; }
 
@@ -73,96 +97,175 @@ public class HeatmapAnalyzer : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
     }
 
     void Start()
     {
-        Debug.Log("Initialization.");
+
+    }
+
+    public GameObject findGameObject(string name)
+    {
+        GameObject obj = GameObject.Find(name);
+
+        if (obj == null)
+        {
+            Debug.LogError($"GameObject {name} not found.");
+            return null;
+        }
+
+        return obj;
+    }
+
+    public void init()  // Initialization for the heatmap analyzer.
+    {
+        Debug.Log("Heatmap initialization starts.");
+
+        string mapName = "Tilemap";
+        string checkPointsParentName = "CheckPoints";
+        string goalName = "Goal";
+
+        GameObject mapObj = findGameObject(mapName);
+
+        map = mapObj.GetComponent<Tilemap>();
+
+        if (map == null)
+        {
+            Debug.LogError($"Tilemap component missing on GameObject: {mapObj.name}");
+            return;
+        }
+
+        GameObject checkPointsParentObj = findGameObject(checkPointsParentName);
+
+        checkPointsParent = checkPointsParentObj.transform;
+
+        if (checkPointsParent == null)
+        {
+            Debug.LogError($"CheckPointsParent component missing on GameObject: {checkPointsParentObj.name}");
+            return;
+        }
+
+        GameObject goalGameObj = findGameObject(goalName);
+        goal = goalGameObj.transform;
+
+        if (goal == null)
+        {
+            Debug.LogError($"Goal component missing on GameObject: {goalGameObj.name}");
+            return;
+        }
+
+        goalPos = goal.position;
+
         BoundsInt bounds = map.cellBounds;
         MAPH = bounds.size.y;
         MAPW = bounds.size.x;
         MAP_TOP_LEFT_POINT = new Vector2(bounds.xMin, bounds.yMax);
-        MAP_BOTTOM_RIGHT_POINT = new Vector2(bounds.xMax, bounds.yMin);
 
         levelHeight = MAPH;
         levelWidth = MAPW;
-        levelTopLeftPointX = MAP_TOP_LEFT_POINT.x;
-        levelTopLeftPointY = MAP_TOP_LEFT_POINT.y;
-        levelBottomRightX = MAP_BOTTOM_RIGHT_POINT.x;
-        levelBottomRightY = MAP_BOTTOM_RIGHT_POINT.y;
 
         completed = false;
-        checkPointIndex = 0;
-        level = levelIndex;
+        success = false;
+        checkPointsPlusGoalCounter = 0;
         ceilSize = ceilSizeDefault;
 
-        playerCollider = player.GetComponent<CapsuleCollider2D>();
-        visited = new Dictionary<CheckPoint, bool>();
-        checkPointsN = checkPointsParent.childCount;
+        StartCoroutine(WaitForPlayerThenInit());
 
+        visited = new Dictionary<CheckPoint, bool>();
+        checkPointsPlusGoalNumber = checkPointsParent.childCount + 1;
+
+        this.level = SceneManager.GetActiveScene().name;
+        checkPointName = "";
         initTimeMap();
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log($"Scene loaded: {scene.name}, reinitializing HeatmapAnalyzer.");
+        init();
+    }
+
+    private IEnumerator WaitForPlayerThenInit()
+    {
+        while (PlayerInfo.instance == null || PlayerInfo.instance.player == null)
+            yield return null;
+
+        playerCollider = PlayerInfo.instance.player.GetComponent<CapsuleCollider2D>();
+    }
+
 
     void Update()
     {
 
         CountTime();
 
-        if (!isUploading && uploadQueue.Count > 0)
+        float distance = Vector2.Distance(playerCollider.bounds.center, goalPos);
+
+        if (distance <= 2.0f && !success)  // Check if the player reachs the destination or not.
         {
-            Debug.Log("Start to upload remaining records in queue...");
-            StartCoroutine(UploadHeatmapCoroutine());
+            Debug.Log($"Reached the goal. Start to send a heatamp...");
+            checkPointName = goal.name;
+            completed = true;
+            success = true;
+            SendAHeatmap();
+            completed = false;
         }
     }
 
     void OnApplicationQuit()
-    { 
-        Debug.Log("Application exiting...");
-
-        if (checkPointIndex != checkPointsN)
+    {
+        if (!success)  // If player did not go through the level.
         {
-            Debug.Log("App quit before reaching all checkpoints. Uploading heatmap...");
+            Debug.Log("Application quits accidentially. Uploading heatmap...");
+            this.checkPointName += "_";  // The underline mark denotes that the player did not finish the route after the most recently visited checkpoint.
             SendAHeatmap();
+            Debug.Log("Uploaded heatmap successfully.");
         }
-        else
-        {
-            Debug.Log("All checkpoints completed. No upload necessary.");
-        }
-
     }
 
     public void isCheckPointCompleted(CheckPoint cp)
     {
 
-        if (checkPointIndex == 0)
+        if (checkPointsPlusGoalCounter == 0) // Check if the player meets the first check point or not.
         {
             Debug.Log("Checkpoint reached: " + cp.name + " (This is the first checkpoint)");
             visited[cp] = true;
-            checkPointIndex++;
+            checkPointName = cp.name;
+            checkPointsPlusGoalCounter++;
         }
       
-        if (!visited.ContainsKey(cp))
+        if (!visited.ContainsKey(cp))  // Check if the check point has been visited or not.
         {
             visited[cp] = true;
             Debug.Log("Checkpoint reached: " + cp.name + " (New)");
 
 
             Debug.Log("Reached a new checkpoint: " + cp.name);
+            checkPointName = cp.name;
             completed = true;
-            Debug.Log("Checkpoint " + checkPointIndex + " reached. Proceed to the next one.");
+            Debug.Log("Checkpoint " + checkPointsPlusGoalCounter + " reached. Proceed to the next one.");
 
             SendAHeatmap();
-
-            checkPointIndex++;
+            
+            checkPointsPlusGoalCounter++;
             Debug.Log("Good! Try to reach the next checkpoint.");
             completed = false;
             initTimeMap();
 
-            if (checkPointIndex == checkPointsN)
+            if (checkPointsPlusGoalCounter == checkPointsPlusGoalNumber - 1)
             {
-                Debug.Log("All checkpoints completed! Great job!");
+                Debug.Log("All checkpoints are visited! Great job!");
             }
         }
         else
@@ -234,47 +337,54 @@ public class HeatmapAnalyzer : MonoBehaviour
         Debug.Log("Send to Google.");  // Send to google.
         SendToGoogle.instance.Send();
 
+        List<CeilData> ceilDataList = new List<CeilData>();
+
         foreach (var entry in timeMap)
         {
-            if (entry.Value > 0.01)
+            if (entry.Value > 0.001)
             {
-                uploadQueue.Enqueue((entry.Key.Item1, entry.Key.Item2, entry.Value, completed, checkPointIndex));
+                CeilData ceilData = new CeilData {ceilRowIndex = entry.Key.Item1, ceilColIndex = entry.Key.Item2, time = Math.Round(entry.Value, 3)};
+                ceilDataList.Add(ceilData);
             }
         }
+
+        CeilDatatListWrapper wrapper = new CeilDatatListWrapper(ceilDataList);
+        heatmapJSONString = JsonUtility.ToJson(wrapper);
+        StartCoroutine(UploadHeatmapCoroutine());
+
+        //Debug.Log($"> Session_ID: {_sessionID}");
+        //Debug.Log($"> CeilDataList: {ceilDataList.ToString()}");
+        //Debug.Log($"> Session ID: {_sessionID}");
+        //Debug.Log($"> Level: {level}");
+        //Debug.Log($"> Level Width: {levelWidth}");
+        //Debug.Log($"> Level height: {levelHeight}");
+        //Debug.Log($"> CheckPoint: {checkPointName}");
+        //Debug.Log($"> CheckPoint Order: {checkPointsPlusGoalCounter}");
+        //Debug.Log($"> Completed: {completed}");
+        //Debug.Log($"> Success: {success}");
+        //Debug.Log($"> HeatmapJSONString: {heatmapJSONString}");
     }
+
 
     IEnumerator UploadHeatmapCoroutine()
     {
-        isUploading = true;
-
-        while (uploadQueue.Count > 0)
-        {
-            var data = uploadQueue.Dequeue();
-            yield return Post(data.row, data.col, data.time, data.isCompleted, data.checkPointIdx);
-            yield return new WaitForSeconds(uploadInterval);
-        }
-
-        isUploading = false;
+        yield return Post();
     }
 
-    IEnumerator Post(int ceilRowIndex, int ceilColumnIndex, double timeSpentOnTheCeil, bool isCompleted, int checkPointIdx)
+    IEnumerator Post()
     {
         WWWForm form = new WWWForm();
 
-        form.AddField("entry.510782445", _sessionID.ToString());   // Session ID
-        form.AddField("entry.1043537761", level.ToString());       // Level
-        form.AddField("entry.1095019868", checkPointIdx.ToString());  // CheckPoint
-        form.AddField("entry.1424100887", isCompleted.ToString().ToLower());  // Completed (boolean to 1/0)
-        form.AddField("entry.1132444678", levelTopLeftPointX.ToString());  // Level top-left point x
-        form.AddField("entry.137265583", levelTopLeftPointY.ToString());  // Level top-left point y
-        form.AddField("entry.279170956", levelBottomRightX.ToString()); // Level bottom-right point x
-        form.AddField("entry.1738846031", levelBottomRightY.ToString()); // Level bottom-right point y
-        form.AddField("entry.961393697", levelWidth.ToString());   // Level width
-        form.AddField("entry.1625854803", levelHeight.ToString()); // Level height
-        form.AddField("entry.369261424", ceilSize.ToString());     // Ceil size
-        form.AddField("entry.426122945", ceilRowIndex.ToString()); // Ceil row index
-        form.AddField("entry.1682497881", ceilColumnIndex.ToString()); // Ceil column index
-        form.AddField("entry.498027340", timeSpentOnTheCeil.ToString("F2")); // Time spent on the ceil
+        form.AddField("entry.27628311", _sessionID.ToString()); // Session ID
+        form.AddField("entry.813258949", level.ToString());  // Level
+        form.AddField("entry.1274235764", checkPointName); // Checkpoint name
+        form.AddField("entry.1204114337", levelWidth.ToString()); // Level width
+        form.AddField("entry.1156096476", levelHeight.ToString()); // Level height
+        form.AddField("entry.274085677", ceilSize.ToString()); // Ceil size
+        form.AddField("entry.1173691568", completed.ToString().ToLower()); // Completed
+        form.AddField("entry.11526168", success.ToString().ToLower()); // Success
+        form.AddField("entry.688043743", checkPointsPlusGoalCounter.ToString()); // Check point order
+        form.AddField("entry.474177861", heatmapJSONString); // Heatmap JSON string
 
         UnityWebRequest www = UnityWebRequest.Post(URL, form);
         yield return www.SendWebRequest();
@@ -282,6 +392,7 @@ public class HeatmapAnalyzer : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log("Player is player too fast, some data will be dropped");
+            Debug.Log(www.responseCode);
         }
         else
         {
